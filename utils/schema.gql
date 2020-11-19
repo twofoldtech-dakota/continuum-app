@@ -1,0 +1,23 @@
+type User {
+    email: String! @unique
+    courses: [Course!] @relation
+    governingAgency: String
+}
+
+type Course {
+    name: String!
+    users: [User!] @relation
+    provider: String!
+    date: String!
+    hours: Int
+    governingAgency: String!
+}
+
+type UserCouse {
+    user: User!
+    course: Course!
+}
+
+type Query {
+    allCourses: [Course!]
+}
