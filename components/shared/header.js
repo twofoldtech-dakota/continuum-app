@@ -18,11 +18,11 @@ const Header = () => {
     };
 
     return (
-        <div className="bg-blue">
+        <div className="header">
             <div className="logo">
                 <a href="#">
                     <img
-                        src="../../assets/images/credits-icon.svg"
+                        src="images/continuum-logo.svg"
                         alt=""
                         className="img-fluid"
                     />
@@ -37,10 +37,10 @@ const Header = () => {
                 <div className="image-holder">
                     <a href="#">
                         <img
-                            src="../../assets/images/user-img.png"
+                            src="images/user-img.png"
                             alt=""
                             className="img-fluid"
-                        />
+                        />{" "}
                     </a>
                 </div>
             </div>
