@@ -1,0 +1,20 @@
+ 
+
+.btn-default{
+    @include  Inter (700);
+    font-size: $font15;
+    color: $white;
+    background: linear-gradient(180deg, $light_blue_color 0%, $primary_color 100%);
+    border: 1px solid $primary_color; 
+    box-shadow: 0px 1px 0px rgba(64, 90, 221, 0.25), inset 0px 1px 0px 1px rgba(255, 255, 255, 0.1);
+    @include border_radius(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 142px;
+    height: 36px;
+    &:hover{
+        background: linear-gradient(270deg, $dark_blue_color 0%, $primary_color 100%);
+        color: $white;
+    }
+}

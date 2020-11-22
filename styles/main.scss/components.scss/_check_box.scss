@@ -1,0 +1,63 @@
+ 
+/* The check */
+.check {
+    display: block;
+    position: relative; 
+    cursor: pointer;
+    font-size: 18px; 
+    box-shadow: 0px 1px 0px rgba(22, 29, 37, 0.1), inset 0px 1px 0px rgba(255, 255, 255, 0.1);
+    input{
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .checkmark {
+        position: absolute;
+        top: 3px;
+        left: 0;
+        height: 16px;
+        width: 16px; 
+         @include border_radius(2px);
+        border-color: $light_gray_color;
+        border-style:solid;
+        border-width:1px;
+        &:after{
+            content: "";
+            position: absolute;
+            display: none;
+        }
+    }
+}
+
+/* Create a custom checkbox */
+
+ 
+ 
+ 
+
+
+
+/* When the checkbox is checked, add a blue background */
+.check input:checked ~ .checkmark {
+  background: linear-gradient(#647bf0 0%, #405add 100%);
+ border-color: $check_border_color; 
+}
+
+/* Show the checkmark when checked */
+.check input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.check .checkmark:after {
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid ;
+    border-color:$white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

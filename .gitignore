@@ -1,0 +1,6 @@
+node_modules
+.next*
+webpack.config.js
+env.local
+.vscode/settings.json
+dist/webpack.config.dev.js

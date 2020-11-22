@@ -1,0 +1,823 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@100;300;400;500;600;700;800;900&display=swap');
+@import '../main.scss/abstracts.scss/_mixin.scss';
+@import '../main.scss/abstracts.scss/_placeholders.scss';
+@import '../main.scss/abstracts.scss/_variables.scss';
+@import '../main.scss/base.scss/_reset.scss';
+@import '../main.scss/base.scss/_typography.scss'; 
+@import '../main.scss/pages.scss/_sidebar.scss'; 
+@import '../main.scss/pages.scss/_courses.scss'; 
+@import '../main.scss/pages.scss/_setting.scss'; 
+@import '../main.scss/pages.scss/_sign_in.scss'; 
+@import '../main.scss/pages.scss/_landing-page.scss'; 
+@import '../main.scss/components.scss/_buttons.scss';   
+@import '../main.scss/components.scss/_check_box.scss';   
+@import '../main.scss/components.scss/_credits_earned_modal.scss';   
+@import '../main.scss/components.scss/_date_picker.scss';   
+@import '../main.scss/layout.scss/_header.scss'; 
+@import '../main.scss/layout.scss/_footer.scss';   
+ 
+/*========================================================
+================== Event Sec ===============================*/
+.continuum-right{
+    padding: 80px 0 0 80px;
+    .header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $text_color2;
+        padding-left: 100px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+        .logo{
+            display: flex;
+            align-items: center;
+            h3{
+                color: $light_blue_color;
+                font-size: $font20;
+                @include  google_sansregular(400);
+                margin-left: 13px;
+            }
+        }
+        .continuum-user{
+            display: flex;
+            align-items: center;
+            .text-box{
+                text-align: right;
+                padding-right: 20px;
+                h3{
+                    @include  Inter (700);
+                    font-size: $font15;
+                    color: $white;
+                    margin-bottom: 3px;
+                }
+                p{
+                    @include  Inter (400);
+                    font-size: $font12;
+                    color: rgba($white, 0.50);
+                }
+            }
+        }
+    }
+    .continuum-detail{
+        padding: 35px 60px 35px 40px;
+        .title{
+            display: flex; 
+            justify-content: space-between;
+            align-items: center;
+            h3{
+                @include  Inter(400);
+                font-size: $font24;
+                color: $text_color;
+            } 
+        }
+        .credit-earning-sec{
+            margin-top: 15px;
+            .credit-earning-box{
+                background-color: $primary_color;
+                @include border_radius(3px);
+                box-shadow: 0px 1px 2px rgba(50, 51, 79, 0.25);
+                padding: 23px 20px 40px 20px;
+                min-height: 236px;
+                margin: 15px 0;
+                h3{
+                    color: $white;
+                    @include  Inter(700);
+                    font-size: $font15;
+                }
+                p{
+                    color: rgba($text_color3 ,0.5);
+                    @include  Inter(400);
+                    font-size: $font13;                
+                    margin-top: 2px;
+                }
+                .image-holder{
+                    text-align: center;
+                    margin-top: 30px;
+                }
+                ul{
+                    display: flex;
+                    margin:  12px -22px 0;
+                    align-items: center; 
+                    justify-content: center;
+                    li{
+                        text-align: center;
+                        padding: 0 22px;
+                        h4{
+                            color: $white;
+                            font-size: $font70;
+                            @include  Inter(800);
+                        }
+                        span{
+                            color: $alice_blue_color2;
+                            @include  Inter(700);
+                        }
+                    }
+                }
+                &.blue-bg{
+                    background-color: $sky_blue_color;
+                }
+                &.dark-blue-bg{
+                    background-color: $dark_blue_color;
+                    p{
+                        color: $alice_blue_color2;
+                    }
+                }
+            }
+        }
+        .upcoming-courses{
+            margin: 22px 0 0 0;
+            h3{
+                @include  Inter (600);
+                font-size: $font15;
+                color: $text_color;
+                margin-bottom: 15px;
+            }
+            .upcoming-courses-inner{
+                box-shadow: 0px 1px 2px rgba(50, 51, 79, 0.25);
+                @include border_radius(3px);
+                background-color: $white;
+                table{
+                    width: 100%;  
+                    tbody{
+                        tr{
+                            td{
+                                color: $text_color2;
+                                @include  Inter (400);
+                                font-size: $font14;
+                                border-bottom: 1px solid $boder_color;
+                                padding: 15px 20px 21px;
+                                vertical-align: middle;
+                                &:nth-child(2){
+                                    text-align: right;
+                                }
+                                span{
+                                    @include  Inter (700);
+                                    font-size: $font12;
+                                    color: $sky_blue_color;
+                                    display: block;
+                                }
+                                .upcomingp-courses-select{
+                                    .text-box{
+                                        padding-left: 35px;
+                                        h4{
+                                            color: $primary_color;
+                                            @include  Inter (600);
+                                            font-size: $font16;
+                                        }
+                                        p{
+                                            @include  Inter (400);
+                                            font-size: $font14;
+                                            color: rgba($text_color2, 0.5);
+                                        }
+                                    }
+                                    .check {
+                                        .checkmark{
+                                            top: 12px;
+                                        }
+                                    }
+                                }
+                                a{
+                                    &.claim-btn{
+                                        color: $white;
+                                        @include  Inter (600);
+                                        font-size: $font15;
+                                        background: linear-gradient(270deg, #6F57E5 0%, #405ADD 100%);
+                                        box-shadow: 0px 1px 0px rgba(64, 90, 221, 0.25);
+                                        @include border_radius(3px);
+                                        width: 82px;
+                                        height: 36px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                    }
+                                }
+                                a{
+                                    &.view-btn{
+                                        @include  Inter (500);
+                                        font-size: $font15;
+                                        color: $sky_blue_color;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: flex-end; 
+                                        img{
+                                            margin-left: 6px;
+                                        }
+                                    }
+                                }
+                                a{
+                                    &.time-btn{
+                                        color: $primary_color;
+                                        @include  Inter (800);
+                                        font-size: $font12;
+                                        background-color: $alice_blue_color; 
+                                        @include border_radius(3px);
+                                        width: 116px;
+                                        height: 30px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        img{
+                                            margin-right: 8px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/***** SORT SELECT STYLE ******/
+.continuum-select{
+    background-color:  $white ;
+    border: 1px solid $ex-light_blue_color; 
+    height: 35px;
+    width: 216px;
+    @include border_radius(3px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 9px;
+
+    p{
+        font-size: $font9;
+        color: $primary_color;
+        @include  Inter(700);
+        text-transform: uppercase;
+    }
+    select{
+        &.form-control{  
+            @include  Inter(600);
+            height: auto;
+            font-size: $font13;
+            border: none;
+            padding-left: 6px;
+            background:url(../images/select-arrow.svg) 98% center no-repeat;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 0;
+            appearance: none;
+            max-width: 100px;
+            width: 100%;
+        }
+    }
+}
+/********* CREDIT PAGE *********/
+.credit-page{
+    .continuum-right{
+        .continuum-detail{
+            .upcoming-courses{
+                table{
+                    tbody{
+                        tr{
+                            td{
+                                .upcomingp-courses-select{
+                                    .check{
+                                        .checkmark{
+                                            top: 3px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.credir-look{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $boder_color;
+    padding-right: 15px;
+    .credir-look-left{
+        form{
+            position: relative;
+            .form-control{
+                border: none;
+                @include border_radius(0);
+                letter-spacing: -0.25px;
+                color: $light_gray_color;
+                @include  Inter(400);
+                height: 60px;
+                padding-left: 50px;
+                font-size: $font15;
+                &::placeholder{
+                    color: $light_gray_color;
+                }
+            }
+            a{
+                position: absolute;
+                left: 20px;
+                top: 50%;
+                transform: translate(0,-50%);
+            }
+        }
+    }
+
+
+    .credir-look-sort{
+        .continuum-select{
+            select{
+                &.form-control{
+                    max-width: 120px;
+                    @include  Inter(600);
+                }
+            }
+        }
+    }
+}
+.show-result{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    p{
+        letter-spacing: -0.25px;
+        color: $gray_text_color;
+        @include  Inter(400);
+        font-size: $font13;
+        padding-left: 8px;
+    }
+    ul{
+        display: flex;
+        border: 1px solid rgba($boder2_color, 0.50);
+        @include border_radius(3px);
+        li{
+            a{
+                width: 40px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img{
+                    opacity: 0.35;
+                }
+
+            }
+            &:first-child{
+                a{
+                    border-right: 1px solid  rgba($boder2_color, 0.50);
+                }
+            }
+        }
+    }
+}
+
+
+/***************** RESPONSIVE CSS ************/
+@media (max-width: 1600px) {
+    .banner-sec .banner-inner h1 {
+        font-size: 44px;
+    }
+    .banner-sec .banner-inner p {
+        font-size: 24px;
+        line-height: 30px;
+        margin: 5px 0 20px;
+    }
+    .banner-sec .banner-inner span{
+        font-size: 16px;
+    }
+    .banner-sec {
+        padding: 110px 0 450px;
+    }
+    .feature-sec .feature-inner .image-holder {
+        margin: -400px 0 65px 0;
+    }
+}
+@media (max-width: 1300px) {
+    .continuum-right .continuum-detail .upcoming-courses .upcoming-courses-inner table tbody tr td{
+        padding: 15px 10px;
+    }
+
+}
+@media (max-width:1199px)  {
+    .continuum-right .continuum-detail {
+        padding: 20px;
+    }
+    .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box {
+        padding: 20px;
+        min-height: 220px;
+    }
+    .continuum-right .continuum-detail .upcoming-courses .upcoming-courses-inner table tbody tr td{
+        width: auto;
+        padding: 15px 10px;
+        font-size: 13px;
+    }
+    .continuum-right .continuum-detail .upcoming-courses .upcoming-courses-inner table tbody tr td .upcomingp-courses-select .text-box h4{
+        font-size: 14px;
+    }
+    .continuum-right .continuum-detail .upcoming-courses .upcoming-courses-inner table tbody tr td a.time-btn{
+        width: 95px;
+        height: 30px;
+        font-size: 10px;
+    }
+    .continuum-right .continuum-detail .upcoming-courses .upcoming-courses-inner table tbody tr td .upcomingp-courses-select .text-box{
+        padding-left: 25px;
+    }
+    .continuum-right .continuum-detail .upcoming-courses .upcoming-courses-inner table tbody tr td a.claim-btn { 
+        font-size: 14px;
+        width: 60px;
+        height: 36px; 
+    }
+} 
+@media (max-width: 991px)  {
+    .continuum-right .header .logo img{
+        height: 15px;
+    }
+    .continuum-right .header .logo h3 {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+    .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box p{
+        font-size: 14px;
+    }
+    .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+        padding: 15px;
+        min-height: 180px;
+    }
+    .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box ul li {
+        padding: 0 10px;
+    }
+    .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box ul{
+        margin: 10px -10px 0;
+    }
+    .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box ul li h4{
+        font-size: 40px;
+    }
+    .continuum-right .continuum-detail .upcoming-courses .upcoming-courses-inner table {
+        width: 870px;
+    }
+    .continuum-right .continuum-detail .upcoming-courses .upcoming-courses-inner table tbody tr td .upcomingp-courses-select .text-box h4{
+        font-size: 14px;
+    }
+    .credits-earned-modal,
+    .nice-job-modal{
+        max-width: 450px;
+        padding: 30px;
+    }
+    .credits-earned-modal .text-box p{
+        font-size: 16px;
+    }
+    .credits-earned-modal .panel-text p {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 5px 0;
+    }
+    .setting-sec .setting-box{
+        padding: 15px 15px 10px;
+    }
+    .setting-sec .setting-box h4{
+        margin-bottom: 20px;
+    }
+    .feature-sec .feature-inner .feature-box h3{
+        font-size: 16px;
+    }
+    .feature-sec .feature-inner .feature-box p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+@media (max-width: 767px)  {
+    .container{
+        max-width: 100%;
+    }
+    .continuum-sidebar{
+        max-width: 60px;
+    }
+    .continuum-right {
+        padding: 52px 0 0 60px;
+    }
+    .continuum-right .header{
+        padding-left: 70px;
+    }
+    .continuum-right .header .continuum-user .image-holder img{
+        height: 50px;
+    }
+    .continuum-right .header .continuum-user .text-box {
+        padding-right: 15px;
+    }
+    .continuum-right .header .continuum-user .text-box h3{
+        font-size: 13px;
+        margin-bottom: 0px;
+    }
+    .continuum-right .header .continuum-user .text-box p{
+        font-size: 11px;
+    }
+    .continuum-sidebar .side-header a {
+        padding: 11px 0;
+    }
+    .continuum-sidebar .navigation ul li a {
+        font-size: 12px;
+        padding: 10px 0;
+    }
+    .continuum-right .continuum-detail .title h3 {
+        font-size: 16px;
+    }
+    .credits-earned-modal,
+    .nice-job-modal{
+        height: calc(100% - 52px);
+    }
+    .credits-earned-modal .text-box h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    .calendar-text {
+        margin-top: 20px;
+    }
+    .credits-earned-modal .upload {
+        margin-top: 20px;
+    }
+    .credits-earned-modal.credits-panel-modal .calendar-text .media {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .credits-earned-modal.credits-panel-modal .calendar-text .media span {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .credits-earned-modal.credits-panel-modal .upload .upload-file label{
+        padding: 15px;
+    }
+    .credits-earned-modal.credits-panel-modal .calendar-text form span {
+        margin: 0 !important;
+    }
+    .setting-sec .setting-box form.licensur-info {
+        max-width: 100%;
+        width: 100%;
+    }
+    .setting-sec .setting-box .email-notification ul li .text-box p{
+        font-size: 12px;
+    }
+    .setting-sec .setting-box .email-notification ul li .text-box h5{
+        font-size: 14px;
+    }
+    .setting-sec .setting-box form .form-group a.reset-password{
+        margin: 0;
+    }
+    .setting-sec {
+        padding: 0 0 0 0;
+    }
+    .sign-in-page {
+        height: 100%;
+    }
+    .sign-in-page .sing-in-sec {
+        padding: 30px 0;
+    }
+    header {
+        padding: 15px 0;
+        width: 100%;
+    }
+    .header-inner img{
+        height: 16px;
+    }
+    header .header-inner h2{
+        font-size: 16px;
+    }
+    .banner-sec .banner-inner h1 {
+        font-size: 30px;
+    }
+    .banner-sec .banner-inner p {
+        font-size: 18px;
+        line-height: 22px;
+        margin: 10px 0;
+    }
+    .banner-sec {
+        padding: 70px 0 250px;
+    }
+    .feature-sec .feature-inner .image-holder {
+        margin: -210px 0 30px 0;
+    }
+    .feature-sec .feature-inner h4 {
+        font-size: 20px;
+        line-height: 28px;
+        max-width: 430px;
+        margin: 30px auto 0;
+    }
+    .feature-sec .feature-inner h4 span:after {
+        bottom: 4px;
+        height: 6px;
+    }
+    footer {
+        padding: 50px 0;
+    }
+    footer .text-box h3 {
+        font-size: 18px;
+        line-height: 24px;
+        max-width: 440px;
+    }
+    footer .text-box p{
+        font-size: 14px;
+    }
+    footer .text-box img {
+        margin: 30px auto;
+    }
+    footer .text-box span {
+        font-size: 14px;
+        margin-top: 16px;
+        line-height: 20px;
+    }
+
+}
+@media (max-width: 575px)  {
+    .continuum-right .continuum-detail .title h3 {
+        font-size: 16px;
+    }
+    .continuum-right .continuum-detail {
+        padding: 15px;
+    }
+    .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box {
+        padding: 15px;
+        min-height: auto;
+    }
+    .continuum-right .continuum-detail .upcoming-courses {
+        margin: 15px 0 0 0;
+    }
+    .continuum-right .header .logo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .continuum-right .header .logo h3 {
+        font-size: 12px;
+        margin-left: 0;
+    }
+    .continuum-sidebar .side-header a {
+        padding: 13px 13px;
+    }
+    .credit-page .continuum-select{
+        width: 178px;
+    }
+    .credir-look .credir-look-sort .continuum-select select.form-control {
+        max-width: 110px;
+        font-size: 11px;
+    }
+    .credir-look .credir-look-left form .form-control{
+        height: 50px;
+        padding-left: 40px;
+        font-size: 14px;
+    }
+    .credir-look .credir-look-left form a {
+        left: 10px;
+    }
+    .credits-earned-modal,
+    .nice-job-modal{
+        max-width: 350px;
+        padding: 20px;
+        z-index: 10;
+    }
+    .credits-earned-modal .upload .upload-inner a{
+        padding: 15px;
+    }
+    .credits-earned-modal .text-box a{
+        font-size: 14px;
+    }
+    .sign-in-page .sing-in-sec {
+        padding: 15px;
+    }
+    .sign-in-page .sing-in-inner{
+        padding: 30px;
+    }
+    .sign-in-page .sing-in-inner.forgot-password-sec .text-box h3 {
+        font-size: 14px;
+    }
+    .sign-in-page .sing-in-inner .text-inner p {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    .sign-in-page .sing-in-inner .text-inner {
+        text-align: center;
+        margin-top: 30px;
+    }
+    .sign-in-page .sing-in-inner .text-inner a.email{
+        margin-top: 20px;
+    }
+    .feature-sec .feature-inner .feature-box p {
+        max-width: 100%;
+    }
+}
+@media (max-width: 479px)  {
+    .continuum-right .continuum-detail .title {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .continuum-select{
+        margin-left: auto;
+        width: 100%;
+    }
+    .continuum-right .continuum-detail .title h3 {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .continuum-right .header .logo h3{
+        display: none;
+    }
+    .continuum-right .header .continuum-user .text-box{
+        display: none;
+    }
+    .credir-look {
+        padding: 0;
+        flex-direction: column;
+    }
+    .credit-page .continuum-select {
+        width: 100%;
+    }
+    .credir-look .credir-look-left form .form-control{
+        height: 40px;
+    }
+    .credir-look .credir-look-left form a img{
+        height: 14px;
+    }
+    .credir-look-sort{
+        width: 100%;
+        padding: 0 10px 10px;
+    }
+    .credit-page  .credir-look-sort .continuum-select {
+        width: 100%;
+    }
+    .show-result {
+        padding: 5px;
+    }
+    .show-result ul li a {
+        width: 30px;
+        height: 26px;
+    }
+    .show-result ul li a img{
+        height: 9px;
+    }
+    .show-result p {
+        font-size: 11px;
+    }
+    .setting-page .btn-default{
+        margin: 0 auto;
+    }
+    .setting-sec .setting-box form .form-group .form-control {
+        font-size: 12px;
+        padding-left: 10px;
+        padding-right: 20px;
+    }
+    .sign-in-page .sing-in-inner {
+        padding: 30px 15px;
+    }
+    .sign-in-page .sing-in-inner .text-box h2{
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+    .sign-in-page .sing-in-inner .text-box h3{
+        font-size: 20px;
+    }
+    .sign-in-page .sing-in-inner .text-box {
+        margin: 35px 0;
+    }
+    .sign-in-page .sing-in-inner.forgot-password-sec .text-box {
+        margin: 35px 0;
+    }
+    .sign-in-page .sing-in-inner form .form-group label.check{
+        font-size: 12px;
+    }
+    .sign-in-page .sing-in-inner form .form-group span{
+        margin: 0;
+    }
+    .sign-in-page .sing-in-inner form .form-group p{
+        font-size: 13px;
+    }
+    .sign-in-page .sing-in-inner form .form-group p{
+        margin-top: 10px;
+    }
+    .sign-in-page .sing-in-inner form .form-group .btn-default{
+        font-size: 16px;
+    }
+    header .header-inner h2{
+        display: none;
+    }
+    .banner-sec .banner-inner h1 {
+        font-size: 26px;
+    }
+    .banner-sec .banner-inner p {
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .banner-sec .banner-inner span {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .banner-sec .banner-inner form .form-control {
+        width: 150px;
+    }
+    .feature-sec .feature-inner h4 {
+        font-size: 18px;
+    }
+    footer .text-box h3 {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    footer .text-box img {
+        margin: 20px auto;
+    }
+} 

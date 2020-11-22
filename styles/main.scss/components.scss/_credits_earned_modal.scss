@@ -1,0 +1,285 @@
+ 
+.credits-earned-modal{
+    background: $bogy_bg;
+    box-shadow: -1px 0px 8px rgba(50, 51, 79, 0.5);
+    max-width: 640px;
+    width: 100%;
+    margin-left: auto;
+    position: fixed;
+    right: -100%;
+    bottom: 0;
+    padding: 30px 60px 50px 50px;
+    height: calc(100% - 80px);
+    transition:  all 0.5s ease-in-out;
+    overflow-y: auto;
+    &.active{
+        right: 0;
+        transition:  all 0.5s ease-in-out;
+    }
+    .cross-icon{
+        text-align: right;
+    }
+    .text-box{
+        h3{
+            color: $primary_color;
+            font-size: $font20;
+            margin-bottom: 43px;
+            @include  Inter (700);
+        }
+        p{
+            letter-spacing: -0.208333px;
+            @include  Inter (600);
+            font-size: $font20;
+            color: $text_color;
+            margin-bottom: 10px;
+        }
+        a{
+            letter-spacing: -0.25px; 
+            font-size: $font17;
+            text-decoration: underline !important;
+            color: $dark_sky_blue_color;
+            @include  Inter (500);
+            display: flex;
+            align-items: center;
+            img{
+                margin-left: 7px;
+            }
+        }
+    }
+    .upload{
+        margin-top: 27px;
+        h4{
+            color: $dark_gray_color;
+            @include  Inter (700);
+            font-size: $font11;
+            margin-bottom: 9px;
+        }
+        .upload-inner{
+            background-color: $white;
+            border: 1px solid $light_gray_color;
+            @include border_radius(3px);
+            a{
+                @include  Inter (400);
+                font-size: $font14;
+                color: $text_color2;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px;
+                border-bottom: 1px solid $boder3_color;
+                p{
+                    display: flex;
+                    align-items: center;
+                    img{
+                        margin-right: 11px;
+                    }
+                }
+            }
+            .image-holder{
+                padding: 30px 20px 20px 20px;
+            }
+        }
+    }
+    .save-btn{
+        max-width: 142px;
+        height: 36px;
+        width: 100%;
+        background: linear-gradient(180deg, #647BF0 0%, #405ADD 100%);
+        border: 1px solid $primary_color; 
+        box-shadow: 0px 1px 0px rgba(64, 90, 221, 0.25), inset 0px 1px 0px 1px rgba(255, 255, 255, 0.1);
+        @include border_radius(3px);
+        color: $white;
+        @include  Inter (600);
+        font-size: $font15;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+    }
+    .panel-text{
+        padding: 30px 0 0 0;
+        h4{
+            color: $dark_gray_color;
+            @include  Inter (700);
+            font-size: $font11;
+            text-transform: uppercase;
+        }
+        p{
+            color: $dark_gray_color;
+            @include  Inter (400);
+            font-size: $font17;
+            line-height: 24px;
+            padding: 5px 0 10px;
+            max-width: 490px;
+            width: 100%;
+            a{
+                color: $sky_blue_color;
+            }
+        }
+        span{
+            color: $dark_gray_color;
+            @include  Inter (700);
+            font-size: $font11;
+            text-transform: uppercase;
+            display: block; 
+            margin-bottom: 10px;
+        }
+        strong{
+            letter-spacing: -0.25px;
+            color: $dark_gray_color;
+            @include  Inter (400);
+            font-size: $font17;
+            display: block;
+        }
+    }
+    &.credits-panel-modal{
+        .calendar-text{
+            .media{
+                align-items: center;
+                span{
+                    color: $primary_color;
+                    @include  Inter (400);
+                    font-size: $font14;
+                    display: inline-block;
+                    margin-left: 13px;
+                }
+            }
+        }
+        .save-btn{
+            max-width: 190px;
+        }
+        .upload{
+            .upload-file{
+                label{
+                    background: rgba($boder2_color, 0.1);
+                    border: 1px dashed rgba($boder2_color, 0.5); 
+                    @include border_radius(3px);
+                    display: flex;
+                    align-items: center;
+                    color: $placeholder_color;
+                    @include  Inter (400);
+                    font-size: $font14;
+                    padding: 20px;
+                    cursor: pointer;
+                    span{
+                        color: $primary_color;
+                        padding: 0 5px 0 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+.calendar-text{
+
+    margin-top: 32px;
+    p{
+        color: $dark_gray_color;
+        @include  Inter (700);
+        font-size: $font11;
+        margin-bottom: 7px;
+    }
+    form{
+        position: relative;
+        .form-control{
+            border: 1px solid $light_gray_color;
+            height: 36px;
+            @include border_radius(3px);
+            background-color: $white;
+            @include  Inter (400);
+            font-size: $font13;
+            max-width: 160px;
+            width: 100%;
+        }
+        span{
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translate(0,-50%);
+        }
+    }
+    &.creadit-date{
+        form{
+            max-width: 160px;
+        }
+    }
+}
+.overly {
+    background-color: rgba($primary_color, 0.25);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:  all 0.5s ease-in-out;
+    &.active{
+        opacity: 1;
+        visibility: visible;
+        transition:  all 0.5s ease-in-out;
+    }
+}
+
+
+input[type="file"] {
+    display: none;
+}
+/******** NICE JOB MODAL *********/
+.nice-job-modal{
+    background: $bogy_bg;
+    box-shadow: -1px 0px 8px rgba(50, 51, 79, 0.5);
+    max-width: 640px;
+    width: 100%;
+    margin-left: auto;
+    position: fixed;
+    right: -100%;
+    bottom: 0;
+    padding: 30px 60px 50px 50px;
+    height: calc(100% - 80px);
+    transition:  all 0.5s ease-in-out;
+    overflow-y: auto;
+    &.active{
+        right: 0;
+        transition:  all 0.5s ease-in-out;
+    }
+    .cross-icon{
+        text-align: right;
+    }
+    .nice-job-text{
+        text-align: center;
+        margin: 60px 0 0 0;
+        h2{
+            color: $placeholder_color;
+            letter-spacing: -0.354167px;
+            @include  Inter (900);
+            margin-bottom: 3px;
+            font-size: $font34;
+        }
+        p{
+            color: $primary_color;
+            letter-spacing: -0.25px;
+            @include  Inter (400);
+            font-size: $font17;
+            margin-bottom: 50px;
+        }
+    }
+    .save-btn{
+        width: 108px;
+        height: 36px;
+        margin: 50px auto 0; 
+        background: linear-gradient(180deg, #647BF0 0%, #405ADD 100%);
+        border: 1px solid $primary_color; 
+        box-shadow: 0px 1px 0px rgba(64, 90, 221, 0.25), inset 0px 1px 0px 1px rgba(255, 255, 255, 0.1);
+        @include border_radius(3px);
+        color: $white;
+        @include  Inter (600);
+        font-size: $font15;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+    }
+}

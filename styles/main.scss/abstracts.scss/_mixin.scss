@@ -1,0 +1,45 @@
+
+ 
+@font-face {
+    font-family: 'google_sansregular';
+    src: url('../fonts/googlesans-regular-webfont.woff2') format('woff2'),
+         url('../fonts/googlesans-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+ 
+
+@mixin Inter($font-weight){
+   font-family: 'Inter', sans-serif;
+   font-weight: $font-weight;
+}
+ 
+@mixin DM_Sans ($font-weight){
+   font-family: 'DM Sans', sans-serif;
+   font-weight: $font-weight;
+}
+
+@mixin google_sansregular ($font-weight){
+   font-family: 'google_sansregular';
+   font-weight: $font-weight;
+}
+ 
+
+@mixin border_radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin transform ($property) {
+    -webkit-transform: $property;
+    -moz-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+}
+
+
+
+

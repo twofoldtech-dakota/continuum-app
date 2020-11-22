@@ -1,8 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-    margin: 0;
-    padding: 0;
-}
+@import "./main.scss/vendors/bootstrap.min.css";
+@import "./main.scss/vendors/fontawesome.min.css";
+@import "./main.scss/custom.css";

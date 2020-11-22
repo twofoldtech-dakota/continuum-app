@@ -1,0 +1,27 @@
+@import url(https://fonts.googleapis.com/css?family=Barlow:100,200,300,400,500,600,700,800,900);
+body{line-height:1}
+abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:0 0}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+ul{list-style:none;color:#000}
+blockquote,q{quotes:none}
+blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}
+a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:0 0;outline:0!important;transition:all .5s ease-in-out;text-decoration:none!important}
+del{text-decoration:line-through}
+abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
+table{border-collapse:collapse;border-spacing:0}
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
+input,select{vertical-align:middle}
+body,html{outline:0;font-family:Barlow,sans-serif;font-weight:400}
+h1,h2,h3,h4,h5,h6{line-height:1.4em;font-family:Barlow,sans-serif;font-weight:700}
+a:hover{color:#000}
+a:focus{outline:0;outline-offset:inherit}
+button:focus{border:none;box-shadow:none;outline:0;border-color:transparent}
+p{line-height:1.4em;margin-bottom:0}
+ul li{line-height:1.4em}
+ul{padding:0;margin-left:0}
+.form-control:focus{box-shadow:none;outline:0;outline-offset:inherit;border:none}
+.center{text-align:center}
+.align_right{text-align:right}
+.btn_center{display:block;margin:0 auto}
+.child-pernt{display:table;height:100%;width:100%}
+.child{display:table-cell;vertical-align:middle}
