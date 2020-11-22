@@ -2,9 +2,29 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Moment from "moment";
+import useSWR from "swr";
 
-export default function Course({ course, courseDeleted }) {
+export default function Course({ course, courseDeleted, courseSaved }) {
     const router = useRouter();
+    const { data } = useSWR("/api/user");
+
+    const createUserCourse = async () => {
+        try {
+            await fetch("/api/createUserCourse", {
+                method: "POST",
+                body: JSON.stringify({
+                    data,
+                    course,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            courseSaved();
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     const deleteCourse = async () => {
         try {
@@ -35,9 +55,9 @@ export default function Course({ course, courseDeleted }) {
             <p className="text-gray-900 mb-4">
                 {Moment(course.data.date).format("MMMM d, yyyy")}
             </p>
-            <Link href={`/edit/${course.id}`}>
-                <a className="text-gray-800 mr-2">Edit</a>
-            </Link>
+            <a className="text-gray-800 mr-2" onClick={createUserCourse}>
+                Save
+            </a>
             <button onClick={deleteCourse} className="text-gray-800 mr-2">
                 Delete
             </button>

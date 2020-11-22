@@ -1,23 +1,68 @@
 type User {
     email: String! @unique
-    courses: [Course!] @relation
     governingAgency: String
+    credits: [Credit!] @relation
+    userCourses: [UserCourse!] @relation
+    name: String
+    title: String
+    company: String
+    website: String
+    bio: String
+    linkedin: String
+    zillow: String
+    twitter: String
+    instagram: String
+    facebook: String
+    theme: String
+    personalEmail: String
+    phone: String
+    officePhone: String
+    addressLine1: String
+    addressLine2: String
+    city: String
+    state: String
+    zip: String
+    licenseType: String
+    licenseNumber: String
+    licenseExpDate: String
+    alerts: String
+    news: String
+    creditsEarned: String
+    creditsRequired: String
 }
 
 type Course {
     name: String!
-    users: [User!] @relation
     provider: String!
     date: String!
     hours: Int
     governingAgency: String!
+    saved: String!
 }
 
-type UserCouse {
+type UserCourse {
+    name: String!
+    provider: String!
+    date: String!
+    hours: Int
+    governingAgency: String!
+    saved: String!
+    owner: String!
     user: User!
-    course: Course!
+}
+
+type Credit {
+    name: String!
+    user: User! @relation
+    provider: String!
+    date: String!
+    hours: Int!
+    governingAgency: String
+    description: String
+    credits: String!
 }
 
 type Query {
     allCourses: [Course!]
+    allUserCourses: [Course!]
 }

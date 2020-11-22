@@ -7,8 +7,8 @@ This uses [Next.js](https://nextjs.org/) as a template
 ```bash
 npm install
 ```
-2. create a file at the root of your project called env.local
-3. to run locally
+
+2. to run locally
 
 ```bash
 yarn dev

@@ -5,11 +5,18 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start"
+        "start": "next start",
+        "eject": "react-scripts eject",
+        "generate": "graphql-codegen --config codegen.js"
     },
     "dependencies": {
+        "@graphql-codegen/introspection": "^1.18.0",
+        "@graphql-codegen/typescript": "^1.17.11",
+        "@graphql-codegen/typescript-operations": "^1.17.10",
+        "@graphql-codegen/typescript-react-apollo": "^2.1.1",
         "cookie": "^0.4.1",
         "faunadb": "^3.0.1",
+        "graphql": "^15.4.0",
         "moment": "^2.29.1",
         "next": "9.5.5",
         "react": "16.14.0",
@@ -20,6 +27,7 @@
     },
     "devDependencies": {
         "@fullhuman/postcss-purgecss": "^3.0.0",
+        "@graphql-codegen/cli": "^1.19.2",
         "postcss-preset-env": "^6.7.0",
         "tailwindcss": "^1.9.6"
     }

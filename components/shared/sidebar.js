@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-// import logo from '../../styles/images/continuum-logo.svg'
-// import KeyImage from '../../styles/images/credits-icon.svg'; 
-// import SVG from 'react-inlinesvg';
 
 const Sidebar = () => {
     const router = useRouter();
@@ -24,7 +21,13 @@ const Sidebar = () => {
     return (
         <div className="continuum-sidebar">
             <div className="side-header">
-
+                <a href="#">
+                    <img
+                        src="/images/continuum-sidebar-logo.svg"
+                        alt=""
+                        className="img-fluid"
+                    />
+                </a>
             </div>
             <div className="navigation">
                 <ul>
@@ -33,12 +36,12 @@ const Sidebar = () => {
                             <span>
                                 <img
                                     className="simple-state"
-                                    src=""
+                                    src="images/dashboard-icon.svg"
                                     alt=""
                                 />
                                 <img
                                     className="hover-state"
-                                    src=""
+                                    src="images/dashboard-icon-hover.svg"
                                     alt=""
                                 />
                             </span>
@@ -48,10 +51,9 @@ const Sidebar = () => {
                     <li>
                         <a href="/credits">
                             <span>
-                            
                                 <img
                                     className="simple-state"
-                                    src=""
+                                    src="images/credits-icon.svg"
                                     alt=""
                                 />
                                 <img
