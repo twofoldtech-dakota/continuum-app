@@ -6,7 +6,7 @@ export default function Courses() {
 
     return (
         <div>
-            {courses &&
+            {/* {courses &&
                 courses.map((course) => (
                     <Course
                         key={course.id}
@@ -14,7 +14,7 @@ export default function Courses() {
                         courseDeleted={mutate}
                         courseSaved={mutate}
                     />
-                ))}
+                ))} */}
         </div>
     );
 }

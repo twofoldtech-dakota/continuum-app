@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { MdDashboard } from 'react-icons/md';
+import { MdClass } from 'react-icons/md';
+import { FaBookOpen } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
+import { MdSettings } from 'react-icons/md';
+import { RiLogoutBoxRLine } from 'react-icons/ri';
+import SideBarLogo from "../svgs/sidebarlogo";
 
 const Sidebar = () => {
     const router = useRouter();
@@ -21,12 +28,9 @@ const Sidebar = () => {
     return (
         <div className="continuum-sidebar">
             <div className="side-header">
+
                 <a href="#">
-                    <img
-                        src="/images/continuum-sidebar-logo.svg"
-                        alt=""
-                        className="img-fluid"
-                    />
+                    <SideBarLogo className="img-fluid"/>
                 </a>
             </div>
             <div className="navigation">
@@ -34,16 +38,8 @@ const Sidebar = () => {
                     <li>
                         <a className="active" href="/">
                             <span>
-                                <img
-                                    className="simple-state"
-                                    src="images/dashboard-icon.svg"
-                                    alt=""
-                                />
-                                <img
-                                    className="hover-state"
-                                    src="images/dashboard-icon-hover.svg"
-                                    alt=""
-                                />
+                                <MdDashboard className="simple-state" size={30}/>
+                                {/* <MdDashboard className="hover-state" size={32}/> */}
                             </span>
                             Home
                         </a>
@@ -51,16 +47,8 @@ const Sidebar = () => {
                     <li>
                         <a href="/credits">
                             <span>
-                                <img
-                                    className="simple-state"
-                                    src="images/credits-icon.svg"
-                                    alt=""
-                                />
-                                <img
-                                    className="hover-state"
-                                    src="images/credits-icon-hover.svg"
-                                    alt=""
-                                />
+                            <MdClass className="simple-state" size={30}/>
+
                             </span>
                             Credits
                         </a>
@@ -68,16 +56,8 @@ const Sidebar = () => {
                     <li>
                         <a href="/courses">
                             <span>
-                                <img
-                                    className="simple-state"
-                                    src="images/courses-icon.svg"
-                                    alt=""
-                                />
-                                <img
-                                    className="hover-state"
-                                    src="images/courses-icon-hover.svg"
-                                    alt=""
-                                />
+                            <FaBookOpen className="simple-state" size={30}/>
+
                             </span>
                             Courses
                         </a>
@@ -85,16 +65,8 @@ const Sidebar = () => {
                     <li>
                         <a href="/profile">
                             <span>
-                                <img
-                                    className="simple-state"
-                                    src="images/profile-icon.svg"
-                                    alt=""
-                                />
-                                <img
-                                    className="hover-state"
-                                    src="images/profile-icon-hover.svg"
-                                    alt=""
-                                />
+                            <FaUserCircle className="simple-state" size={30}/>
+
                             </span>
                             Profile
                         </a>
@@ -102,16 +74,8 @@ const Sidebar = () => {
                     <li>
                         <a href="/settings">
                             <span>
-                                <img
-                                    className="simple-state"
-                                    src="images/setting-icon.svg"
-                                    alt=""
-                                />
-                                <img
-                                    className="hover-state"
-                                    src="images/setting-icon-hover.svg"
-                                    alt=""
-                                />
+                            <MdSettings className="simple-state" size={30}/>
+
                             </span>
                             Settings
                         </a>
@@ -119,16 +83,8 @@ const Sidebar = () => {
                     <li>
                         <a onClick={logout} href="#">
                             <span>
-                                <img
-                                    className="simple-state"
-                                    src="images/setting-icon.svg"
-                                    alt=""
-                                />
-                                <img
-                                    className="hover-state"
-                                    src="images/setting-icon-hover.svg"
-                                    alt=""
-                                />
+                            <RiLogoutBoxRLine className="simple-state" size={30}/>
+
                             </span>
                             Logout
                         </a>
