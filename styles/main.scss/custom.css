@@ -1683,6 +1683,9 @@ footer {
   .sign-in-page .sing-in-inner form .form-group .btn-default {
     font-size: 16px; }
 
+   
+
+
   header .header-inner h2 {
     display: none; }
 
@@ -1709,5 +1712,74 @@ footer {
 
   footer .text-box img {
     margin: 20px auto; } }
+
+
+/************ Profile Edit Page ************/
+.profile-edit {
+
+  
+}
+
+.profile-edit form .profile-edit-container .form-section{
+  background-color: white;
+  box-shadow: 0 1 2 1 #32334F;
+  padding: 30px;
+  margin: 30px;
+}
+
+.profile-edit form .profile-edit-container .form-section .form-group .group-title{
+  color:#405ADD;
+  line-height: 30px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.profile-edit form .profile-edit-container .form-section .form-group .form-label{
+ margin-top: 20px;
+ margin-bottom: 9px;
+ color: #48515C;
+ font-size: 11px;
+ font-weight: 700;
+ display: inline-block;
+}
+.profile-edit form .profile-edit-container .form-section .form-group .form-control.bio{
+  height: 200px;
+  
+}
+
+
+.profile-edit form .profile-edit-container .form-section .form-group .character-count{
+font-size: 11px;
+font-weight: 400;
+color: #48515C;
+float:right;
+margin-top: 20px;
+ margin-bottom: 9px;
+ text-align: right;
+}
+
+.profile-edit form .profile-edit-container .form-section .form-group .form-control{
+margin-bottom: 10px;
+font-size: 13px;
+font-weight: 400;
+color:#293340;
+border: 1px solid #BFC2C6;
+
+}
+
+.profile-edit form .profile-edit-container .form-section .form-group .form-subtext{
+font-weight: 400;
+font-size: 12px;
+color:#747B83;
+}
+
+.profile-edit form .profile-edit-container .form-section .form-group .form-row div{
+}
+
+
+
+
+
+
 
 /*# sourceMappingURL=custom.css.map */
