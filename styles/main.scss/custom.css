@@ -1715,12 +1715,67 @@ footer {
 
 
 /************ Profile Edit Page ************/
+.profile-edit .title .btn-default{
+  float:right;
+  margin-left: 18px;
+}
+
+.profile-edit .title .btn-default.inverse{
+  border:1px solid #9AAAFA !important;
+  background-color: #F9FAFF !important;
+  color:#647BF0 !important;
+
+  background: -webkit-linear-gradient(top, #F9FAFF 0%, #F9FAFF 100%);
+  background: linear-gradient(180deg, #F9FAFF 0%, #F9FAFF 100%);
+  border: 1px solid #9AAAFA;
+  box-shadow: 0px 1px 0px rgba(64, 90, 221, 0.25), inset 0px 1px 0px 1px rgba(255, 255, 255, 0.1);
+
+ 
+}
+
+.profile-edit .title .btn-default.inverse:hover{
+  border:1px solid #9AAAFA !important;
+  background-color: #9AAAFA !important;
+  
+
+  background: -webkit-linear-gradient(top, #9AAAFA 0%, #9AAAFA 100%);
+  background: linear-gradient(180deg, #9AAAFA 0%, #9AAAFA 100%);
+  border: 1px solid #9AAAFA;
+  box-shadow: 0px 1px 0px rgba(64, 90, 221, 0.25), inset 0px 1px 0px 1px rgba(255, 255, 255, 0.1);
+
+
+}
 
 .profile-edit form .profile-edit-container .form-section{
   background-color: white;
   box-shadow: 0 1 2 1 #32334F;
   padding: 30px;
-  margin: 30px;
+  margin: 33px 15px 30px; 
+}
+.profile-edit form .profile-edit-container .container{
+  margin:0;
+  padding: 0;
+  max-width:none;
+}
+
+.profile-edit form .profile-edit-container .container .row .profile-col{
+padding:0;
+}
+.profile-edit form .profile-edit-container .form-section .form-group .profile-theme{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.profile-edit form .profile-edit-container .form-section .form-group .profile-theme.purple{
+  background: linear-gradient( 0deg, #405ADD,  #405ADD 50%, #DDE2FF 50%, #DDE2FF 50%,#DDE2FF 50% ); 
+
+}
+.profile-edit form .profile-edit-container .form-section .form-group .profile-change-photo{
+  font-weight: 500;
+  font-size: 14px;
+  color: #16A6C9;
+  margin-bottom: 15px;
+  display:block;
 }
 
 .profile-edit form .profile-edit-container .form-section .form-group .group-title{
