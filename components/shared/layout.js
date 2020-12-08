@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Header from "./header";
 import Sidebar from "./sidebar";
-import Right from "./right";
 
 const Layout = ({ children, title }) => (
     <>

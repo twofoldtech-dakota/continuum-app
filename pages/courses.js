@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/shared/layout";
 import Courses from "../components/courses/Courses";
-import SavedCourses from "../components/courses/SavedCourses";
+// import SavedCourses from "../components/courses/SavedCourses";
 import ToggleCourses from "../components/courses/ToggleCourses";
 
 export default function Courses1() {
@@ -94,7 +94,7 @@ export default function Courses1() {
                             </div>
                             <ToggleCourses active={activeComponent}>
                                 <Courses name="courses" />
-                                <SavedCourses name="savedCourses" />
+                                {/* <SavedCourses name="savedCourses" /> */}
                             </ToggleCourses>
                             <div className="show-result">
                                 <p>Showing 20 of 248 results</p>
@@ -123,4 +123,10 @@ export default function Courses1() {
             </div>
         </Layout>
     );
+}
+
+export async function getServerSideProps(ctx) {
+    const token = getAuthCookie(ctx.req);
+
+    return { props: { token: token || null } };
 }

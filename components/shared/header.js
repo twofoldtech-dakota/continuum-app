@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Logo from "../svgs/logo";
@@ -18,23 +17,25 @@ const Header = () => {
         }
     };
     return (
-<div className="header">
-  <div className="logo">
-    <a href="#"><Logo className="img-fluid"/></a>
-    <h3>Continuing Education Tracker</h3>
-  </div>
-  <div className="continuum-user">
-    <div className="text-box">
-      <h3>Catherine Jennings</h3>
-      <p>Compass Colorado</p>
-    </div>
-    <div className="image-holder">
-      <a href="#"><img src="" className="img-fluid" /> </a>
-    </div> 
-  </div>
-</div>
-
-
+        <div className="header">
+            <div className="logo">
+                <a href="#">
+                    <Logo className="img-fluid" />
+                </a>
+                <h3>Continuing Education Tracker</h3>
+            </div>
+            <div className="continuum-user">
+                <div className="text-box">
+                    <h3>Catherine Jennings</h3>
+                    <p>Compass Colorado</p>
+                </div>
+                <div className="image-holder">
+                    <a href="#">
+                        <img src="" className="img-fluid" />{" "}
+                    </a>
+                </div>
+            </div>
+        </div>
     );
 };
 

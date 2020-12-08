@@ -1,6 +1,3 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import Header from "./header";
 
 const Right = ({ children }) => (

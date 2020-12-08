@@ -41,3 +41,9 @@ export default function Courses1() {
         </Layout>
     );
 }
+
+export async function getServerSideProps(ctx) {
+    const token = getAuthCookie(ctx.req);
+
+    return { props: { token: token || null } };
+}
