@@ -1846,7 +1846,161 @@ font-weight: 400;
 color:#293340;
  }
 
+/******************Public Profile Page**************/
+/* Portrait and Landscape */
 
+.public-page .top{
+  background-color: white;
+  min-height:591px;
+
+  
+}
+
+.public-page .top .title{
+  color:#747B83;
+  font-size: 14px;
+font-weight: 500;
+margin-top:50px;
+}
+
+.public-page .top .logo{
+  width: 14px;
+  margin-left: 50px;
+  margin-right: 20px;
+  margin-top: 50px;
+  font-size:14px;
+  float:left;
+}
+
+.public-page .top .social{
+  color: rgb(211, 209, 209);
+  font-size: 24px;
+  margin: 10px 10px;
+}
+.public-page .top div .info {
+  border-top: 1px solid  rgb(211, 209, 209);;
+  width:80%;
+  min-height:40px;
+position: relative;
+}
+.public-page .top div .info .info-icon{
+  color: rgb(211, 209, 209);
+  font-size: 18px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.public-page .top div .info div{
+font-weight: 400;
+font-size: 16px;
+color: #35404E;
+margin-left:30px;
+margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left:25px;
+}
+.public-page .top div .bio{
+  color:#333D49;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 96px;
+  margin-top:24px;
+  width:80%;
+}
+.public-page .top div .name{
+  color:#2C3541;
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom:10px;
+}
+.public-page .top div .sub{
+  font-size:20px;
+  font-weight: 400;
+  color: #405ADD;
+  margin-bottom: 3px;
+}
+
+.public-page .top div .position{
+  color: #59697B;
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+
+.public-page .bottom{
+  background-color: #F5F6F7;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+}
+
+.public-page .bottom .listing{
+  margin-top:60px;
+}
+
+.public-page .bottom .listing .credits-box{
+  max-width: 170px;
+  min-width:130px;
+  font-size: 12px;
+  font-weight:700;
+  color:#405ADD;
+  background-color:rgba(64, 90, 221, 0.15);
+  display:inline-block;
+  padding:15px;
+margin-top:20px;
+margin-bottom:20px;
+margin-right:20px;
+}
+
+.public-page .bottom .listing .credits-box .number{
+  font-size: 24px;
+  font-weight:800;
+  margin-right:10px;
+}
+
+.public-page .bottom .listing .credits-box .text{
+  width:100px;
+  float:right;
+}
+
+.public-page .bottom .listing .licensure-text{
+  font-size:11px;
+  font-weight: 700;
+  color:rgb(72, 81, 92);
+  float:right;
+  margin-top:16px;
+}
+
+.public-page .bottom .listing .licensure-option{
+  background-color: rgb(218, 222, 224);
+    padding: 10px;
+    float: right;
+    margin-bottom: 20px;
+    clear:both;
+    margin-top:4px;
+}
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .public-page .top{
+      padding-left: 20px;
+      padding-right:20px; 
+      margin:0 auto;
+    }
+    .public-page .bottom .listing{
+      margin-top:0px;
+    }
+      
+    
+}
 
 
 /*# sourceMappingURL=custom.css.map */

@@ -42,13 +42,15 @@ export default function Profile() {
           <div className="title">
             <h3 className="col-md-5">Public Profile</h3>
             <div className="col-md-7">
-            
+            <Link>
             <a className="btn-default" href="#">
               Save Changes
             </a>
-            <a className="btn-default inverse" href="#">
+            </Link>
+            <Link>
+            <a className="btn-default inverse" href="/public#">
               View Profile
-            </a>
+            </a></Link>
             </div>
           </div>
           <div className="profile-edit-container">
