@@ -1009,6 +1009,10 @@ footer {
     .continuum-right .header .continuum-user {
       display: flex;
       align-items: center; }
+
+      .continuum-right .header .continuum-user .image-holder a img{
+        max-height:80px;
+      }
       .continuum-right .header .continuum-user .text-box {
         text-align: right;
         padding-right: 20px; }
@@ -1848,18 +1852,19 @@ color:#293340;
 
 /******************Public Profile Page**************/
 /* Portrait and Landscape */
-
+.public-page a{
+  color:#405ADD;
+}
 .public-page .top{
   background-color: white;
   min-height:591px;
-
   
 }
 
 .public-page .top .title{
   color:#747B83;
   font-size: 14px;
-font-weight: 500;
+font-weight: 700;
 margin-top:50px;
 }
 
@@ -1872,18 +1877,35 @@ margin-top:50px;
   float:left;
 }
 
+.public-page .top .profile-info{
+  max-width: 940px;
+  margin:0 auto;
+}
+.public-page .top .profile-info .right{
+  float: right;
+  max-width:620px;
+}
+.public-page .top .profile-info .left{
+  float: left;
+max-width:274px;
+margin-right:46px;
+}
 .public-page .top .social{
   color: rgb(211, 209, 209);
   font-size: 24px;
   margin: 10px 10px;
 }
-.public-page .top div .info {
-  border-top: 1px solid  rgb(211, 209, 209);;
-  width:80%;
+.public-page .top .profile-image{
+border-radius:100px;
+margin-bottom:20px;
+
+}
+.public-page .top div div .info {
+  border-top: 1px solid  rgb(211, 209, 209);
   min-height:40px;
 position: relative;
 }
-.public-page .top div .info .info-icon{
+.public-page .top div div .info .info-icon{
   color: rgb(211, 209, 209);
   font-size: 18px;
   margin: 0;
@@ -1893,7 +1915,7 @@ position: relative;
   transform: translateY(-50%);
 }
 
-.public-page .top div .info div{
+.public-page .top div div .info div{
 font-weight: 400;
 font-size: 16px;
 color: #35404E;
@@ -1905,28 +1927,28 @@ margin: 0;
   transform: translateY(-50%);
   left:25px;
 }
-.public-page .top div .bio{
+.public-page .top div div .bio{
   color:#333D49;
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 96px;
   margin-top:24px;
-  width:80%;
+  line-height: 26px;
 }
-.public-page .top div .name{
+.public-page .top div div .name{
   color:#2C3541;
   font-size: 36px;
   font-weight: 800;
   margin-bottom:10px;
 }
-.public-page .top div .sub{
+.public-page .top div div .sub{
   font-size:20px;
   font-weight: 400;
   color: #405ADD;
   margin-bottom: 3px;
 }
 
-.public-page .top div .position{
+.public-page .top div div .position{
   color: #59697B;
   font-weight: 400;
   font-size: 14px;
@@ -1938,11 +1960,13 @@ margin: 0;
   background-color: #F5F6F7;
   padding-left: 20px;
   padding-right: 20px;
-  margin: 0 auto;
+  padding-top:60px;
 }
 
 .public-page .bottom .listing{
   margin-top:60px;
+  max-width:940px;
+  margin: 0 auto;
 }
 
 .public-page .bottom .listing .credits-box{
@@ -1986,10 +2010,78 @@ margin-right:20px;
     clear:both;
     margin-top:4px;
 }
+
+
+
+.public-page .bottom .listing .table{
+  background-color: white;
+  margin-bottom:90px;
+}
+.public-page .bottom .listing .table tr{
+  height: 84px;
+  text-align: center;
+}
+.public-page .bottom .listing .table tr td{
+  vertical-align: middle;
+}
+/*.public-page .bottom .listing .table tr{
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}*/
+.public-page .bottom .listing .table .title{
+  font-size: 16px;
+  font-weight: 600;
+  color:#35404E;
+  text-align:left;
+}
+.public-page .bottom .listing .table .date{
+  font-size: 14px;
+  color:#59697B;
+
+}
+.public-page .bottom .listing .table .hours{
+  font-size: 14px;
+min-width:51px;
+color:#59697B;
+}
+.public-page .bottom .listing .table .hours span{
+  font-weight:600;
+}
+.public-page .bottom .listing .table .view span{
+  padding: 8px 20px;
+  color: white;
+  background-color: #405ADD;
+  border-radius: 3px;
+  font-size: 15px;
+}
+.public-page .bottom .listing .bottom-text{
+  text-align: center;
+  max-width: 620px;
+  margin:0 auto;
+margin-bottom: 115px;
+}
+.public-page .bottom .listing .bottom-text .main{
+  font-size: 20px;
+  font-weight: 400;
+  color:#333D49;
+  line-height: 26px;
+}
+.public-page .bottom .listing .bottom-text .bottom .bullet{
+  margin-left:10px;
+  margin-right:10px;
+  color:#BFC2C6;
+
+
+
+}
+
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
+    
     .public-page .top{
       padding-left: 20px;
       padding-right:20px; 
@@ -1998,8 +2090,27 @@ margin-right:20px;
     .public-page .bottom .listing{
       margin-top:0px;
     }
-      
-    
+    .public-page .top .profile-image{
+      margin:0 auto;
+    }
+    .public-page .top .profile-info .left{
+      float:none;
+      max-width:100%;
+      margin:0 auto;
+      text-align:center;
+    }
+    .public-page .top .top-bar{
+      text-align: center;
+      margin-bottom:20px;
+    }
+    .public-page .top .logo{
+      display: inline-block;
+    }
+
+    .public-page .top .title{
+      display: inline-block;
+
+    }
 }
 
 
