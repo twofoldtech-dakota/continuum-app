@@ -15,7 +15,7 @@
 @import '../main.scss/components.scss/_date_picker.scss';   
 @import '../main.scss/layout.scss/_header.scss'; 
 @import '../main.scss/layout.scss/_footer.scss';   
- 
+@import '../main.scss/pages.scss/profile'; 
 /*========================================================
 ================== Event Sec ===============================*/
 .continuum-right{
@@ -371,6 +371,10 @@
     }
 }
 
+/********* Profile Edit Page ***********/
+.profile-edit{
+   background-color: #405ADD;
+  }
 
 /***************** RESPONSIVE CSS ************/
 @media (max-width: 1600px) {

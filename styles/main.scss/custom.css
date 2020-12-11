@@ -1009,6 +1009,10 @@ footer {
     .continuum-right .header .continuum-user {
       display: flex;
       align-items: center; }
+
+      .continuum-right .header .continuum-user .image-holder a img{
+        max-height:80px;
+      }
       .continuum-right .header .continuum-user .text-box {
         text-align: right;
         padding-right: 20px; }
@@ -1683,6 +1687,9 @@ footer {
   .sign-in-page .sing-in-inner form .form-group .btn-default {
     font-size: 16px; }
 
+   
+
+
   header .header-inner h2 {
     display: none; }
 
@@ -1709,5 +1716,402 @@ footer {
 
   footer .text-box img {
     margin: 20px auto; } }
+
+
+/************ Profile Edit Page ************/
+.profile-edit .title .btn-default{
+  float:right;
+  margin-left: 18px;
+}
+
+.profile-edit .title .btn-default.inverse{
+  border:1px solid #9AAAFA !important;
+  background-color: #F9FAFF !important;
+  color:#647BF0 !important;
+
+  background: -webkit-linear-gradient(top, #F9FAFF 0%, #F9FAFF 100%);
+  background: linear-gradient(180deg, #F9FAFF 0%, #F9FAFF 100%);
+  border: 1px solid #9AAAFA;
+  box-shadow: 0px 1px 0px rgba(64, 90, 221, 0.25), inset 0px 1px 0px 1px rgba(255, 255, 255, 0.1);
+
+ 
+}
+
+.profile-edit .title .btn-default.inverse:hover{
+  border:1px solid #9AAAFA !important;
+  background-color: #9AAAFA !important;
+  
+
+  background: -webkit-linear-gradient(top, #9AAAFA 0%, #9AAAFA 100%);
+  background: linear-gradient(180deg, #9AAAFA 0%, #9AAAFA 100%);
+  border: 1px solid #9AAAFA;
+  box-shadow: 0px 1px 0px rgba(64, 90, 221, 0.25), inset 0px 1px 0px 1px rgba(255, 255, 255, 0.1);
+
+
+}
+
+.profile-edit form .profile-edit-container .form-section{
+  background-color: white;
+  box-shadow: 0 1 2 1 #32334F;
+  padding: 30px;
+  margin: 33px 15px 30px; 
+}
+.profile-edit form .profile-edit-container .container{
+  margin:0;
+  padding: 0;
+  max-width:none;
+}
+
+.profile-edit form .profile-edit-container .container .row .profile-col{
+padding:0;
+}
+.profile-edit form .profile-edit-container .form-section .form-group .profile-theme{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.profile-edit form .profile-edit-container .form-section .form-group .profile-theme.purple{
+  background: linear-gradient( 0deg, #405ADD,  #405ADD 50%, #DDE2FF 50%, #DDE2FF 50%,#DDE2FF 50% ); 
+
+}
+.profile-edit form .profile-edit-container .form-section .form-group .profile-change-photo{
+  font-weight: 500;
+  font-size: 14px;
+  color: #16A6C9;
+  margin-bottom: 15px;
+  display:block;
+}
+
+.profile-edit form .profile-edit-container .form-section .form-group .group-title{
+  color:#405ADD;
+  line-height: 30px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.profile-edit form .profile-edit-container .form-section .form-group .form-label{
+ margin-top: 20px;
+ margin-bottom: 9px;
+ color: #48515C;
+ font-size: 11px;
+ font-weight: 700;
+ display: inline-block;
+}
+.profile-edit form .profile-edit-container .form-section .form-group .form-control.bio{
+  height: 200px;
+  
+}
+
+
+.profile-edit form .profile-edit-container .form-section .form-group .character-count{
+font-size: 11px;
+font-weight: 400;
+color: #48515C;
+float:right;
+margin-top: 20px;
+ margin-bottom: 9px;
+ text-align: right;
+}
+
+.profile-edit form .profile-edit-container .form-section .form-group .form-control{
+margin-bottom: 10px;
+font-size: 13px;
+font-weight: 400;
+color:#293340;
+border: 1px solid #BFC2C6;
+
+}
+
+.profile-edit form .profile-edit-container .form-section .form-group .form-subtext{
+font-weight: 400;
+font-size: 12px;
+color:#747B83;
+}
+
+.profile-edit form .profile-edit-container .form-section .form-group .form-row .form-group .form-label{
+  margin-top: 20px;
+  margin-bottom: 9px;
+  color: #48515C;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-block;
+ }
+
+ .profile-edit form .profile-edit-container .form-section .form-group .checkbox{
+   width:16px;
+   height:16px;
+   float:left;
+   margin-right:5px;
+ }
+
+ .profile-edit form .profile-edit-container .form-section .form-group .form-label-checkbox{
+font-size: 14px;
+font-weight: 400;
+color:#293340;
+ }
+
+/******************Public Profile Page**************/
+/* Portrait and Landscape */
+.public-page a{
+  color:#405ADD;
+}
+.public-page .top{
+  background-color: white;
+  min-height:591px;
+  
+}
+
+.public-page .top .title{
+  color:#747B83;
+  font-size: 14px;
+font-weight: 700;
+margin-top:50px;
+}
+
+.public-page .top .logo{
+  width: 14px;
+  margin-left: 50px;
+  margin-right: 20px;
+  margin-top: 50px;
+  font-size:14px;
+  float:left;
+}
+
+.public-page .top .profile-info{
+  max-width: 940px;
+  margin:0 auto;
+}
+.public-page .top .profile-info .right{
+  float: right;
+  max-width:620px;
+}
+.public-page .top .profile-info .left{
+  float: left;
+max-width:274px;
+margin-right:46px;
+}
+.public-page .top .social{
+  color: rgb(211, 209, 209);
+  font-size: 24px;
+  margin: 10px 10px;
+}
+.public-page .top .profile-image{
+border-radius:100px;
+margin-bottom:20px;
+
+}
+.public-page .top div div .info {
+  border-top: 1px solid  rgb(211, 209, 209);
+  min-height:40px;
+position: relative;
+}
+.public-page .top div div .info .info-icon{
+  color: rgb(211, 209, 209);
+  font-size: 18px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.public-page .top div div .info div{
+font-weight: 400;
+font-size: 16px;
+color: #35404E;
+margin-left:30px;
+margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left:25px;
+}
+.public-page .top div div .bio{
+  color:#333D49;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 96px;
+  margin-top:24px;
+  line-height: 26px;
+}
+.public-page .top div div .name{
+  color:#2C3541;
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom:10px;
+}
+.public-page .top div div .sub{
+  font-size:20px;
+  font-weight: 400;
+  color: #405ADD;
+  margin-bottom: 3px;
+}
+
+.public-page .top div div .position{
+  color: #59697B;
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+
+.public-page .bottom{
+  background-color: #F5F6F7;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top:60px;
+}
+
+.public-page .bottom .listing{
+  margin-top:60px;
+  max-width:940px;
+  margin: 0 auto;
+}
+
+.public-page .bottom .listing .credits-box{
+  max-width: 170px;
+  min-width:130px;
+  font-size: 12px;
+  font-weight:700;
+  color:#405ADD;
+  background-color:rgba(64, 90, 221, 0.15);
+  display:inline-block;
+  padding:15px;
+margin-top:20px;
+margin-bottom:20px;
+margin-right:20px;
+}
+
+.public-page .bottom .listing .credits-box .number{
+  font-size: 24px;
+  font-weight:800;
+  margin-right:10px;
+}
+
+.public-page .bottom .listing .credits-box .text{
+  width:100px;
+  float:right;
+}
+
+.public-page .bottom .listing .licensure-text{
+  font-size:11px;
+  font-weight: 700;
+  color:rgb(72, 81, 92);
+  float:right;
+  margin-top:16px;
+}
+
+.public-page .bottom .listing .licensure-option{
+  background-color: rgb(218, 222, 224);
+    padding: 10px;
+    float: right;
+    margin-bottom: 20px;
+    clear:both;
+    margin-top:4px;
+}
+
+
+
+.public-page .bottom .listing .table{
+  background-color: white;
+  margin-bottom:90px;
+}
+.public-page .bottom .listing .table tr{
+  height: 84px;
+  text-align: center;
+}
+.public-page .bottom .listing .table tr td{
+  vertical-align: middle;
+}
+/*.public-page .bottom .listing .table tr{
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}*/
+.public-page .bottom .listing .table .title{
+  font-size: 16px;
+  font-weight: 600;
+  color:#35404E;
+  text-align:left;
+}
+.public-page .bottom .listing .table .date{
+  font-size: 14px;
+  color:#59697B;
+
+}
+.public-page .bottom .listing .table .hours{
+  font-size: 14px;
+min-width:51px;
+color:#59697B;
+}
+.public-page .bottom .listing .table .hours span{
+  font-weight:600;
+}
+.public-page .bottom .listing .table .view span{
+  padding: 8px 20px;
+  color: white;
+  background-color: #405ADD;
+  border-radius: 3px;
+  font-size: 15px;
+}
+.public-page .bottom .listing .bottom-text{
+  text-align: center;
+  max-width: 620px;
+  margin:0 auto;
+margin-bottom: 115px;
+}
+.public-page .bottom .listing .bottom-text .main{
+  font-size: 20px;
+  font-weight: 400;
+  color:#333D49;
+  line-height: 26px;
+}
+.public-page .bottom .listing .bottom-text .bottom .bullet{
+  margin-left:10px;
+  margin-right:10px;
+  color:#BFC2C6;
+
+
+
+}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    
+    .public-page .top{
+      padding-left: 20px;
+      padding-right:20px; 
+      margin:0 auto;
+    }
+    .public-page .bottom .listing{
+      margin-top:0px;
+    }
+    .public-page .top .profile-image{
+      margin:0 auto;
+    }
+    .public-page .top .profile-info .left{
+      float:none;
+      max-width:100%;
+      margin:0 auto;
+      text-align:center;
+    }
+    .public-page .top .top-bar{
+      text-align: center;
+      margin-bottom:20px;
+    }
+    .public-page .top .logo{
+      display: inline-block;
+    }
+
+    .public-page .top .title{
+      display: inline-block;
+
+    }
+}
+
 
 /*# sourceMappingURL=custom.css.map */
