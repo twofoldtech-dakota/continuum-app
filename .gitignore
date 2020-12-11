@@ -10,7 +10,8 @@
 
 # next.js
 /.next/
-/out/
+/out_publish/
+/functions/
 
 # production
 /build

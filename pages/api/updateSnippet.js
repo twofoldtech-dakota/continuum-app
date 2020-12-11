@@ -1,7 +1,7 @@
-import { updateSnippet } from '../../utils/Fauna';
+import { updateSnippet } from "../../utils/Fauna";
 export default async function handler(req, res) {
-    if (req.method !== 'PUT') {
-        return res.status(405).json({ msg: 'Method not allowed' });
+    if (req.method !== "PUT") {
+        return res.status(405).json({ msg: "Method not allowed" });
     }
     const { id, code, language, description, name } = req.body;
 
@@ -9,6 +9,6 @@ export default async function handler(req, res) {
         //TODO: update snippet
     } catch (err) {
         console.error(err);
-        res.status(500).json({ msg: 'Something went wrong.' });
+        res.status(500).json({ msg: "Something went wrong." });
     }
 }

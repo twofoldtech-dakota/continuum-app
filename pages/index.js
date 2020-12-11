@@ -1,7 +1,5 @@
-import Head from "next/head";
 import useSWR from "swr";
-import Link from "next/link";
-import Courses from "../components/Courses";
+import Courses from "../components/courses/Courses";
 import { getAuthCookie } from "../utils/auth-cookies";
 import Layout from "../components/shared/layout";
 

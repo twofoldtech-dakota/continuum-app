@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import { MdDashboard } from 'react-icons/md';
-import { MdClass } from 'react-icons/md';
-import { FaBookOpen } from 'react-icons/fa';
-import { FaUserCircle } from 'react-icons/fa';
-import { MdSettings } from 'react-icons/md';
-import { RiLogoutBoxRLine } from 'react-icons/ri';
+import { MdDashboard } from "react-icons/md";
+import { MdClass } from "react-icons/md";
+import { FaBookOpen } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+import { MdSettings } from "react-icons/md";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 import SideBarLogo from "../svgs/sidebarlogo";
 
 const Sidebar = () => {
@@ -28,9 +28,8 @@ const Sidebar = () => {
     return (
         <div className="continuum-sidebar">
             <div className="side-header">
-
                 <a href="#">
-                    <SideBarLogo className="img-fluid"/>
+                    <SideBarLogo className="img-fluid" />
                 </a>
             </div>
             <div className="navigation">
@@ -38,7 +37,10 @@ const Sidebar = () => {
                     <li>
                         <a className="active" href="/">
                             <span>
-                                <MdDashboard className="simple-state" size={30}/>
+                                <MdDashboard
+                                    className="simple-state"
+                                    size={30}
+                                />
                                 {/* <MdDashboard className="hover-state" size={32}/> */}
                             </span>
                             Home
@@ -47,26 +49,31 @@ const Sidebar = () => {
                     <li>
                         <a href="/credits">
                             <span>
-                            <MdClass className="simple-state" size={30}/>
-
+                                <MdClass className="simple-state" size={30} />
                             </span>
                             Credits
                         </a>
                     </li>
                     <li>
-                        <a href="/courses">
-                            <span>
-                            <FaBookOpen className="simple-state" size={30}/>
-
-                            </span>
-                            Courses
-                        </a>
+                        <Link href="/courses">
+                            <a>
+                                <span>
+                                    <FaBookOpen
+                                        className="simple-state"
+                                        size={30}
+                                    />
+                                </span>
+                                Courses
+                            </a>
+                        </Link>
                     </li>
                     <li>
                         <a href="/profile">
                             <span>
-                            <FaUserCircle className="simple-state" size={30}/>
-
+                                <FaUserCircle
+                                    className="simple-state"
+                                    size={30}
+                                />
                             </span>
                             Profile
                         </a>
@@ -74,8 +81,10 @@ const Sidebar = () => {
                     <li>
                         <a href="/settings">
                             <span>
-                            <MdSettings className="simple-state" size={30}/>
-
+                                <MdSettings
+                                    className="simple-state"
+                                    size={30}
+                                />
                             </span>
                             Settings
                         </a>
@@ -83,8 +92,10 @@ const Sidebar = () => {
                     <li>
                         <a onClick={logout} href="#">
                             <span>
-                            <RiLogoutBoxRLine className="simple-state" size={30}/>
-
+                                <RiLogoutBoxRLine
+                                    className="simple-state"
+                                    size={30}
+                                />
                             </span>
                             Logout
                         </a>
