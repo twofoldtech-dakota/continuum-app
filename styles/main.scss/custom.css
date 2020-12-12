@@ -1740,7 +1740,6 @@ footer {
 .profile-edit .title .btn-default.inverse:hover{
   border:1px solid #9AAAFA !important;
   background-color: #9AAAFA !important;
-  
 
   background: -webkit-linear-gradient(top, #9AAAFA 0%, #9AAAFA 100%);
   background: linear-gradient(180deg, #9AAAFA 0%, #9AAAFA 100%);
@@ -1756,6 +1755,13 @@ footer {
   padding: 30px;
   margin: 33px 15px 30px; 
 }
+.profile-edit form .profile-edit-container .form-section .form-group .form-error{
+  color: red;
+  font-size: 12px;
+  display: block;
+
+}
+
 .profile-edit form .profile-edit-container .container{
   margin:0;
   padding: 0;
@@ -1861,20 +1867,11 @@ color:#293340;
   
 }
 
-.public-page .top .title{
-  color:#747B83;
-  font-size: 14px;
-font-weight: 700;
-margin-top:50px;
-}
 
 .public-page .top .logo{
-  width: 14px;
   margin-left: 50px;
-  margin-right: 20px;
   margin-top: 50px;
   font-size:14px;
-  float:left;
 }
 
 .public-page .top .profile-info{
@@ -2073,8 +2070,9 @@ margin-bottom: 115px;
   margin-right:10px;
   color:#BFC2C6;
 
-
-
+}
+.public-page .bottom .listing .bottom-text svg{
+  margin-bottom:30px;
 }
 
 @media only screen 
@@ -2103,14 +2101,11 @@ margin-bottom: 115px;
       text-align: center;
       margin-bottom:20px;
     }
-    .public-page .top .logo{
-      display: inline-block;
+    .public-page .top div .logo{
+      margin-left: auto;
+      margin-right: auto;
     }
-
-    .public-page .top .title{
-      display: inline-block;
-
-    }
+    
 }
 
 

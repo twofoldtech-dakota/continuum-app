@@ -10,6 +10,10 @@ import { SiZillow } from "react-icons/si";
 import { MdLocationOn } from "react-icons/md";
 import { MdPhoneIphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
+
+import PublicProfileLogoTop from "../components/svgs/publicprofilelogotop";
+import PublicProfileLogoBottom from "../components/svgs/publicprofilelogobottom";
+
 export default function Home() {
   const router = useRouter();
 
@@ -17,8 +21,7 @@ export default function Home() {
     <div className="public-page">
       <div className="row top">
         <div className="col-sm-12 col-md-12 top-bar">
-          <div className="logo">logo</div>
-          <div className="title">Continuum</div>
+          <div className="logo"><PublicProfileLogoTop /></div>
         </div>
         <div className="profile-info">
           <div className="left">
@@ -142,7 +145,7 @@ export default function Home() {
           </div>
         
           <div className="col-sm-12 bottom-text">
-
+<PublicProfileLogoBottom />
           <div className="main">
             Continuum — the only continuing education credit tracking app designed specifically for real estate pros.
           </div>
