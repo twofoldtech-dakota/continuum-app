@@ -1872,6 +1872,7 @@ color:#293340;
   margin-left: 50px;
   margin-top: 50px;
   font-size:14px;
+  margin-bottom: 30px;
 }
 
 .public-page .top .profile-info{
@@ -1967,7 +1968,6 @@ margin: 0;
 }
 
 .public-page .bottom .listing .credits-box{
-  max-width: 170px;
   min-width:130px;
   font-size: 12px;
   font-weight:700;
@@ -2106,6 +2106,12 @@ margin-bottom: 115px;
       margin-right: auto;
     }
     
+}
+
+.bullet{
+  margin-left:10px;
+  margin-right:10px;
+  color:#BFC2C6;
 }
 
 

@@ -5,7 +5,7 @@ const publicprofilelogobottom = () => {
   return (
     <svg width="52px" height="36px" viewBox="0 0 52 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
   <title>logo-bug</title>
-  <g id="public-profile" stroke="none" strokewidth={1} fill="none" fillrule="evenodd">
+  <g id="public-profile" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
     <g id="public-profile-b" transform="translate(-794.000000, -1404.000000)" fill="#BFC2C6">
       <g id="logo-bug" transform="translate(794.000000, 1404.000000)">
         <path d="M36.4348052,4.26325641e-14 C45.0312249,4.61852778e-14 52,6.9687751 52,15.5651948 L52,21.1834355 C52,23.9907705 49.7242054,26.2665651 46.9168704,26.2665651 C44.1098935,26.2665651 41.834389,23.9910607 41.834389,21.1840837 L41.8349748,15.4169252 C41.8349748,12.4344938 39.4172365,10.0167555 36.4348052,10.0167555 C33.7988658,10.0167555 31.6040318,11.9053522 31.1296283,14.4032204 L31.1303897,20.4348052 C31.1303897,29.0312249 24.1616146,36 15.5651948,36 C6.9687751,36 -4.97379915e-14,29.0312249 -5.32907052e-14,20.4348052 L-5.32907052e-14,20.4348052 L
