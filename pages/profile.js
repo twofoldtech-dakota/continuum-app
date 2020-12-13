@@ -122,7 +122,8 @@ console.log(userData);
     console.log("submitted form");
     try {
       console.log(formData);
-
+    }
+    catch(error){
       console.error(error);
       setErrorMessage(error.message);
     }

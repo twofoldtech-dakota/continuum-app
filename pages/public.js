@@ -120,7 +120,8 @@ export default function Home() {
     hideContactInfo: true,
     profileImage:
       "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
-  };
+    isRealtor: true
+    };
   const [selectedLicensurePeriod, setLicensurePeriod] = useState();
   const [activeLicensureCredits, setActiveLicensureCredits] = useState([]);
   const [currentLicensureCreditsEarned, setCurrentLicensureCreditsEarned] = useState(0);
@@ -142,7 +143,6 @@ export default function Home() {
   if (userData.email !== "" && userData.email !== null) {
     email = mailTo + userData.email;
   }
-  
 
   /*set setActiveCredits to only list credits that are within the current selected licensure period.*/
   function setActiveCredits(licensurePeriod) {
@@ -199,6 +199,12 @@ export default function Home() {
             <div className="sub">{userData.company}</div>
             <div className="position">
               {userData.title}
+              {userData.isRealtor ? (
+        <span>/ REALTOR<sup>&#174;</sup></span>
+      ) : (
+        <span></span>
+      )}
+              
               <span className="bullet">&#8226;</span>
               {userData.licenseNumber}
             </div>
