@@ -117,20 +117,23 @@ export default function Profile() {
   };
 
 console.log(userData);
-  const onSubmit = handleSubmit(async (formData) => {
-    if (errorMessage) setErrorMessage("");
-    console.log("submitted form");
-    try {
-      console.log(formData);
+const onSubmit = handleSubmit(async (formData) => {
+  if (errorMessage) setErrorMessage("");
+  console.log("submitted form");
+  try {
+    console.log(formData);
 
-      console.error(error);
-      setErrorMessage(error.message);
-    }
-  });
+    console.error(error);
+    setErrorMessage(error.message);
+  }
+  catch(ex){
+    console.log(ex);
+  }
+});
 
-  const handleChange = function (e) {
-    this.setState({ selectValue: e.target.value });
-  };
+const handleChange = function (e) {
+  this.setState({ selectValue: e.target.value });
+};
   
 
   return (
