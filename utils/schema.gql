@@ -1,8 +1,8 @@
 type User {
+    username: String @unique
     email: String! @unique
     governingAgency: String
-    credits: [Credit!] @relation
-    userCourses: [UserCourse!] @relation
+    savedCourses: [SavedCourses!] @relation
     name: String
     title: String
     company: String
@@ -24,11 +24,11 @@ type User {
     zip: String
     licenseType: String
     licenseNumber: String
-    licenseExpDate: String
-    alerts: String
-    news: String
-    creditsEarned: String
-    creditsRequired: String
+    licensurePeriod: [LicensurePeriod] @relation
+    alerts: Boolean
+    news: Boolean
+    hideContactInfo: Boolean
+    profileImage: String
 }
 
 type Course {
@@ -40,7 +40,7 @@ type Course {
     saved: String!
 }
 
-type UserCourse {
+type SavedCourses {
     name: String!
     provider: String!
     date: String!
@@ -48,7 +48,7 @@ type UserCourse {
     governingAgency: String!
     saved: String!
     owner: String!
-    user: User!
+    username: String!
 }
 
 type Credit {
@@ -65,4 +65,12 @@ type Credit {
 type Query {
     allCourses: [Course!]
     allUserCourses: [Course!]
+}
+
+type LicensurePeriod{
+    startDate: String!
+    endDate: String!
+    creditsEarned: Int!
+    creditsRequired: Int!
+    credits: [Credit!] @relation
 }
