@@ -9,6 +9,7 @@ export default function Profile() {
 
   const { handleSubmit, register, errors } = useForm();
 
+
   /*Do not delete until you confirm every prop is accounted for in the api call and matches the same type*/
   const userData = {
     username: "dillonosmith",
@@ -121,11 +122,16 @@ console.log(userData);
     console.log("submitted form");
     try {
       console.log(formData);
-    } catch (error) {
+
       console.error(error);
       setErrorMessage(error.message);
     }
   });
+
+  const handleChange = function (e) {
+    this.setState({ selectValue: e.target.value });
+  };
+  
 
   return (
     <Layout title="Continuum - Profile">
@@ -134,6 +140,7 @@ console.log(userData);
           <div className="title">
             <h3 className="col-md-5">Public Profile</h3>
             <div className="col-md-7">
+
               
               <input
                                 type="submit"
@@ -143,6 +150,7 @@ console.log(userData);
               <a className="btn-default inverse" href="/public#">
                 View Profile
               </a>
+
             </div>
           </div>
           <div className="profile-edit-container">
@@ -169,6 +177,7 @@ console.log(userData);
                                     {errors.username.message}
                                 </span>
                             )}
+
                       <div className="form-subtext">
                         Your username is your unique identifier across the
                         network.
@@ -189,6 +198,7 @@ console.log(userData);
                                     {errors.name.message}
                                 </span>
                             )}
+
                       <div className="form-subtext">
                         Help people discover your account by using the name
                         you’re known by: either your full name, nickname, or
@@ -216,6 +226,7 @@ console.log(userData);
                         type="text"
                         name="company"
                         className="form-control"
+
                         defaultValue={userData.company}
                         ref={register({
                           required: "Company is required",
@@ -226,11 +237,13 @@ console.log(userData);
                                     {errors.company.message}
                                 </span>
                             )}
+
                       <div className="form-label">WEBSITE</div>
                       <input
                         type="text"
                         name="website"
                         className="form-control"
+
                         defaultValue={userData.website}
                         ref={register({
                           required: "Website is required",
@@ -241,6 +254,7 @@ console.log(userData);
                                     {errors.website.message}
                                 </span>
                             )}
+
                       <div className="form-label">BIO</div>
 
                       <p className="character-count col-sm-2">30/400</p>
@@ -249,7 +263,6 @@ console.log(userData);
                         className="form-control bio"
                         maxLength="400"
                         defaultValue={userData.bio}
-
                       ></textarea>
                     </div>
                   </div>
@@ -288,6 +301,7 @@ console.log(userData);
                                     {errors.phone.message}
                                 </span>
                             )}
+
                       <div className="form-label">OFFICE PHONE</div>
                       <input
                         type="text"
@@ -303,11 +317,13 @@ console.log(userData);
                                     {errors.officePhone.message}
                                 </span>
                             )}    
+
                       <div className="form-label">MAILING ADDRESS</div>
                       <input
                         type="text"
                         name="addressLine1"
                         className="form-control"
+
                         defaultValue={userData.addressLine1}
                         ref={register({
                           required: "Address is required",
@@ -318,6 +334,7 @@ console.log(userData);
                                     {errors.addressLine1.message}
                                 </span>
                             )}
+
                       <input
                         type="text"
                         name="addressLine2"
