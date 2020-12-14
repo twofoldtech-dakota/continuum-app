@@ -129,11 +129,11 @@ export default function Home() {
 
   /*only loads on initial load */
   useEffect(()=>{
-    if(userData.licensurePeriod[0] !== null){
+    if(userData.licensurePeriods[0] !== null){
 
-      setActiveCredits(userData.licensurePeriod[0].startDate+"-"+userData.licensurePeriod[0].endDate);
-      setCurrentLicensureCreditsRemaining(userData.licensurePeriod[0].creditsRequired - userData.licensurePeriod[0].creditsEarned);
-      setCurrentLicensureCreditsEarned (userData.licensurePeriod[0].creditsEarned);
+      setActiveCredits(userData.licensurePeriods[0].startDate+"-"+userData.licensurePeriods[0].endDate);
+      setCurrentLicensureCreditsRemaining(userData.licensurePeriods[0].creditsRequired - userData.licensurePeriods[0].creditsEarned);
+      setCurrentLicensureCreditsEarned (userData.licensurePeriods[0].creditsEarned);
 
     }
 }, [])
@@ -153,7 +153,7 @@ export default function Home() {
       startLicensureDate = split[0];
       endLicensureDate = split[1];
     }
-    userData.licensurePeriod.forEach((period) => {
+    userData.licensurePeriods.forEach((period) => {
       if(period.startDate == startLicensureDate && period.endDate == endLicensureDate){
         setActiveLicensureCredits(period.credits);
         setCurrentLicensureCreditsRemaining(period.creditsRequired - currentLicensureCreditsEarned);
@@ -250,7 +250,7 @@ export default function Home() {
               <div className="licensure-text">LICENSURE PERIOD</div>
               <select
                 className="licensure-option"
-                defaultValue={userData.licensurePeriod[0]}
+                defaultValue={userData.licensurePeriods[0]}
                 value={selectedLicensurePeriod}
                 /*onChange={e => setLicensurePeriod(e.currentTarget.value)}*/
                 onChange={(e) =>
@@ -259,7 +259,7 @@ export default function Home() {
                   )
                 }
               >
-                {userData.licensurePeriod.map((period) => (
+                {userData.licensurePeriods.map((period) => (
                   <option key={period.startDate} value={`${period.startDate}-${period.endDate}`}>
                     {period.startDate} - {period.endDate}
                   </option>

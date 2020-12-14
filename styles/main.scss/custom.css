@@ -1971,7 +1971,7 @@ margin: 0;
 .public-page .bottom .listing .credits-box{
   min-width:130px;
   font-size: 12px;
-  font-weight:700;
+  font-weight:700; 
   color:#405ADD;
   background-color:rgba(64, 90, 221, 0.15);
   display:inline-block;
@@ -2116,5 +2116,50 @@ margin-bottom: 115px;
   color:#BFC2C6;
 }
 
+/*************Settings Page*************/
+.setting-box div .form-group label{
+  display: block;
+  color: #48515C;
+  font-weight: 700;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+.setting-box div .form-group .licensure-row{
+  
+    position: relative;
+  
+}
+.setting-box div .form-group .start-label{
+display: inline-block;
+margin-right: 107px;
+}
+.setting-box div .form-group .end-label{
+  display: inline-block;
+}
+.setting-box div .form-group .licensure-row .start{
+  max-width:130px;
+  display: inline-block;
+  margin-right:20px;
+}
 
+  .setting-box div .form-group .licensure-row .end{
+    max-width:130px;
+  display: inline-block;
+  margin-right:20px;
+  }
+
+  .setting-box div .form-group .licensure-row .delete svg{
+    color:red;
+    cursor: pointer;
+
+  }
+  .setting-box div .add-period{
+    padding: 8px 15px;
+    background-color: #F9FAFF;
+    color:#647BF0;
+    border: 1px solid #9AAAFA;
+    display: inline-block;
+    cursor: pointer;
+border-radius: 3px;
+  }
 /*# sourceMappingURL=custom.css.map */

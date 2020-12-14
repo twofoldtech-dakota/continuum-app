@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Layout from "../components/shared/layout";
-
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
 const Settings = () => {
   const router = useRouter();
 
@@ -107,24 +108,53 @@ const Settings = () => {
     hideContactInfo: true,
     profileImage:
       "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
-    isRealtor: true
-    };
+    isRealtor: true,
+  };
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [licensurePeriods, setlicensurePeriods] = useState(userData.licensurePeriods);
 
   const { handleSubmit, register, watch, errors } = useForm();
 
+  
   const onSubmit = handleSubmit(async (formData) => {
+// check and loop through all licensure periods and make sure there are no blank fields and make sure the start date is less than the end date.
+// if we find a blank field or an end date that is before the start date then show general error message at top of box 
+  var startLicensurePeriods = [];
+  var endLicensurePeriods = [];
+  var licensurePeriodsToSave = [];
+  document.querySelectorAll('.start').forEach(function(el){
+    startLicensurePeriods.push(el.value);
+  });
+  document.querySelectorAll('.end').forEach(function(el){
+    endLicensurePeriods.push(el.value);
+  });
+  var newPeriods = [];
+  var newArray = startLicensurePeriods.map((e, i) => e + "-"+ endLicensurePeriods[i]);
+  console.log(newArray);
+  
+
+  
     if (errorMessage) setErrorMessage("");
 
     try {
-        console.log(formData);
+      console.log(formData);
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
     }
   });
 
+  function addPeriod() {
+    let newPeriod = '<div class="calendar licensure-row"> <input type="text" name="licensureStartDate" class="form-control start"/><input type="text" name="licensureEndDate" class="form-control end"/><span class="delete" onClick={removePeriod}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="delete" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"></path></g></svg></span> <hr/> </div>';
+    document.querySelector('#periods').insertAdjacentHTML('beforeend', newPeriod);
+
+  }
+
+  function removePeriod() {
+console.log("remove");
+    
+  }
   return (
     <Layout>
       <div className="continuum-detail">
@@ -140,50 +170,48 @@ const Settings = () => {
           <div className="setting-sec">
             <div className="setting-box">
               <h4>Licensure Information</h4>
-              <form className="licensur-info">
+              <div className="licensur-info">
                 <div className="row">
                   <div className="col-md-3">
                     <div className="form-group">
                       <label>LICENSE TYPE</label>
                       <select
-                            className="form-control"
-                            name="licenseType"
-                            defaultValue={userData.licenseType}
-                            ref={register({
-                              required: "License type is required",
-                            })}
-                          >
+                        className="form-control"
+                        name="licenseType"
+                        defaultValue={userData.licenseType}
+                        ref={register({
+                          required: "License type is required",
+                        })}
+                      >
                         <option>Real Estate</option>
                         <option>Test License</option>
-
                       </select>
                       {errors.licenseType && (
-                                <span role="alert" class="form-error">
-                                    {errors.licenseType.message}
-                                </span>
-                            )}
+                        <span role="alert" class="form-error">
+                          {errors.licenseType.message}
+                        </span>
+                      )}
                     </div>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <div className="form-group">
                       <label>GOVERNING AGENCY</label>
                       <select
-                            className="form-control"
-                            name="governingAgency"
-                            defaultValue={userData.governingAgency}
-                            ref={register({
-                              required: "Governing agency is required",
-                            })}
-                          >
+                        className="form-control"
+                        name="governingAgency"
+                        defaultValue={userData.governingAgency}
+                        ref={register({
+                          required: "Governing agency is required",
+                        })}
+                      >
                         <option>Colorado Association of Realtors</option>
                         <option>Test Governing Association</option>
-
                       </select>
                       {errors.governingAgency && (
-                                <span role="alert" class="form-error">
-                                    {errors.governingAgency.message}
-                                </span>
-                            )}
+                        <span role="alert" class="form-error">
+                          {errors.governingAgency.message}
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="col-md-3">
@@ -206,84 +234,96 @@ const Settings = () => {
                         )}
 
                         <span>
-                          <img src="images/calendar-icon.svg" alt="" />
+                          <FaRegCalendarAlt className="calendar"></FaRegCalendarAlt>
                         </span>
                       </div>
                     </div>
                   </div>
                   <div className="col-md-3">
                     <div className="form-group">
-                    <label className="check ">
-                    <input
-                        type="checkbox"
-                        name="isRealtor"
-                        className="form-control checkbox"
-                        defaultValue={userData.isRealtor}
-                        defaultChecked={userData.isRealtor}
-                      ></input>
-                      <span className="checkmark" />
-                    </label>
-                    <div className="text-box">
-                      <p>
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am a Realtor<sup>&#174;</sup>
-                      </p>
-                    </div>
-
-                      </div>
-                    </div>
-                  </div>
-
-              </form>
-            </div>
-            <div className="setting-box">
-              <h4>Licensure Periods</h4>
-              <form className="licensur-info">
-                <div className="row">
-                  <div className="col-md-3">
-                    <div className="form-group">
-                      <label>STARTS</label><label>ENDS</label>
-                      <div className="calendar">
-                    
-                  
-
-                        <span>
-                          <img src="images/calendar-icon.svg" alt="" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-3">
-                    <div className="form-group">
-                      <label>ENDS</label>
-                      <div className="calendar">
+                      <label className="check ">
                         <input
-                          type="text"
-                          name="licensureEndDate"
-                          className="form-control"
-                          defaultValue={userData.licenseNumber}
-                          ref={register({
-                            required: "License number is required",
-                          })}
-                        />
-                        {errors.licenseNumber && (
-                          <span role="alert" class="form-error">
-                            {errors.licenseNumber.message}
-                          </span>
-                        )}
-
-                        <span>
-                          <img src="images/calendar-icon.svg" alt="" />
-                        </span>
+                          type="checkbox"
+                          name="isRealtor"
+                          className="form-control checkbox"
+                          defaultValue={userData.isRealtor}
+                          defaultChecked={userData.isRealtor}
+                        ></input>
+                        <span className="checkmark" />
+                      </label>
+                      <div className="text-box">
+                        <p>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am a Realtor
+                          <sup>&#174;</sup>
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
-            
+            <div className="setting-box">
+              <h4>Licensure Periods</h4>
+              <div className="licensur-info">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group" id="periods">
+                      <label className="start-label">STARTS</label>
+                      <label className="end-label">ENDS</label>
+                      {userData.licensurePeriods.map((period) => (
+                        <div className="calendar licensure-row">
+                          <input
+                            type="text"
+                            name="licensureStartDate"
+                            className="form-control start"
+                            defaultValue={period.startDate}
+                            ref={register({
+                              required: "Start date is required",
+                            })}
+                          />
+                          {errors.startDate && (
+                            <span role="alert" class="form-error">
+                              {errors.startDate.message}
+                            </span>
+                          )}
+                          <span>
+                            <img src="images/calendar-icon.svg" alt="" />
+                          </span>
+                          <input
+                            type="text"
+                            name="licensureEndDate"
+                            className="form-control end"
+                            defaultValue={period.endDate}
+                            ref={register({
+                              required: "End date is required",
+                            })}
+                          />
+                          {errors.endDate && (
+                            <span role="alert" class="form-error">
+                              {errors.endDate.message}
+                            </span>
+                          )}
+                          <span className="delete" onClick={removePeriod}>
+                            <RiDeleteBin6Line className="delete"></RiDeleteBin6Line>
+                          </span>
+                          <hr />
+                        </div>
+                      
+                      ))}
+
+                      
+                    </div>
+                    <span className="add-period" onClick={addPeriod}>
+                        Add Licensure Period
+                      </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="setting-box">
               <h4>Social Media Links</h4>
-              <form className="social-info">
+              <div className="social-info">
                 <div className="row">
                   <div className="col-md-3">
                     <div className="form-group">
@@ -334,11 +374,11 @@ const Settings = () => {
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
             <div className="setting-box">
               <h4>NETWORK</h4>
-              <form className="social-info">
+              <div className="social-info">
                 <div className="row">
                   <div className="col-md-4">
                     <div className="form-group">
@@ -369,7 +409,7 @@ const Settings = () => {
                     </div>
                   </div>*/}
                 </div>
-              </form>
+              </div>
             </div>
             <div className="setting-box">
               <h4>Email Notifications</h4>
@@ -377,7 +417,7 @@ const Settings = () => {
                 <ul>
                   <li>
                     <label className="check ">
-                    <input
+                      <input
                         type="checkbox"
                         name="alerts"
                         className="form-control checkbox"
@@ -396,7 +436,7 @@ const Settings = () => {
                   </li>
                   <li>
                     <label className="check ">
-                    <input
+                      <input
                         type="checkbox"
                         name="news"
                         className="form-control checkbox"
