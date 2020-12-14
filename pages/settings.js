@@ -44,7 +44,7 @@ const Settings = () => {
     zip: "98767",
     licenseType: "Real Estate",
     licenseNumber: "FA.100069906",
-    licensurePeriod: [
+    licensurePeriods: [
       {
         startDate: "12/01/2020",
         endDate: "11/30/2023",
@@ -118,6 +118,7 @@ const Settings = () => {
     if (errorMessage) setErrorMessage("");
 
     try {
+        console.log(formData);
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
@@ -144,17 +145,45 @@ const Settings = () => {
                   <div className="col-md-3">
                     <div className="form-group">
                       <label>LICENSE TYPE</label>
-                      <select className="form-control">
+                      <select
+                            className="form-control"
+                            name="licenseType"
+                            defaultValue={userData.licenseType}
+                            ref={register({
+                              required: "License type is required",
+                            })}
+                          >
                         <option>Real Estate</option>
+                        <option>Test License</option>
+
                       </select>
+                      {errors.licenseType && (
+                                <span role="alert" class="form-error">
+                                    {errors.licenseType.message}
+                                </span>
+                            )}
                     </div>
                   </div>
-                  <div className="col-md-5">
+                  <div className="col-md-4">
                     <div className="form-group">
                       <label>GOVERNING AGENCY</label>
-                      <select className="form-control">
+                      <select
+                            className="form-control"
+                            name="governingAgency"
+                            defaultValue={userData.governingAgency}
+                            ref={register({
+                              required: "Governing agency is required",
+                            })}
+                          >
                         <option>Colorado Association of Realtors</option>
+                        <option>Test Governing Association</option>
+
                       </select>
+                      {errors.governingAgency && (
+                                <span role="alert" class="form-error">
+                                    {errors.governingAgency.message}
+                                </span>
+                            )}
                     </div>
                   </div>
                   <div className="col-md-3">
@@ -182,7 +211,28 @@ const Settings = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                  <div className="col-md-3">
+                    <div className="form-group">
+                    <label className="check ">
+                    <input
+                        type="checkbox"
+                        name="isRealtor"
+                        className="form-control checkbox"
+                        defaultValue={userData.isRealtor}
+                        defaultChecked={userData.isRealtor}
+                      ></input>
+                      <span className="checkmark" />
+                    </label>
+                    <div className="text-box">
+                      <p>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am a Realtor<sup>&#174;</sup>
+                      </p>
+                    </div>
+
+                      </div>
+                    </div>
+                  </div>
+
               </form>
             </div>
             <div className="setting-box">
@@ -191,22 +241,10 @@ const Settings = () => {
                 <div className="row">
                   <div className="col-md-3">
                     <div className="form-group">
-                      <label>LICENSE TYPE</label>
+                      <label>STARTS</label><label>ENDS</label>
                       <div className="calendar">
-                        <input
-                          type="text"
-                          name="licensureStartDate"
-                          className="form-control"
-                          defaultValue={userData.licenseNumber}
-                          ref={register({
-                            required: "License number is required",
-                          })}
-                        />
-                        {errors.licenseNumber && (
-                          <span role="alert" class="form-error">
-                            {errors.licenseNumber.message}
-                          </span>
-                        )}
+                    
+                  
 
                         <span>
                           <img src="images/calendar-icon.svg" alt="" />
@@ -216,36 +254,11 @@ const Settings = () => {
                   </div>
                   <div className="col-md-3">
                     <div className="form-group">
-                      <label>GOVERNING AGENCY</label>
+                      <label>ENDS</label>
                       <div className="calendar">
                         <input
                           type="text"
                           name="licensureEndDate"
-                          className="form-control"
-                          defaultValue={userData.licenseNumber}
-                          ref={register({
-                            required: "License number is required",
-                          })}
-                        />
-                        {errors.licenseNumber && (
-                          <span role="alert" class="form-error">
-                            {errors.licenseNumber.message}
-                          </span>
-                        )}
-
-                        <span>
-                          <img src="images/calendar-icon.svg" alt="" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-3">
-                    <div className="form-group">
-                      <label>LICENSE NUMBER</label>
-                      <div className="calendar">
-                        <input
-                          type="text"
-                          name="licenseNumber"
                           className="form-control"
                           defaultValue={userData.licenseNumber}
                           ref={register({

@@ -55,7 +55,7 @@ export default function Home() {
     zip: "98767",
     licenseType: "Real Estate",
     licenseNumber: "FA.100069906",
-    licensurePeriod: [
+    licensurePeriods: [
       {
         startDate: "12/01/2020",
         endDate: "11/30/2023",
