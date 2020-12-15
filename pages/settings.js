@@ -112,10 +112,8 @@ const Settings = () => {
   };
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [licensurePeriods, setlicensurePeriods] = useState(userData.licensurePeriods);
 
   const { handleSubmit, register, watch, errors } = useForm();
-
   
   const onSubmit = handleSubmit(async (formData) => {
 // check and loop through all licensure periods and make sure there are no blank fields and make sure the start date is less than the end date.
@@ -123,22 +121,57 @@ const Settings = () => {
   var startLicensurePeriods = [];
   var endLicensurePeriods = [];
   var licensurePeriodsToSave = [];
+ 
   document.querySelectorAll('.start').forEach(function(el){
-    startLicensurePeriods.push(el.value);
+    if(el.value !== ""){
+      startLicensurePeriods.push(el.value);
+    }
   });
   document.querySelectorAll('.end').forEach(function(el){
-    endLicensurePeriods.push(el.value);
+    if(el.value !== ""){
+      endLicensurePeriods.push(el.value);
+    }
   });
-  var newPeriods = [];
-  var newArray = startLicensurePeriods.map((e, i) => e + "-"+ endLicensurePeriods[i]);
-  console.log(newArray);
-  
+  var newPeriods = startLicensurePeriods.map((e, i) => e + "-"+ endLicensurePeriods[i]);
+  var finalPeriods = new Set();
 
+  if(newPeriods.length){ 
+    for (let index = 0; index < newPeriods.length; index++) {
+      const newPeriod = newPeriods[index];
+      var startDate = newPeriod.split('-')[0];
+      var endDate = newPeriod.split('-')[1];
+      console.log(startDate);
+      console.log(endDate);
+
+      for (let index = 0; index < userData.licensurePeriods.length; index++) {
+       const currentPeriod = userData.licensurePeriods[index];
+
+       if(currentPeriod.startDate == startDate && currentPeriod.endDate == endDate && !finalPeriods.has(currentPeriod))
+       {
+        finalPeriods.add(currentPeriod);
+        continue;
+       }
+       if(currentPeriod.startDate != startDate && currentPeriod.endDate != endDate && !finalPeriods.has(newPeriod) && !finalPeriods.has(currentPeriod)){
+        let period = 
+          {
+            "startDate": startDate,
+            "EndDate": endDate,
+            "creditsEarned": 0,
+            "creditsRequired": 24,
+            "credits":currentPeriod.credits != [] ? currentPeriod.credits : []
+          };
+        finalPeriods.add(period);
+       }
+        
+      }
+    }
+  }
+console.log(finalPeriods);
   
     if (errorMessage) setErrorMessage("");
 
     try {
-      console.log(formData);
+
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
@@ -152,7 +185,7 @@ const Settings = () => {
   }
 
   function removePeriod() {
-console.log("remove");
+alert("are you sure you want to delete this period? This will also remove all credits associated with this licensure period");
     
   }
   return (
@@ -271,7 +304,7 @@ console.log("remove");
                       <label className="start-label">STARTS</label>
                       <label className="end-label">ENDS</label>
                       {userData.licensurePeriods.map((period) => (
-                        <div className="calendar licensure-row">
+                        <div className="calendar licensure-row" key={period.startDate}>
                           <input
                             type="text"
                             name="licensureStartDate"
