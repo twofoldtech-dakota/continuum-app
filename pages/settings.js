@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import Layout from "../components/shared/layout";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaRegSave } from "react-icons/fa";
+
 const Settings = () => {
   const router = useRouter();
 
@@ -112,66 +114,83 @@ const Settings = () => {
   };
 
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [licensureErrorMessage, setLicensureErrorMessage] = useState("");
   const { handleSubmit, register, watch, errors } = useForm();
-  
-  const onSubmit = handleSubmit(async (formData) => {
-// check and loop through all licensure periods and make sure there are no blank fields and make sure the start date is less than the end date.
-// if we find a blank field or an end date that is before the start date then show general error message at top of box 
-  var startLicensurePeriods = [];
-  var endLicensurePeriods = [];
-  var licensurePeriodsToSave = [];
- 
-  document.querySelectorAll('.start').forEach(function(el){
-    if(el.value !== ""){
-      startLicensurePeriods.push(el.value);
-    }
-  });
-  document.querySelectorAll('.end').forEach(function(el){
-    if(el.value !== ""){
-      endLicensurePeriods.push(el.value);
-    }
-  });
-  var newPeriods = startLicensurePeriods.map((e, i) => e + "-"+ endLicensurePeriods[i]);
-  var finalPeriods = new Set();
-
-  if(newPeriods.length){ 
-    for (let index = 0; index < newPeriods.length; index++) {
-      const newPeriod = newPeriods[index];
-      var startDate = newPeriod.split('-')[0];
-      var endDate = newPeriod.split('-')[1];
-      console.log(startDate);
-      console.log(endDate);
-
-      for (let index = 0; index < userData.licensurePeriods.length; index++) {
-       const currentPeriod = userData.licensurePeriods[index];
-
-       if(currentPeriod.startDate == startDate && currentPeriod.endDate == endDate && !finalPeriods.has(currentPeriod))
-       {
-        finalPeriods.add(currentPeriod);
-        continue;
-       }
-       if(currentPeriod.startDate != startDate && currentPeriod.endDate != endDate && !finalPeriods.has(newPeriod) && !finalPeriods.has(currentPeriod)){
-        let period = 
-          {
-            "startDate": startDate,
-            "EndDate": endDate,
-            "creditsEarned": 0,
-            "creditsRequired": 24,
-            "credits":currentPeriod.credits != [] ? currentPeriod.credits : []
-          };
-        finalPeriods.add(period);
-       }
-        
-      }
-    }
+  //compares our existing userData.LicensurePeriods to what is being submitted on the form and returning the unique entries
+  function comparer(otherArray) {
+    return function (current) {
+      return (
+        otherArray.filter(function (other) {
+          return (
+            other.startDate == current.startDate &&
+            other.endDate == current.endDate
+          );
+        }).length == 0
+      );
+    };
   }
-console.log(finalPeriods);
-  
-    if (errorMessage) setErrorMessage("");
 
+  const onSubmit = handleSubmit(async (formData) => {
+    // check and loop through all licensure periods and make sure there are no blank fields and make sure the start date is less than the end date.
+    // if we find a blank field or an end date that is before the start date then show general error message at top of box
+    var startLicensurePeriods = [];
+    var endLicensurePeriods = [];
+    var licensurePeriodsToSave = [];
+    var finalPeriods = [];
+    if (licensureErrorMessage) setLicensureErrorMessage("");
     try {
+      document.querySelectorAll(".start").forEach(function (el) {
+        if (el.value !== "") {
+          startLicensurePeriods.push(el.value);
+        } else {
+          setLicensureErrorMessage(
+            "Please ensure there are no empty start dates"
+          );
+        }
+      });
+      document.querySelectorAll(".end").forEach(function (el) {
+        if (el.value !== "") {
+          endLicensurePeriods.push(el.value);
+        } else {
+          setLicensureErrorMessage(
+            "Please ensure there are no empty end dates"
+          );
+        }
+      });
+      var newPeriods = startLicensurePeriods.map(
+        (e, i) => e + "-" + endLicensurePeriods[i]
+      );
+      if (newPeriods.length) {
+        for (let index = 0; index < newPeriods.length; index++) {
+          const newPeriod = newPeriods[index];
+          var startDate = newPeriod.split("-")[0];
+          var endDate = newPeriod.split("-")[1];
+          let period = {
+            startDate: startDate,
+            endDate: endDate,
+            creditsEarned: 0,
+            creditsRequired: 24,
+            credits: [],
+          };
 
+          finalPeriods.push(period);
+        }
+      }
+
+      var onlyInLicensurePeriods = userData.licensurePeriods.filter(
+        comparer(finalPeriods)
+      );
+      var onlyInNewPeriods = finalPeriods.filter(
+        comparer(userData.licensurePeriods)
+      );
+
+      var results = onlyInLicensurePeriods.concat(onlyInNewPeriods);
+
+      if (results.length) {
+        licensurePeriodsToSave = userData.licensurePeriods.concat(results);
+        console.log(licensurePeriodsToSave);
+      }
+      if (errorMessage) setErrorMessage("");
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
@@ -179,15 +198,24 @@ console.log(finalPeriods);
   });
 
   function addPeriod() {
-    let newPeriod = '<div class="calendar licensure-row"> <input type="text" name="licensureStartDate" class="form-control start"/><input type="text" name="licensureEndDate" class="form-control end"/><span class="delete" onClick={removePeriod}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="delete" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"></path></g></svg></span> <hr/> </div>';
-    document.querySelector('#periods').insertAdjacentHTML('beforeend', newPeriod);
+    let newPeriod =
+      //'<div class="calendar licensure-row"> <input type="text" placeholder="mm/dd/yyyy" name="licensureStartDate" class="form-control start" ><span><img src="images/calendar-icon.svg" alt=""></span><input type="text" placeholder="mm/dd/yyyy" name="licensureEndDate" class="form-control end" ><span class="delete"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="delete" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"></path></g></svg></span><span class="save"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="save" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM272 80v80H144V80h128zm122 352H54a6 6 0 0 1-6-6V86a6 6 0 0 1 6-6h42v104c0 13.255 10.745 24 24 24h176c13.255 0 24-10.745 24-24V83.882l78.243 78.243a6 6 0 0 1 1.757 4.243V426a6 6 0 0 1-6 6zM224 232c-48.523 0-88 39.477-88 88s39.477 88 88 88 88-39.477 88-88-39.477-88-88-88zm0 128c-22.056 0-40-17.944-40-40s17.944-40 40-40 40 17.944 40 40-17.944 40-40 40z"></path></svg></span><hr class="divider"></div>';
+      '<div class="calendar licensure-row"> <input type="text" placeholder="mm/dd/yyyy" name="licensureStartDate" class="form-control start" ><span><img src="images/calendar-icon.svg" alt=""></span><input type="text" placeholder="mm/dd/yyyy" name="licensureEndDate" class="form-control end" ><span class="delete"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="delete" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"></path></g></svg></span><hr class="divider"></div>';
 
+    document
+      .querySelector("#periods")
+      .insertAdjacentHTML("beforeend", newPeriod);
   }
 
   function removePeriod() {
-alert("are you sure you want to delete this period? This will also remove all credits associated with this licensure period");
-    
+    console.log(
+      "are you sure you want to delete this period? This will also remove all credits associated with this licensure period"
+    );
   }
+  function savePeriod() {
+    console.log("saving");
+  }
+
   return (
     <Layout>
       <div className="continuum-detail">
@@ -205,7 +233,7 @@ alert("are you sure you want to delete this period? This will also remove all cr
               <h4>Licensure Information</h4>
               <div className="licensur-info">
                 <div className="row">
-                  <div className="col-md-3">
+                  <div className="col-md-2">
                     <div className="form-group">
                       <label>LICENSE TYPE</label>
                       <select
@@ -226,7 +254,7 @@ alert("are you sure you want to delete this period? This will also remove all cr
                       )}
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <div className="form-group">
                       <label>GOVERNING AGENCY</label>
                       <select
@@ -266,13 +294,11 @@ alert("are you sure you want to delete this period? This will also remove all cr
                           </span>
                         )}
 
-                        <span>
-                          <FaRegCalendarAlt className="calendar"></FaRegCalendarAlt>
-                        </span>
+                        
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-3">
+                  <div className="col-md-3 realtor">
                     <div className="form-group">
                       <label className="check ">
                         <input
@@ -300,11 +326,19 @@ alert("are you sure you want to delete this period? This will also remove all cr
               <div className="licensur-info">
                 <div className="row">
                   <div className="col-md-6">
+                    {licensureErrorMessage && (
+                      <span role="alert" className="form-error">
+                        {licensureErrorMessage}
+                      </span>
+                    )}
                     <div className="form-group" id="periods">
                       <label className="start-label">STARTS</label>
                       <label className="end-label">ENDS</label>
                       {userData.licensurePeriods.map((period) => (
-                        <div className="calendar licensure-row" key={period.startDate}>
+                        <div
+                          className="calendar licensure-row"
+                          key={period.startDate}
+                        >
                           <input
                             type="text"
                             name="licensureStartDate"
@@ -315,7 +349,7 @@ alert("are you sure you want to delete this period? This will also remove all cr
                             })}
                           />
                           {errors.startDate && (
-                            <span role="alert" class="form-error">
+                            <span role="alert" className="form-error">
                               {errors.startDate.message}
                             </span>
                           )}
@@ -332,23 +366,23 @@ alert("are you sure you want to delete this period? This will also remove all cr
                             })}
                           />
                           {errors.endDate && (
-                            <span role="alert" class="form-error">
+                            <span role="alert" className="form-error">
                               {errors.endDate.message}
                             </span>
                           )}
                           <span className="delete" onClick={removePeriod}>
                             <RiDeleteBin6Line className="delete"></RiDeleteBin6Line>
                           </span>
-                          <hr />
+                          {/* <span className="save" onClick={savePeriod}>
+                            <FaRegSave className="save"></FaRegSave>
+                          </span> */}
+                          <hr className="divider" />
                         </div>
-                      
                       ))}
-
-                      
                     </div>
                     <span className="add-period" onClick={addPeriod}>
-                        Add Licensure Period
-                      </span>
+                      Add Licensure Period
+                    </span>
                   </div>
                 </div>
               </div>

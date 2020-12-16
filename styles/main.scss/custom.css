@@ -2127,6 +2127,7 @@ margin-bottom: 115px;
 .setting-box div .form-group .licensure-row{
   
     position: relative;
+    margin-bottom: 20px;
   
 }
 .setting-box div .form-group .start-label{
@@ -2139,18 +2140,26 @@ margin-right: 107px;
 .setting-box div .form-group .licensure-row .start{
   max-width:130px;
   display: inline-block;
-  margin-right:20px;
+  margin-right:10px;
 }
 
   .setting-box div .form-group .licensure-row .end{
     max-width:130px;
   display: inline-block;
-  margin-right:20px;
+  margin-right:24px;
   }
-
+  .setting-box div .form-group .licensure-row .delete{
+    margin-right: 24px;
+  }
   .setting-box div .form-group .licensure-row .delete svg{
     color:red;
     cursor: pointer;
+font-size:20px;
+  }
+  .setting-box div .form-group .licensure-row .save svg{
+    color:green;
+    cursor: pointer;
+    font-size:20px;
 
   }
   .setting-box div .add-period{
@@ -2162,4 +2171,52 @@ margin-right: 107px;
     cursor: pointer;
 border-radius: 3px;
   }
+
+  .form-error{
+    color:red;
+    font-size:12px;
+    margin-bottom: 10px;
+  }
+.divider{
+  display: none;
+}
+.realtor{
+  margin-top:18px;
+}
+
+  @media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    
+    .divider{
+      display:block;
+      margin-top: 35px;
+    }
+    .setting-box div .form-group .licensure-row div{
+      margin:0 auto;
+    }
+    .setting-box div .form-group .licensure-row .start{
+      float:left;
+      max-width:123px;
+      margin-bottom: 20px;
+    }
+
+    .setting-box div .form-group .licensure-row .end{
+      max-width: 123px;
+      margin-bottom: 20px;
+    }
+    .setting-box div .form-group .licensure-row .delete{
+      float:right;
+    }
+    .setting-box div .form-group .licensure-row .save{
+      float:right;
+      
+      margin-right: 20px;
+    }
+    .realtor{
+      margin-top:0px;
+    }
+}
+
 /*# sourceMappingURL=custom.css.map */
