@@ -26,6 +26,7 @@ const Sidebar = () => {
     };
 
     return (
+        <div>
         <div className="continuum-sidebar">
             <div className="side-header">
                 <a href="#">
@@ -102,6 +103,76 @@ const Sidebar = () => {
                     </li>
                 </ul>
             </div>
+        </div>
+    
+        <div className="mobile-navigation">
+        <div className="navbar">
+                
+                        <a className="active" href="/">
+                            <span>
+                                <MdDashboard
+                                    className="simple-state"
+                                    size={30}
+                                />
+                                {/* <MdDashboard className="hover-state" size={32}/> */}
+                            </span>
+                            
+                        </a>
+                  
+                        <a href="/credits">
+                            <span>
+                                <MdClass className="simple-state" size={30} />
+                            </span>
+                            
+                        </a>
+                   
+                        <Link href="/courses">
+                            <a>
+                                <span>
+                                    <FaBookOpen
+                                        className="simple-state"
+                                        size={30}
+                                    />
+                                </span>
+                                
+                            </a>
+                        </Link>
+                    
+                        <a href="/profile">
+                            <span>
+                                <FaUserCircle
+                                    className="simple-state"
+                                    size={30}
+                                />
+                            </span>
+                            
+                        </a>
+                        
+                        <a href="/settings">
+                            <span>
+                                <MdSettings
+                                    className="simple-state"
+                                    size={30}
+                                />
+                            </span>
+                            
+                        </a>
+                  
+                        <a onClick={logout} href="#">
+                            <span>
+                                <RiLogoutBoxRLine
+                                    className="simple-state"
+                                    size={30}
+                                />
+                            </span>
+                            
+                        </a>
+                   
+                
+                   
+            </div>
+       
+        </div>
         </div>
     );
 };

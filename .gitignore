@@ -34,3 +34,6 @@ yarn-error.log*
 # vercel
 .vercel
 env.local
+pages/profile.js
+styles/main.scss/pages.scss/public-profile.css
+styles/main.scss/pages.scss/public-profile.css.map
