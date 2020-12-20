@@ -2216,7 +2216,15 @@ border-radius: 3px;
     }
     .realtor{
       margin-top:0px;
+
     }
+    
+}
+
+.bullet{
+  margin-left:10px;
+  margin-right:10px;
+  color:#BFC2C6;
 }
 
 

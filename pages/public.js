@@ -122,6 +122,7 @@ export default function Home() {
       "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
     isRealtor: true
     };
+
   const [selectedLicensurePeriod, setLicensurePeriod] = useState();
   const [activeLicensureCredits, setActiveLicensureCredits] = useState([]);
   const [currentLicensureCreditsEarned, setCurrentLicensureCreditsEarned] = useState(0);
@@ -129,6 +130,7 @@ export default function Home() {
 
   /*only loads on initial load */
   useEffect(()=>{
+
     if(userData.licensurePeriods[0] !== null){
 
       setActiveCredits(userData.licensurePeriods[0].startDate+"-"+userData.licensurePeriods[0].endDate);
@@ -153,6 +155,7 @@ export default function Home() {
       startLicensureDate = split[0];
       endLicensureDate = split[1];
     }
+
     userData.licensurePeriods.forEach((period) => {
       if(period.startDate == startLicensureDate && period.endDate == endLicensureDate){
         setActiveLicensureCredits(period.credits);

@@ -511,6 +511,7 @@ var licensurePeriodsToSave = [];
                 </div>
               </div>
             </div>
+
             <div className="setting-box">
               <h4>Email Notifications</h4>
               <div className="email-notification">
@@ -563,3 +564,4 @@ var licensurePeriodsToSave = [];
   );
 };
 export default Settings;
+
