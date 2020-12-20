@@ -55,7 +55,7 @@ export default function Home() {
     zip: "98767",
     licenseType: "Real Estate",
     licenseNumber: "FA.100069906",
-    licensurePeriod: [
+    licensurePeriods: [
       {
         startDate: "12/01/2020",
         endDate: "11/30/2023",
@@ -120,7 +120,9 @@ export default function Home() {
     hideContactInfo: true,
     profileImage:
       "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
-  };
+    isRealtor: true
+    };
+
   const [selectedLicensurePeriod, setLicensurePeriod] = useState();
   const [activeLicensureCredits, setActiveLicensureCredits] = useState([]);
   const [currentLicensureCreditsEarned, setCurrentLicensureCreditsEarned] = useState(0);
@@ -128,11 +130,12 @@ export default function Home() {
 
   /*only loads on initial load */
   useEffect(()=>{
-    if(userData.licensurePeriod[0] !== null){
 
-      setActiveCredits(userData.licensurePeriod[0].startDate+"-"+userData.licensurePeriod[0].endDate);
-      setCurrentLicensureCreditsRemaining(userData.licensurePeriod[0].creditsRequired - userData.licensurePeriod[0].creditsEarned);
-      setCurrentLicensureCreditsEarned (userData.licensurePeriod[0].creditsEarned);
+    if(userData.licensurePeriods[0] !== null){
+
+      setActiveCredits(userData.licensurePeriods[0].startDate+"-"+userData.licensurePeriods[0].endDate);
+      setCurrentLicensureCreditsRemaining(userData.licensurePeriods[0].creditsRequired - userData.licensurePeriods[0].creditsEarned);
+      setCurrentLicensureCreditsEarned (userData.licensurePeriods[0].creditsEarned);
 
     }
 }, [])
@@ -142,7 +145,6 @@ export default function Home() {
   if (userData.email !== "" && userData.email !== null) {
     email = mailTo + userData.email;
   }
-  
 
   /*set setActiveCredits to only list credits that are within the current selected licensure period.*/
   function setActiveCredits(licensurePeriod) {
@@ -153,7 +155,8 @@ export default function Home() {
       startLicensureDate = split[0];
       endLicensureDate = split[1];
     }
-    userData.licensurePeriod.forEach((period) => {
+
+    userData.licensurePeriods.forEach((period) => {
       if(period.startDate == startLicensureDate && period.endDate == endLicensureDate){
         setActiveLicensureCredits(period.credits);
         setCurrentLicensureCreditsRemaining(period.creditsRequired - currentLicensureCreditsEarned);
@@ -199,6 +202,12 @@ export default function Home() {
             <div className="sub">{userData.company}</div>
             <div className="position">
               {userData.title}
+              {userData.isRealtor ? (
+        <span>/ REALTOR<sup>&#174;</sup></span>
+      ) : (
+        <span></span>
+      )}
+              
               <span className="bullet">&#8226;</span>
               {userData.licenseNumber}
             </div>
@@ -244,7 +253,7 @@ export default function Home() {
               <div className="licensure-text">LICENSURE PERIOD</div>
               <select
                 className="licensure-option"
-                defaultValue={userData.licensurePeriod[0]}
+                defaultValue={userData.licensurePeriods[0]}
                 value={selectedLicensurePeriod}
                 /*onChange={e => setLicensurePeriod(e.currentTarget.value)}*/
                 onChange={(e) =>
@@ -253,7 +262,7 @@ export default function Home() {
                   )
                 }
               >
-                {userData.licensurePeriod.map((period) => (
+                {userData.licensurePeriods.map((period) => (
                   <option key={period.startDate} value={`${period.startDate}-${period.endDate}`}>
                     {period.startDate} - {period.endDate}
                   </option>

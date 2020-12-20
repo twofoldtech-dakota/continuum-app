@@ -24,11 +24,12 @@ type User {
     zip: String
     licenseType: String
     licenseNumber: String
-    licensurePeriod: [LicensurePeriod] @relation
+    licensurePeriods: [LicensurePeriod] @relation
     alerts: Boolean
     news: Boolean
     hideContactInfo: Boolean
     profileImage: String
+    isRealtor: Boolean
 }
 
 type Course {

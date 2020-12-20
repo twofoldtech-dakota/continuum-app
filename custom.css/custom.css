@@ -261,17 +261,17 @@ ul {
   margin-bottom: 31px;
 }
 
-.setting-sec .setting-box form.licensur-info {
+.setting-sec .setting-box div.licensur-info {
   max-width: 780px;
   width: 100%;
 }
 
-.setting-sec .setting-box form.social-info {
+.setting-sec .setting-box div.social-info {
   max-width: 900px;
   width: 100%;
 }
 
-.setting-sec .setting-box form .form-group label {
+.setting-sec .setting-box div .form-group label {
   display: block;
   color: #48515C;
   font-family: 'Inter', sans-serif;
@@ -280,7 +280,7 @@ ul {
   margin-bottom: 10px;
 }
 
-.setting-sec .setting-box form .form-group .form-control {
+.setting-sec .setting-box div .form-group .form-control {
   border: 1px solid #BFC2C6;
   border-radius: 3px;
   height: 36px;
@@ -290,7 +290,7 @@ ul {
   color: #32334F;
 }
 
-.setting-sec .setting-box form .form-group select.form-control {
+.setting-sec .setting-box div .form-group select.form-control {
   background: url(../images/select-arrow.svg) 98% center no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -298,11 +298,11 @@ ul {
   border: 1px solid #9AAAFA;
 }
 
-.setting-sec .setting-box form .form-group .calendar {
+.setting-sec .setting-box div .form-group .calendar {
   position: relative;
 }
 
-.setting-sec .setting-box form .form-group .calendar span {
+.setting-sec .setting-box div .form-group .calendar span {
   position: absolute;
   right: 10px;
   top: 50%;
@@ -310,7 +310,7 @@ ul {
           transform: translate(0, -50%);
 }
 
-.setting-sec .setting-box form .form-group a.reset-password {
+.setting-sec .setting-box div .form-group a.reset-password {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 15px;
@@ -1796,6 +1796,11 @@ footer .text-box span {
 
 .show-result ul li:first-child a {
   border-right: 1px solid rgba(113, 113, 166, 0.5);
+}
+
+/********* Profile Edit Page ***********/
+.profile-edit {
+  background-color: #405ADD;
 }
 
 /***************** RESPONSIVE CSS ************/

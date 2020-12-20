@@ -49,7 +49,7 @@ export default function Profile() {
     zip: "98767",
     licenseType: "Real Estate",
     licenseNumber: "FA.100069906",
-    licensurePeriod: [
+    licensurePeriods: [
       {
         startDate: "12/01/2020",
         endDate: "11/30/2023",
@@ -122,7 +122,7 @@ console.log(userData);
     console.log("submitted form");
     try {
       console.log(formData);
-
+    }
       console.error(error);
       setErrorMessage(error.message);
     }
