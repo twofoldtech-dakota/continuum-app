@@ -123,6 +123,7 @@ console.log(userData);
     try {
       console.log(formData);
     }
+    catch(error){
       console.error(error);
       setErrorMessage(error.message);
     }
