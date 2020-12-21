@@ -169,6 +169,10 @@ export default function Home() {
   function handleChange (event) {
     setActiveCredits(event);
   }
+
+  function showSlideOut(){
+    
+  }
   return (
     <div className="public-page">
       <div className="row top">
@@ -282,7 +286,7 @@ export default function Home() {
                       <span>{credit.credits}</span> hours
                     </td>
                     <td className="view">
-                      <span>View Certificate</span>
+                      <span onClick={showSlideOut}>View Certificate</span>
                     </td>
                   </tr>
                 ))}
@@ -303,6 +307,41 @@ export default function Home() {
           </div>
         </div>
       </div>
+    
+
+      <div class="overly"></div>
+      <div className="credits-earned-modal">
+  <div className="cross-icon">
+    <a href="#"><img src="images/cross-icon.svg" alt="" /></a>
+  </div>
+  <div className="text-box">
+    <h3>4 Credits Earned</h3>
+    <p>Contracts, Purchases, and Sales Agreements</p>
+    <a href="#">All Service Real Estate Academy <img src="images/expend-icon.svg" alt="" /></a>
+  </div>
+  <div className="calendar-text creadit-date">
+    <p>COURSE DATE</p>
+    <form>
+      <input type="text" className="form-control" id="startDate" placeholder="11/09/2019" />
+      <span><img src="images/calendar-icon.svg" alt="" /></span>
+    </form>
+  </div>
+  <div className="upload">
+    <h4>UPLOAD CERTIFICATE</h4>
+    <div className="upload-inner">
+      <a href="#">
+        <p><img src="images/image-icon.svg" alt="" />certificate-name-xyz.png</p>
+        <img src="images/trash-icon.svg" alt="" />
+      </a>
+      <div className="image-holder">
+        <img src="images/certificate-img.png" alt="" className="img-fluid" />
+      </div>
+    </div>
+  </div>
+  <a className="save-btn" href="#">Save Changes</a>
+</div>
+
+    
     </div>
   );
 }
