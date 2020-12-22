@@ -24,7 +24,10 @@ export default function Home() {
     savedCourses: [
       {
         name: "Saved Course 1",
-        provider: "American Home Shield",
+        provider: {
+          name: "American Home Shield",
+          url: "http://www.google.com"
+        },
         date: "05/29/2020",
         hours: 6,
         governingAgency: "Governing Agency Test",
@@ -65,7 +68,10 @@ export default function Home() {
           {
             name: "Testing Period",
             /*user: User! @relation*/
-            provider: "All Service Real Estate Academy",
+            provider: {
+              name: "All Service Real Estate Academy",
+              url: "http://www.google.com"
+            },
             date: "01/20/2022",
             hours: 12,
             governingAgency: "Governing Agency Test",
@@ -75,14 +81,16 @@ export default function Home() {
           {
             name: "Testing Period 2",
             /*user: User! @relation*/
-            provider: "All Service Real Estate Academy",
+            provider: {
+              name: "All Service Real Estate Academy",
+              url: "http://www.google.com"
+            },
             date: "01/20/2022",
             hours: 6,
             governingAgency: "Governing Agency Test",
             description: "Credit description testing testing testing",
             credits: 6,
-          }
-          
+          },
         ],
       },
       {
@@ -94,7 +102,10 @@ export default function Home() {
           {
             name: "Fundamental Skills for Real Estate Agents",
             /*user: User! @relation*/
-            provider: "All Service Real Estate Academy",
+            provider: {
+              name: "All Service Real Estate Academy",
+              url: "http://www.google.com"
+            },
             date: "01/20/2020",
             hours: 12,
             governingAgency: "Governing Agency Test",
@@ -104,7 +115,10 @@ export default function Home() {
           {
             name: "Credit testing",
             /*user: User! @relation*/
-            provider: "Armburst Real Estate",
+            provider: {
+              name: "Armburst Real Estate",
+              url: "http://www.google.com"
+            },
             date: "03/03/2020",
             hours: 3,
             governingAgency: "Governing Agency Test",
@@ -112,34 +126,37 @@ export default function Home() {
             credits: 3,
           },
         ],
-
-      }
+      },
     ],
     alerts: true,
     news: true,
     hideContactInfo: true,
     profileImage:
       "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
-    isRealtor: true
-    };
+    isRealtor: true,
+  };
 
   const [selectedLicensurePeriod, setLicensurePeriod] = useState();
   const [activeLicensureCredits, setActiveLicensureCredits] = useState([]);
-  const [currentLicensureCreditsEarned, setCurrentLicensureCreditsEarned] = useState(0);
-  const [currentLicensureCreditsRemaining, setCurrentLicensureCreditsRemaining] = useState(0);
-
+  const [
+    currentLicensureCreditsEarned,
+    setCurrentLicensureCreditsEarned,
+  ] = useState();
+  const [
+    currentLicensureCreditsRemaining,
+    setCurrentLicensureCreditsRemaining,
+  ] = useState();
+  const [showModal, setShowModal] = useState();
+const [creditToView, setCreditToView] = useState(null);
   /*only loads on initial load */
-  useEffect(()=>{
-
-    if(userData.licensurePeriods[0] !== null){
-
-      setActiveCredits(userData.licensurePeriods[0].startDate+"-"+userData.licensurePeriods[0].endDate);
-      setCurrentLicensureCreditsRemaining(userData.licensurePeriods[0].creditsRequired - userData.licensurePeriods[0].creditsEarned);
-      setCurrentLicensureCreditsEarned (userData.licensurePeriods[0].creditsEarned);
-
+  useEffect(() => {
+    if (userData.licensurePeriods[0] !== null) {
+      setActiveCredits(userData.licensurePeriods[0].startDate + "-" + userData.licensurePeriods[0].endDate);
+      setCurrentLicensureCreditsRemaining( userData.licensurePeriods[0].creditsRequired - userData.licensurePeriods[0].creditsEarned);
+      setCurrentLicensureCreditsEarned( userData.licensurePeriods[0].creditsEarned);
+      setShowModal(false);
     }
-}, [])
-
+  }, []);
   const mailTo = "mailto:";
   var email = "";
   if (userData.email !== "" && userData.email !== null) {
@@ -151,29 +168,41 @@ export default function Home() {
     var startLicensureDate = "";
     var endLicensureDate = "";
     if (licensurePeriod !== undefined && licensurePeriod.indexOf("-") > -1) {
-      var split = licensurePeriod.split('-');
+      var split = licensurePeriod.split("-");
       startLicensureDate = split[0];
       endLicensureDate = split[1];
     }
 
     userData.licensurePeriods.forEach((period) => {
-      if(period.startDate == startLicensureDate && period.endDate == endLicensureDate){
+      if (
+        period.startDate == startLicensureDate &&
+        period.endDate == endLicensureDate
+      ) {
         setActiveLicensureCredits(period.credits);
-        setCurrentLicensureCreditsRemaining(period.creditsRequired - currentLicensureCreditsEarned);
-        setCurrentLicensureCreditsEarned (period.creditsEarned);
+        setCurrentLicensureCreditsRemaining(
+          period.creditsRequired - currentLicensureCreditsEarned
+        );
+        setCurrentLicensureCreditsEarned(period.creditsEarned);
       }
     });
     //loadCredits(credits, startLicensureDate, endLicensureDate);
   }
- 
-  function handleChange (event) {
+
+  function handleChange(event) {
     setActiveCredits(event);
   }
 
-  function showSlideOut(){
-    
+  function showSlideOut(credit) {
+    setShowModal(true);
+    setCreditToView(credit);
   }
+
+  function hideModal(){
+    setShowModal(false);
+  }
+  
   return (
+<div>
     <div className="public-page">
       <div className="row top">
         <div className="col-sm-12 col-md-12 top-bar">
@@ -207,11 +236,13 @@ export default function Home() {
             <div className="position">
               {userData.title}
               {userData.isRealtor ? (
-        <span>/ REALTOR<sup>&#174;</sup></span>
-      ) : (
-        <span></span>
-      )}
-              
+                <span>
+                  / REALTOR<sup>&#174;</sup>
+                </span>
+              ) : (
+                <span></span>
+              )}
+
               <span className="bullet">&#8226;</span>
               {userData.licenseNumber}
             </div>
@@ -249,7 +280,9 @@ export default function Home() {
                 <span className="text">TOTAL CREDITS EARNED</span>
               </div>
               <div className="credits-box">
-                <span className="number">{currentLicensureCreditsRemaining}</span>
+                <span className="number">
+                  {currentLicensureCreditsRemaining}
+                </span>
                 <span className="text">CREDITS REMAINING</span>
               </div>
             </div>
@@ -260,14 +293,13 @@ export default function Home() {
                 defaultValue={userData.licensurePeriods[0]}
                 value={selectedLicensurePeriod}
                 /*onChange={e => setLicensurePeriod(e.currentTarget.value)}*/
-                onChange={(e) =>
-                  handleChange(
-                    e.currentTarget.value
-                  )
-                }
+                onChange={(e) => handleChange(e.currentTarget.value)}
               >
                 {userData.licensurePeriods.map((period) => (
-                  <option key={period.startDate} value={`${period.startDate}-${period.endDate}`}>
+                  <option
+                    key={period.startDate}
+                    value={`${period.startDate}-${period.endDate}`}
+                  >
                     {period.startDate} - {period.endDate}
                   </option>
                 ))}
@@ -286,7 +318,9 @@ export default function Home() {
                       <span>{credit.credits}</span> hours
                     </td>
                     <td className="view">
-                      <span onClick={showSlideOut}>View Certificate</span>
+                      <span onClick={() => showSlideOut(credit)}>
+                        View Certificate
+                      </span>
                     </td>
                   </tr>
                 ))}
@@ -307,41 +341,44 @@ export default function Home() {
           </div>
         </div>
       </div>
-    
 
-      <div class="overly"></div>
-      <div className="credits-earned-modal">
+  
+    </div>
+
+<div className={showModal ? "overly active" : "overly"} onClick={hideModal}></div>
+<div className={showModal ? "credits-earned-modal active" : "credits-earned-modal"}>
   <div className="cross-icon">
-    <a href="#"><img src="images/cross-icon.svg" alt="" /></a>
+    <a href="#" onClick={hideModal}>
+      <img src="images/cross-icon.svg" alt="" />
+    </a>
   </div>
   <div className="text-box">
-    <h3>4 Credits Earned</h3>
-    <p>Contracts, Purchases, and Sales Agreements</p>
-    <a href="#">All Service Real Estate Academy <img src="images/expend-icon.svg" alt="" /></a>
+    <h3>{creditToView !== null ? creditToView.hours : ""} Credits Earned</h3>
+    <p>{creditToView !== null ? creditToView.name : ""}</p>
+    <a href={creditToView !== null ? creditToView.provider.url : ""}>
+      {creditToView !== null ? creditToView.provider.name : ""}{" "}
+      <img src="images/expend-icon.svg" alt="" />
+    </a>
   </div>
   <div className="calendar-text creadit-date">
-    <p>COURSE DATE</p>
-    <form>
-      <input type="text" className="form-control" id="startDate" placeholder="11/09/2019" />
-      <span><img src="images/calendar-icon.svg" alt="" /></span>
-    </form>
+    <p>COURSE DATE: {creditToView !== null ? creditToView.date : ""}</p>
+    
   </div>
   <div className="upload">
-    <h4>UPLOAD CERTIFICATE</h4>
+    <h4>CERTIFICATE</h4>
     <div className="upload-inner">
-      <a href="#">
-        <p><img src="images/image-icon.svg" alt="" />certificate-name-xyz.png</p>
-        <img src="images/trash-icon.svg" alt="" />
-      </a>
+      
       <div className="image-holder">
-        <img src="images/certificate-img.png" alt="" className="img-fluid" />
+        <img
+          src={creditToView !== null ? creditToView.certificateImage : ""}
+          alt=""
+          className="img-fluid"
+        />
       </div>
     </div>
   </div>
-  <a className="save-btn" href="#">Save Changes</a>
+  
 </div>
-
-    
-    </div>
+</div>
   );
 }

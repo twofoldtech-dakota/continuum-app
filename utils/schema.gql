@@ -55,12 +55,18 @@ type SavedCourses {
 type Credit {
     name: String!
     user: User! @relation
-    provider: String!
+    provider: Provider! @relation
     date: String!
     hours: Int!
     governingAgency: String
     description: String
     credits: String!
+    certificateImage: String!
+}
+
+type Provider{
+    name: String! 
+    url: String!
 }
 
 type Query {

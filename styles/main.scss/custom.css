@@ -630,7 +630,8 @@ header {
   overflow-y: auto; }
   .credits-earned-modal.active {
     right: 0;
-    transition: all 0.5s ease-in-out; }
+    transition: all 0.5s ease-in-out;
+  height:100%; }
   .credits-earned-modal .cross-icon {
     text-align: right; }
   .credits-earned-modal .text-box h3 {
@@ -2226,7 +2227,12 @@ border-radius: 3px;
   margin-right:10px;
   color:#BFC2C6;
 }
-
+.hidden{
+  display:none;
+}
+.show{
+  display:block;
+}
 
 /************ Navigation ***************/
 .navbar{
