@@ -13,7 +13,8 @@ import { MdEmail } from "react-icons/md";
 
 import PublicProfileLogoTop from "../components/svgs/publicprofilelogotop";
 import PublicProfileLogoBottom from "../components/svgs/publicprofilelogobottom";
-
+import CrossIcon from "../components/svgs/crossIcon";
+import ExpendIcon from "../components/svgs/expendIcon"
 export default function Home() {
   const router = useRouter();
 
@@ -37,7 +38,7 @@ export default function Home() {
       },
     ],
     name: "Dillon Smith",
-    title: "Associate Broker / Realtor",
+    title: "Associate Broker",
     company: "compass Colorado",
     website: "https://www.twofold.tech/",
     bio:
@@ -349,15 +350,15 @@ const [creditToView, setCreditToView] = useState(null);
 <div className={showModal ? "credits-earned-modal active" : "credits-earned-modal"}>
   <div className="cross-icon">
     <a href="#" onClick={hideModal}>
-      <img src="images/cross-icon.svg" alt="" />
+      <CrossIcon/>
     </a>
   </div>
   <div className="text-box">
     <h3>{creditToView !== null ? creditToView.hours : ""} Credits Earned</h3>
     <p>{creditToView !== null ? creditToView.name : ""}</p>
     <a href={creditToView !== null ? creditToView.provider.url : ""}>
-      {creditToView !== null ? creditToView.provider.name : ""}{" "}
-      <img src="images/expend-icon.svg" alt="" />
+      {creditToView !== null ? creditToView.provider.name : " "}{" "}&nbsp;
+      <ExpendIcon />
     </a>
   </div>
   <div className="calendar-text creadit-date">

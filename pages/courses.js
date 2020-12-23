@@ -3,7 +3,9 @@ import Layout from "../components/shared/layout";
 import Courses from "../components/courses/Courses";
 // import SavedCourses from "../components/courses/SavedCourses";
 import ToggleCourses from "../components/courses/ToggleCourses";
-
+import LeftArrow from "../components/svgs/leftArrow";
+import RightArrow2 from "../components/svgs/rightArrow2";
+import SearchIcon from "../components/svgs/searchIcon";
 export default function Courses1() {
     const [activeComponent, setActiveComponent] = useState("courses");
     const userData = {
@@ -13,7 +15,10 @@ export default function Courses1() {
         savedCourses: [
           {
             name: "Saved Course 1",
-            provider: "American Home Shield",
+            provider: {
+              name: "American Home Shield",
+              url: "http://www.google.com"
+            },
             date: "05/29/2020",
             hours: 6,
             governingAgency: "Governing Agency Test",
@@ -23,7 +28,7 @@ export default function Courses1() {
           },
         ],
         name: "Dillon Smith",
-        title: "Associate Broker / Realtor",
+        title: "Associate Broker",
         company: "compass Colorado",
         website: "https://www.twofold.tech/",
         bio:
@@ -54,7 +59,10 @@ export default function Courses1() {
               {
                 name: "Testing Period",
                 /*user: User! @relation*/
-                provider: "All Service Real Estate Academy",
+                provider: {
+                  name: "All Service Real Estate Academy",
+                  url: "http://www.google.com"
+                },
                 date: "01/20/2022",
                 hours: 12,
                 governingAgency: "Governing Agency Test",
@@ -64,7 +72,10 @@ export default function Courses1() {
               {
                 name: "Testing Period 2",
                 /*user: User! @relation*/
-                provider: "All Service Real Estate Academy",
+                provider: {
+                  name: "All Service Real Estate Academy",
+                  url: "http://www.google.com"
+                },
                 date: "01/20/2022",
                 hours: 6,
                 governingAgency: "Governing Agency Test",
@@ -82,7 +93,10 @@ export default function Courses1() {
               {
                 name: "Fundamental Skills for Real Estate Agents",
                 /*user: User! @relation*/
-                provider: "All Service Real Estate Academy",
+                provider: {
+                  name: "All Service Real Estate Academy",
+                  url: "http://www.google.com"
+                },
                 date: "01/20/2020",
                 hours: 12,
                 governingAgency: "Governing Agency Test",
@@ -92,7 +106,10 @@ export default function Courses1() {
               {
                 name: "Credit testing",
                 /*user: User! @relation*/
-                provider: "Armburst Real Estate",
+                provider: {
+                  name: "Armburst Real Estate",
+                  url: "http://www.google.com"
+                },
                 date: "03/03/2020",
                 hours: 3,
                 governingAgency: "Governing Agency Test",
@@ -109,6 +126,7 @@ export default function Courses1() {
           "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
         isRealtor: true,
       };
+ 
     
     const courses = {}
       function toggleList(name) {
@@ -179,11 +197,8 @@ export default function Courses1() {
                                             className="form-control"
                                             placeholder="Look up a credit"
                                         />
-                                        <a href>
-                                            <img
-                                                src="images/search-icon.svg"
-                                                alt
-                                            />
+                                        <a href="#">
+                                            <SearchIcon />
                                         </a>
                                     </form>
                                 </div>
@@ -196,27 +211,22 @@ export default function Courses1() {
                                     </div>
                                 </div>
                             </div>
-                            <ToggleCourses active={activeComponent}>
+                            <Courses name="courses" />
+                            {/* <ToggleCourses active={activeComponent}>
                                 <Courses name="courses" />
-                                {/* <SavedCourses name="savedCourses" /> */}
-                            </ToggleCourses>
+                                <SavedCourses name="savedCourses" />
+                            </ToggleCourses> */}
                             <div className="show-result">
                                 <p>Showing 20 of 248 results</p>
                                 <ul>
                                     <li>
                                         <a href="#">
-                                            <img
-                                                src="images/left-arrow.svg"
-                                                alt
-                                            />
+                                            <LeftArrow />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img
-                                                src="images/right-arrow2.svg"
-                                                alt
-                                            />
+                                            <RightArrow2 />
                                         </a>
                                     </li>
                                 </ul>
@@ -229,8 +239,8 @@ export default function Courses1() {
     );
 }
 
-export async function getServerSideProps(ctx) {
-    const token = getAuthCookie(ctx.req);
+//export async function getServerSideProps(ctx) {
+    //const token = getAuthCookie(ctx.req);
 
-    return { props: { token: token || null } };
-}
+    //return { props: { token: token || null } };
+//}

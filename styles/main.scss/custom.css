@@ -2054,6 +2054,10 @@ color:#59697B;
   background-color: #405ADD;
   border-radius: 3px;
   font-size: 15px;
+  min-width: 100px;
+    display: block;
+    max-width: 154px;
+    float:right;
 }
 .public-page .bottom .listing .bottom-text{
   text-align: center;

@@ -43,7 +43,7 @@ type Course {
 
 type SavedCourses {
     name: String!
-    provider: String!
+    provider: Provider! @relation
     date: String!
     hours: Int
     governingAgency: String!
@@ -60,7 +60,6 @@ type Credit {
     hours: Int!
     governingAgency: String
     description: String
-    credits: String!
     certificateImage: String!
 }
 

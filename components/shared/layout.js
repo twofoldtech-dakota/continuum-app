@@ -17,6 +17,8 @@ const Layout = ({ children, title }) => (
                 <div className="continuum-detail">{children}</div>
             </div>
         </section>
+
+       
     </>
 );
 
