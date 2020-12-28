@@ -34,11 +34,12 @@ type User {
 
 type Course {
     name: String!
-    provider: String!
+    provider: Provider! @relation
     date: String!
     hours: Int
     governingAgency: String!
     saved: String!
+    description: String
 }
 
 type SavedCourses {
@@ -50,6 +51,7 @@ type SavedCourses {
     saved: String!
     owner: String!
     username: String!
+    description: String
 }
 
 type Credit {

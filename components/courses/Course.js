@@ -8,16 +8,10 @@ import useSWR from "swr";
 import BlankStar from "../svgs/blankStar";
 import FilledStar from "../svgs/filledStar";
 
-export default function Course({ course, courseDeleted, courseSaved }) {
+export default function Course({ course, showModal, courseToView }) {
     const router = useRouter();
     const { data } = useSWR("/api/user");
-    const [showModal, setShowModal] = useState(false);
-    const [courseToView, setCourseToView] = useState(null);
-    useEffect(() => {
-        
-          setShowModal(false);
-       
-      }, []);
+   
     const createUserCourse = async (course) => {
         try {
             await fetch("/api/createUserCourse", {
@@ -52,12 +46,14 @@ export default function Course({ course, courseDeleted, courseSaved }) {
     };
 
     function showSlideOut(course) {
-        setShowModal(true);
-        setCourseToView(course);
+        console.log(showModal);
+        console.log(course);
+        showModal = true;
+        courseToView = course;
       }
     
       function hideModal(){
-        setShowModal(false);
+        showModal = false;
       }
 
       function saveCourse(course){
