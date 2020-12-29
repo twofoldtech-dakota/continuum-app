@@ -148,11 +148,12 @@ export default function Graphs() {
       setActiveCredits(userData.licensurePeriods[0].startDate + "-" + userData.licensurePeriods[0].endDate);
       setCurrentLicensureCreditsRemaining( userData.licensurePeriods[0].creditsRequired - userData.licensurePeriods[0].creditsEarned);
       setCurrentLicensureCreditsEarned( userData.licensurePeriods[0].creditsEarned);
+      setLicensurePeriod(userData.licensurePeriods[0]);
     }
   }, []);
   var barChartData = [];
   var yearlyHours = [0,0,0,0,0,0,0,0,0,0,0,0];
-
+var creditsEarnedGraphData = [0,0,0];
 for (let index = 0; index < activeLicensureCredits.length; index++) {
     const activeCredit = activeLicensureCredits[index];
     var month = activeCredit.date.split("/", 1);
@@ -199,54 +200,14 @@ for (let index = 0; index < activeLicensureCredits.length; index++) {
             default:
                 break;
         }
-    // switch (month.toString()) {
-    //     case "01":
-    //         newData.month = 1;
-    //         break;
-    //     case "02":
-    //         newData.month = 2;
-    //         break;
-    //     case "03":
-    //         newData.month = 3;
-    //         break;
-    //     case "04":
-    //         newData.month = 4;
-    //         break;
-    //     case "05":
-    //         newData.month = 5;
-    //         break;
-    //     case "06":
-    //         newData.month = 6;
-    //         break;
-    //     case "07":
-    //         newData.month = 7;
-    //         break;
-    //     case "08":
-    //         newData.month = 8;
-    //         break;
-    //     case "09":
-    //         newData.month = 9;
-    //         break;
-    //     case "10":
-    //         newData.month = 10;
-    //         break;
-    //     case "11":
-    //         newData.month = 11;
-    //         break;
-    //     case "12":
-    //         newData.month = 12;
-    //         break;
-    
-    //     default:
-    //         break;
-    // }
-    console.log(yearlyHours);
 
     newData.hours = activeCredit.hours;
     barChartData.push(newData);
 }
 
-  function setActiveCredits(licensurePeriod) {
+creditsEarnedGraphData = [userData.licensurePeriods[0].creditsRequired, currentLicensureCreditsEarned, 4];
+
+function setActiveCredits(licensurePeriod) {
     var startLicensureDate = "";
     var endLicensureDate = "";
     if (licensurePeriod !== undefined && licensurePeriod.indexOf("-") > -1) {
@@ -272,6 +233,7 @@ for (let index = 0; index < activeLicensureCredits.length; index++) {
 
   function handleChange(event) {
     setActiveCredits(event);
+    setLicensurePeriod(event);
   }
   return (
     <div>
@@ -304,7 +266,7 @@ for (let index = 0; index < activeLicensureCredits.length; index++) {
             <div className="credit-earning-box">
               <h3>Credits Earned</h3>
               <div className="image-holder">
-                <PieChart data={yearlyHours}/>
+                <PieChart data={creditsEarnedGraphData}/>
               </div>
             </div>
           </div>

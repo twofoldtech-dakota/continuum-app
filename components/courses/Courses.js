@@ -70,36 +70,36 @@ var isShowingUpcomingCourses = false;
 
 //component updates if sort is updated
 }, [sort]);
-console.log(sort);
+
 if (sort !== null && sort !== "" && sort !== undefined) {
     switch (sort) {
       case "DateDesc":
-        console.log("date desc");
-        sortedCourses = 
+
+      sortedCourses = 
           coursesData.sort(function (a, b) {
             return new Date(a.date) - new Date(b.date);
           }).reverse();
 
         break;
       case "DateAsc":
-        console.log("date asc");
-        sortedCourses = 
+
+      sortedCourses = 
           coursesData
             .sort(function (a, b) {
               return new Date(a.date) - new Date(b.date);
             });
         break;
       case "AZ":
-        console.log("az");
-        sortedCourses = 
+
+      sortedCourses = 
           coursesData.sort(function (a, b) {
             return a.name - b.name;
           });
 
         break;
       case "ZA":
-        console.log("za");
-        sortedCourses =
+
+      sortedCourses =
           coursesData
             .sort(function (a, b) {
               return a.name - b.name;
@@ -107,8 +107,6 @@ if (sort !== null && sort !== "" && sort !== undefined) {
             .reverse();
         break;
       case "CreditHours":
-        console.log("credit hours");
-
         sortedCourses =
           coursesData
             .sort(function (a, b) {

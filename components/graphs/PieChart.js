@@ -7,24 +7,25 @@ import {Pie, Doughnut} from 'react-chartjs-2';
 
   
   export default function PieChart({data}) {
+    
     const state = {
         labels: ['Required', 'Total Earned', 'CREC Earned'],
         datasets: [
           {
             label: 'Rainfall',
             backgroundColor: [
-              '#B21F00',
-              '#C9DE00',
-              '#2FDE00',
+              '#505864',
+              '#647BF0',
+              '#43BFDD',
               
             ],
             hoverBackgroundColor: [
-            '#501800',
-            '#4B5000',
-            '#175000',
+            '#505864',
+            '#647BF0',
+            '#43BFDD',
             
             ],
-            data: [24, 12, 6]
+            data: data
           }
         ]
       }
@@ -35,14 +36,14 @@ import {Pie, Doughnut} from 'react-chartjs-2';
         <Doughnut
           data={state}
           options={{
-            title:{
-              display:true,
-              text:'Average Rainfall per month',
-              fontSize:20
-            },
+            
             legend:{
               display:true,
-              position:'right'
+              position:'right',
+              labels: {
+                fontColor: 'rgb(255,255,255)'
+            }
+              
             }
           }}
         />

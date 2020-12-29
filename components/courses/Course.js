@@ -46,8 +46,6 @@ export default function Course({ course, showModal, courseToView }) {
     };
 
     function showSlideOut(course) {
-        console.log(showModal);
-        console.log(course);
         showModal = true;
         courseToView = course;
       }

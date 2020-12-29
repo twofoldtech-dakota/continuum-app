@@ -1064,7 +1064,7 @@ footer {
           margin-top: 2px; }
         .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box .image-holder {
           text-align: center;
-          margin-top: 30px; }
+          margin-top: 20px; }
         .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box ul {
           display: flex;
           margin: 12px -22px 0;
@@ -2275,7 +2275,11 @@ border-radius: 3px;
       text-align: center;
       padding: 14px 13px;
       text-decoration: none;
-      height:24px;
+    }
+
+    .navbar a.active{
+      background-color: #DDE2FF;
+    color: #405ADD;
     }
     
     /* Change the color of links on hover */
@@ -2372,5 +2376,9 @@ border-radius: 3px;
 }
 .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
   background-color: #333D49;
+}
+
+.continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+  height: 235px;
 }
 /*# sourceMappingURL=custom.css.map */

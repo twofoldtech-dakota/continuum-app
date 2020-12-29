@@ -9,9 +9,11 @@ import { FaUserCircle } from "react-icons/fa";
 import { MdSettings } from "react-icons/md";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import SideBarLogo from "../svgs/sidebarlogo";
+import { useState, useEffect } from "react";
 
 const Sidebar = () => {
     const router = useRouter();
+    const [activeUrl, setActiveUrl] = useState(window.location.pathname);
 
     const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -25,6 +27,11 @@ const Sidebar = () => {
         }
     };
 
+    function setActive(event){
+        setActiveUrl(event);
+        console.log(event);
+    }
+console.log(activeUrl);
     return (
         <div>
         <div className="continuum-sidebar">
@@ -36,7 +43,8 @@ const Sidebar = () => {
             <div className="navigation">
                 <ul>
                     <li>
-                        <a className="active" href="/">
+                    <Link href="/" >
+                        <a className={activeUrl === "/" ? "active" : ""} onClick={() => setActive("/")}>
                             <span>
                                 <MdDashboard
                                     className="simple-state"
@@ -46,18 +54,21 @@ const Sidebar = () => {
                             </span>
                             Home
                         </a>
+                    </Link>
                     </li>
                     <li>
-                        <a href="/credits">
+                    <Link href="/credits">
+                        <a className={activeUrl === "/credits" ? "active" : ""} onClick={() => setActive("/credits")}>
                             <span>
                                 <MdClass className="simple-state" size={30} />
                             </span>
                             Credits
                         </a>
+                    </Link>
                     </li>
                     <li>
                         <Link href="/courses">
-                            <a>
+                            <a className={activeUrl === "/courses" ? "active" : ""} onClick={() => setActive("/courses")}>
                                 <span>
                                     <FaBookOpen
                                         className="simple-state"
@@ -69,7 +80,8 @@ const Sidebar = () => {
                         </Link>
                     </li>
                     <li>
-                        <a href="/profile">
+                    <Link href="/profile">
+                        <a className={activeUrl === "/profile" ? "active" : ""} onClick={() => setActive("/profile")}>
                             <span>
                                 <FaUserCircle
                                     className="simple-state"
@@ -78,9 +90,11 @@ const Sidebar = () => {
                             </span>
                             Profile
                         </a>
+                    </Link>
                     </li>
                     <li>
-                        <a href="/settings">
+                    <Link href="/settings">
+                        <a className={activeUrl === "/settings" ? "active" : ""} onClick={() => setActive("/settings")}>
                             <span>
                                 <MdSettings
                                     className="simple-state"
@@ -89,9 +103,11 @@ const Sidebar = () => {
                             </span>
                             Settings
                         </a>
+                    </Link>
                     </li>
                     <li>
-                        <a onClick={logout} href="#">
+                    <Link href="#" onClick={logout}>
+                        <a>
                             <span>
                                 <RiLogoutBoxRLine
                                     className="simple-state"
@@ -100,6 +116,7 @@ const Sidebar = () => {
                             </span>
                             Logout
                         </a>
+                    </Link>
                     </li>
                 </ul>
             </div>
@@ -107,8 +124,8 @@ const Sidebar = () => {
     
         <div className="mobile-navigation">
         <div className="navbar">
-                
-                        <a className="active" href="/">
+        <Link href="/">
+                        <a className={activeUrl === "/" ? "active" : ""} onClick={() => setActive("/")}>
                             <span>
                                 <MdDashboard
                                     className="simple-state"
@@ -117,17 +134,17 @@ const Sidebar = () => {
                                 {/* <MdDashboard className="hover-state" size={32}/> */}
                             </span>
                             
-                        </a>
-                  
-                        <a href="/credits">
+                        </a></Link>
+                        <Link href="/credits">
+                        <a className={activeUrl === "/settings" ? "active" : ""} onClick={() => setActive("/credits")}>
                             <span>
                                 <MdClass className="simple-state" size={30} />
                             </span>
                             
                         </a>
-                   
+                        </Link>
                         <Link href="/courses">
-                            <a>
+                            <a className={activeUrl === "/courses" ? "active" : ""} onClick={() => setActive("/courses")}>
                                 <span>
                                     <FaBookOpen
                                         className="simple-state"
@@ -137,8 +154,8 @@ const Sidebar = () => {
                                 
                             </a>
                         </Link>
-                    
-                        <a href="/profile">
+                        <Link href="/profile">
+                        <a className={activeUrl === "/profile" ? "active" : ""} onClick={() => setActive("/profile")}>
                             <span>
                                 <FaUserCircle
                                     className="simple-state"
@@ -146,9 +163,9 @@ const Sidebar = () => {
                                 />
                             </span>
                             
-                        </a>
-                        
-                        <a href="/settings">
+                        </a></Link>
+                        <Link href="/settings">
+                        <a className={activeUrl === "/settings" ? "active" : ""} onClick={() => setActive("/settings")}>
                             <span>
                                 <MdSettings
                                     className="simple-state"
@@ -156,8 +173,8 @@ const Sidebar = () => {
                                 />
                             </span>
                             
-                        </a>
-                  
+                        </a></Link>
+                        <Link href="/settings">
                         <a onClick={logout} href="#">
                             <span>
                                 <RiLogoutBoxRLine
@@ -167,7 +184,7 @@ const Sidebar = () => {
                             </span>
                             
                         </a>
-                   
+                        </Link>
                 
                    
             </div>
