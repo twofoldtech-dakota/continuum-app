@@ -8,7 +8,7 @@ import BlankStar from "../svgs/blankStar";
 import FilledStar from "../svgs/filledStar";
 import FileIcon from "../svgs/fileIcon";
 import CalendarIcon from "../svgs/calendarIcon";
-
+import RightArrow from "../svgs/rightArrow";
 export default function Courses({ sort }) {
   const { data: courses, mutate } = useSWR("/api/courses");
   const coursesData = [
@@ -64,14 +64,14 @@ export default function Courses({ sort }) {
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [courseToView, setCourseToView] = useState(null);
-
+var isShowingUpcomingCourses = false;
   var sortedCourses = [];
   useEffect(() => {
 
 //component updates if sort is updated
 }, [sort]);
-
-if (sort !== null && sort !== "") {
+console.log(sort);
+if (sort !== null && sort !== "" && sort !== undefined) {
     switch (sort) {
       case "DateDesc":
         console.log("date desc");
@@ -122,6 +122,27 @@ if (sort !== null && sort !== "") {
     }
   
 }
+else{
+    // This is for the upcoming courses on the homepage. This shows the 5 latest courses
+    isShowingUpcomingCourses = true;
+    sortedCourses = 
+          coursesData.sort(function (a, b) {
+            return new Date(a.date) - new Date(b.date);
+          }).reverse();
+    if(sortedCourses.length > 5){
+        sortedCourses = sortedCourses.slice(0, 5).reduce();
+    }
+    for (let index = 0; index < sortedCourses.length; index++) {
+        const course = sortedCourses[index];
+
+        if(Date.parse(course.date) < Date.now()){
+            delete sortedCourses[index];
+        }
+        
+    }
+
+}
+
   function showSlideOut(course) {
     setShowModal(true);
     setCourseToView(course);
@@ -132,7 +153,7 @@ if (sort !== null && sort !== "") {
     setShowSuccessModal(false);
   }
 
-  function saveCourse(course) {
+  function addToSavedCourses(course) {
     console.log("save course - " + course.name);
   }
   function unsaveCourse(course) {
@@ -170,7 +191,7 @@ if (sort !== null && sort !== "") {
                         <FilledStar></FilledStar>
                       </a>
                     ) : (
-                      <a href="#" onClick={() => saveCourse(course)}>
+                      <a href="#" onClick={() => addToSavedCourses(course)}>
                         <BlankStar></BlankStar>
                       </a>
                     )}
@@ -186,6 +207,9 @@ if (sort !== null && sort !== "") {
                   </td>
                 </tr>
               ))}
+
+{isShowingUpcomingCourses ? <tr><td colSpan="5"><a className="view-btn" href="/courses">View all courses&nbsp;<RightArrow /></a></td></tr> : ""}
+
           </tbody>
         </table>
       </div>
