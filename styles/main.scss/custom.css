@@ -2332,4 +2332,45 @@ border-radius: 3px;
   border-bottom: 2px solid transparent;
   border-radius: -0;
 }
+
+/************charts and graphs********/
+.continuum-select-home{
+  background-color: #fff;
+    border: 1px solid #9AAAFA;
+    height: 35px;
+    width: 300px;
+    border-radius: 3px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding: 0 9px;
+}
+.continuum-select-home select.form-control{
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  height: auto;
+  font-size: 13px;
+  border: none;
+  padding-left: 6px;
+  background: url(/_next/static/media/select-arrow.6808d9d….svg) 98% center no-repeat;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0;
+  appearance: none;
+  /* max-width: 100px; */
+  width: 65%;
+}
+.continuum-select-home p{
+  font-size: 9px;
+    color: #405ADD;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase
+}
+.continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+  background-color: #333D49;
+}
 /*# sourceMappingURL=custom.css.map */
