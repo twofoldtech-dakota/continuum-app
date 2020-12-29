@@ -52,6 +52,7 @@ type SavedCourses {
     owner: String!
     username: String!
     description: String
+    user: User! @relation
 }
 
 type Credit {
@@ -63,10 +64,11 @@ type Credit {
     governingAgency: String
     description: String
     certificateImage: String!
+    licensurePeriod: LicensurePeriod! @relation
 }
 
-type Provider{
-    name: String! 
+type Provider {
+    name: String!
     url: String!
 }
 
@@ -75,10 +77,11 @@ type Query {
     allUserCourses: [Course!]
 }
 
-type LicensurePeriod{
+type LicensurePeriod {
     startDate: String!
     endDate: String!
     creditsEarned: Int!
     creditsRequired: Int!
     credits: [Credit!] @relation
+    user: User! @relation
 }
