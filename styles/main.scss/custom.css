@@ -630,7 +630,8 @@ header {
   overflow-y: auto; }
   .credits-earned-modal.active {
     right: 0;
-    transition: all 0.5s ease-in-out; }
+    transition: all 0.5s ease-in-out;
+  height:100%; }
   .credits-earned-modal .cross-icon {
     text-align: right; }
   .credits-earned-modal .text-box h3 {
@@ -2053,6 +2054,10 @@ color:#59697B;
   background-color: #405ADD;
   border-radius: 3px;
   font-size: 15px;
+  min-width: 100px;
+    display: block;
+    max-width: 154px;
+    float:right;
 }
 .public-page .bottom .listing .bottom-text{
   text-align: center;
@@ -2226,7 +2231,12 @@ border-radius: 3px;
   margin-right:10px;
   color:#BFC2C6;
 }
-
+.hidden{
+  display:none;
+}
+.show{
+  display:block;
+}
 
 /************ Navigation ***************/
 .navbar{
@@ -2278,5 +2288,89 @@ border-radius: 3px;
     /* .navbar a.active {
     } */
     
+}
+
+/********** Modals ************/
+.credits-earned-modal.active{
+  z-index: 5;
+}
+.overlay{
+  background-color: rgba(64, 90, 221, 0.25);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease-in-out;
+}
+.overlay.active{
+  opacity: 1;
+    visibility: visible;
+    transition: all 0.5s ease-in-out;
+}
+
+/********** COurses and Credits ****************/
+.nav-pills .nav-item .nav-link.active{
+  background-color: transparent;
+    color: #293340;
+    border-color: #647BF0;
+}
+.nav-pills .nav-item{
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.nav-pills .nav-item .nav-link{
+  letter-spacing: -0.25px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: rgba(41, 51, 64, 0.65);
+  padding: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: -0;
+}
+
+/************charts and graphs********/
+.continuum-select-home{
+  background-color: #fff;
+    border: 1px solid #9AAAFA;
+    height: 35px;
+    width: 300px;
+    border-radius: 3px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding: 0 9px;
+}
+.continuum-select-home select.form-control{
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  height: auto;
+  font-size: 13px;
+  border: none;
+  padding-left: 6px;
+  background: url(/_next/static/media/select-arrow.6808d9d….svg) 98% center no-repeat;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0;
+  appearance: none;
+  /* max-width: 100px; */
+  width: 65%;
+}
+.continuum-select-home p{
+  font-size: 9px;
+    color: #405ADD;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase
+}
+.continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+  background-color: #333D49;
 }
 /*# sourceMappingURL=custom.css.map */

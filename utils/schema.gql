@@ -34,33 +34,42 @@ type User {
 
 type Course {
     name: String!
-    provider: String!
+    provider: Provider! @relation
     date: String!
     hours: Int
     governingAgency: String!
     saved: String!
+    description: String
 }
 
 type SavedCourses {
     name: String!
-    provider: String!
+    provider: Provider! @relation
     date: String!
     hours: Int
     governingAgency: String!
     saved: String!
     owner: String!
     username: String!
+    description: String
+    user: User! @relation
 }
 
 type Credit {
     name: String!
     user: User! @relation
-    provider: String!
+    provider: Provider! @relation
     date: String!
     hours: Int!
     governingAgency: String
     description: String
-    credits: String!
+    certificateImage: String!
+    licensurePeriod: LicensurePeriod! @relation
+}
+
+type Provider {
+    name: String!
+    url: String!
 }
 
 type Query {
@@ -68,10 +77,11 @@ type Query {
     allUserCourses: [Course!]
 }
 
-type LicensurePeriod{
+type LicensurePeriod {
     startDate: String!
     endDate: String!
     creditsEarned: Int!
     creditsRequired: Int!
     credits: [Credit!] @relation
+    user: User! @relation
 }
