@@ -781,9 +781,9 @@ header {
     font-weight: 700;
     font-size: 11px;
     margin-bottom: 7px; }
-  .calendar-text form {
+  .calendar-text .media div {
     position: relative; }
-    .calendar-text form .form-control {
+    .calendar-text .media div .form-control {
       border: 1px solid #BFC2C6;
       height: 36px;
       -webkit-border-radius: 3px;
@@ -796,7 +796,7 @@ header {
       font-size: 13px;
       max-width: 160px;
       width: 100%; }
-    .calendar-text form span {
+    .calendar-text .media div span {
       position: absolute;
       right: 10px;
       top: 50%;
@@ -1343,7 +1343,7 @@ footer {
 
   .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box {
     padding: 15px;
-    min-height: 180px; }
+    min-height: 231px; }
 
   .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box ul li {
     padding: 0 10px; }
@@ -2359,7 +2359,7 @@ border-radius: 3px;
   font-size: 13px;
   border: none;
   padding-left: 6px;
-  background: url(/_next/static/media/select-arrow.6808d9d….svg) 98% center no-repeat;
+  background: url(../../styles/images/select-arrow.svg) 98% center no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
   padding: 0;
@@ -2376,9 +2376,165 @@ border-radius: 3px;
 }
 .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
   background-color: #333D49;
+  
 }
 
-.continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
-  height: 235px;
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+@media (min-width: 2240px) {
+  .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+    height: 460px;
+  }
+  /* CSS */
+  
+}
+@media (min-width: 1441px) and (max-width: 2239px) {
+  .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+    height: 350px;
+  }
+  /* CSS */
+  
+}
+@media (min-width: 1281px) and (max-width: 1440px) {
+  .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+    height: 280px;
+  }
+  /* CSS */
+  
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+    height: 280px;
+  }
+  /* CSS */
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  /* CSS */
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  /* CSS */
+  
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+    height: 280px;
+  }
+  .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box .image-holder{
+    margin-top:10px;
+  }
+  /* CSS */
+  
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 321px) and (max-width: 375px) {
+  .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+    height: 250px;
+  }
+  .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box .image-holder{
+    margin-top:10px;
+  }
+  /* CSS */
+  
+}
+
+@media (max-width: 320px){
+  .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box{
+    height: 220px;
+  }
+  .continuum-right .continuum-detail .credit-earning-sec .credit-earning-box .image-holder{
+    margin-top:10px;
+  }
+  /* CSS */
+  
+}
+
+.earning-progress{
+  margin-top:20px;
+}
+.progress-title{
+  font-size: 15px;
+  font-weight: 600;
+  color: #505280;
+  margin: 0 0 4px;
+  line-height:30px;
+}
+.progress-outer{
+  background: #E6EAFF;
+  padding: 0px 60px 0px 0px;
+  border: 10px solid white;
+  border-radius: 45px;
+  margin-bottom: 20px;
+  position: relative;
+  box-shadow: 0px 1px 2px rgba(50, 51, 79, 0.25);
+}
+.progress{
+  background: white;
+  border-radius: 20px;
+  margin: 0;
+  height:1.5rem;
+}
+.progress .progress-bar{
+  border-radius: 20px;
+  box-shadow: none;
+  animation: animate-positive 2s;
+}
+.progress .progress-value{
+  font-size: 20px;
+  font-weight: 800;
+  color: #405ADD;
+  position: absolute;
+  top: 3px;
+  right: 10px;
+}
+
+.progress-bar{
+  background-color: #405ADD;
 }
 /*# sourceMappingURL=custom.css.map */

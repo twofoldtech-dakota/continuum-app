@@ -128,6 +128,7 @@ export default function Courses1() {
           "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
         isRealtor: true,
       };
+     
       function toggleList(name) {
         if (name === "courses") {
             setActiveComponent("courses");
@@ -211,7 +212,7 @@ export default function Courses1() {
                                             <option value="DateDesc">Date Descending</option>
                                             <option value="DateAsc">Date Ascending</option>
                                             <option value="AZ">A-Z</option>
-                                            <option value="ZA">Z-A Completed</option>
+                                            <option value="ZA">Z-A</option>
                                             <option value="CreditHours">Credit Hours</option>
                                         </select>
                                     </div>

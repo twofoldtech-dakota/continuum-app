@@ -12,39 +12,6 @@ export default function Course({ course, showModal, courseToView }) {
     const router = useRouter();
     const { data } = useSWR("/api/user");
    
-    const createUserCourse = async (course) => {
-        try {
-            await fetch("/api/createUserCourse", {
-                method: "POST",
-                body: JSON.stringify({
-                    data,
-                    course,
-                }),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            courseSaved();
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
-    const deleteCourse = async (course) => {
-        try {
-            await fetch("/api/deleteCourse", {
-                method: "DELETE",
-                body: JSON.stringify({ id: course.id }),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            courseDeleted();
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
     function showSlideOut(course) {
         showModal = true;
         courseToView = course;

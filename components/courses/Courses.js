@@ -10,7 +10,6 @@ import FileIcon from "../svgs/fileIcon";
 import CalendarIcon from "../svgs/calendarIcon";
 import RightArrow from "../svgs/rightArrow";
 export default function Courses({ sort }) {
-  const { data: courses, mutate } = useSWR("/api/courses");
   const coursesData = [
     {
       name: "Test course 1",
@@ -30,7 +29,7 @@ export default function Courses({ sort }) {
         name: "Provider 2 Testing",
         url: "http://www.google.com",
       },
-      date: "12/31/2020",
+      date: "2/31/2021",
       hours: 5,
       governingAgency: "Test Governing Agency 2",
       saved: false,
@@ -42,7 +41,7 @@ export default function Courses({ sort }) {
         name: "Provider 3 Testing",
         url: "http://www.google.com",
       },
-      date: "12/29/2020",
+      date: "1/29/2022",
       hours: 6,
       governingAgency: "Test Governing Agency 3",
       saved: true,
@@ -54,7 +53,55 @@ export default function Courses({ sort }) {
         name: "Provider 4 Testing",
         url: "http://www.google.com",
       },
-      date: "12/30/2020",
+      date: "1/30/2021",
+      hours: 4,
+      governingAgency: "Test Governing Agency 4",
+      saved: false,
+      description: "Test description 4",
+    },
+    {
+      name: "Test course 5",
+      provider: {
+        name: "Provider 4 Testing",
+        url: "http://www.google.com",
+      },
+      date: "1/12/2021",
+      hours: 4,
+      governingAgency: "Test Governing Agency 4",
+      saved: false,
+      description: "Test description 4",
+    },
+    {
+      name: "Test course 6",
+      provider: {
+        name: "Provider 4 Testing",
+        url: "http://www.google.com",
+      },
+      date: "3/12/2021",
+      hours: 4,
+      governingAgency: "Test Governing Agency 4",
+      saved: false,
+      description: "Test description 4",
+    },
+    {
+      name: "Test course 8",
+      provider: {
+        name: "Provider 4 Testing",
+        url: "http://www.google.com",
+      },
+      date: "6/30/2021",
+      hours: 4,
+      governingAgency: "Test Governing Agency 4",
+      saved: false,
+      description: "Test description 4",
+    },
+    {
+      name: "Test course 7",
+      provider: {
+        name: "Provider 4 Testing",
+        url: "http://www.google.com",
+      },
+      date: "1/15/2021",
       hours: 4,
       governingAgency: "Test Governing Agency 4",
       saved: false,
@@ -123,13 +170,15 @@ if (sort !== null && sort !== "" && sort !== undefined) {
 else{
     // This is for the upcoming courses on the homepage. This shows the 5 latest courses
     isShowingUpcomingCourses = true;
-    sortedCourses = 
-          coursesData.sort(function (a, b) {
-            return new Date(a.date) - new Date(b.date);
-          }).reverse();
-    if(sortedCourses.length > 5){
-        sortedCourses = sortedCourses.slice(0, 5).reduce();
-    }
+
+    var diffdate = new Date();
+
+    sortedCourses = coursesData.sort(function(a, b) {
+        var distancea = Math.abs(diffdate - new Date(a.date));
+        var distanceb = Math.abs(diffdate - new Date(b.date));
+        return distancea - distanceb; // sort a before b when the distance is smaller
+    });
+    sortedCourses = sortedCourses.slice(0, 6);
     for (let index = 0; index < sortedCourses.length; index++) {
         const course = sortedCourses[index];
 

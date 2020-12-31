@@ -32,11 +32,13 @@ import {Pie, Doughnut} from 'react-chartjs-2';
 
 
       return (
-        <div>
+          
+            
         <Doughnut
           data={state}
           options={{
-            
+            responsive: true,
+            maintainAspectRatio: true,
             legend:{
               display:true,
               position:'right',
@@ -44,10 +46,14 @@ import {Pie, Doughnut} from 'react-chartjs-2';
                 fontColor: 'rgb(255,255,255)'
             }
               
-            }
+            },
+            elements: {
+              arc: {
+                  borderWidth: 0
+              }
+          }
           }}
         />
-        </div>
       );
     }
 

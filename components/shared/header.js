@@ -8,7 +8,7 @@ const Header = () => {
     const fetcher = (url) => fetch(url).then((r) => r.json());
 
     const { data: user, mutate: mutateUser } = useSWR("/api/user", fetcher);
-
+const userName = "dillonosmith";
     const logout = async () => {
         const res = await fetch("/api/logout");
         if (res.ok) {

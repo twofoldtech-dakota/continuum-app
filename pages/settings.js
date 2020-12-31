@@ -249,7 +249,7 @@ var licensurePeriodsToSave = [];
 
    
 
-    <Layout>
+    <Layout title="Continuum - Settings">
       <div className="continuum-detail">
         <form onSubmit={onSubmit}>
           <div className="title">

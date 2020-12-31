@@ -26,11 +26,13 @@ export default function BarChart({data}) {
               <h3>Activity by Month</h3>
               <p>Rolling 12-Month History</p>
               <div className="image-holder">
-              <div>
+              <div className="chart-container">
           <Bar
             data={state}
             
             options={{
+              responsive: true,
+              maintainAspectRatio: true,
               title:{
                 display:false,
                 text:'',
@@ -70,4 +72,3 @@ export default function BarChart({data}) {
     );
 
 }
-{/*  */}

@@ -13,12 +13,19 @@ import { useState, useEffect } from "react";
 
 const Sidebar = () => {
     const router = useRouter();
-    const [activeUrl, setActiveUrl] = useState(window.location.pathname);
+    const [activeUrl, setActiveUrl] = useState();
 
     const fetcher = (url) => fetch(url).then((r) => r.json());
 
     const { data: user, mutate: mutateUser } = useSWR("/api/user", fetcher);
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setActiveUrl(window.location.pathname);
+        }
+        
+      }, []);
 
+    
     const logout = async () => {
         const res = await fetch("/api/logout");
         if (res.ok) {
@@ -31,7 +38,7 @@ const Sidebar = () => {
         setActiveUrl(event);
         console.log(event);
     }
-console.log(activeUrl);
+
     return (
         <div>
         <div className="continuum-sidebar">

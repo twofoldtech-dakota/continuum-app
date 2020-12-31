@@ -153,8 +153,7 @@ const [creditToView, setCreditToView] = useState(null);
   useEffect(() => {
     if (userData.licensurePeriods[0] !== null) {
       setActiveCredits(userData.licensurePeriods[0].startDate + "-" + userData.licensurePeriods[0].endDate);
-      setCurrentLicensureCreditsRemaining( userData.licensurePeriods[0].creditsRequired - userData.licensurePeriods[0].creditsEarned);
-      setCurrentLicensureCreditsEarned( userData.licensurePeriods[0].creditsEarned);
+      
       setShowModal(false);
     }
   }, []);
@@ -180,10 +179,10 @@ const [creditToView, setCreditToView] = useState(null);
         period.endDate == endLicensureDate
       ) {
         setActiveLicensureCredits(period.credits);
-        setCurrentLicensureCreditsRemaining(
-          period.creditsRequired - currentLicensureCreditsEarned
-        );
+        setCurrentLicensureCreditsRemaining(period.creditsRequired - period.creditsEarned);
         setCurrentLicensureCreditsEarned(period.creditsEarned);
+
+        
       }
     });
     //loadCredits(credits, startLicensureDate, endLicensureDate);
