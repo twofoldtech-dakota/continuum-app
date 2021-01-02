@@ -2,7 +2,6 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import {useForm} from "react-hook-form";
-import Credit from "./Credit";
 import CrossIcon from "../svgs/crossIcon";
 import ExpendIcon from "../svgs/expendIcon";
 import CalendarIcon from "../svgs/calendarIcon";
@@ -17,7 +16,9 @@ export default function Courses({ sort, licensurePeriod }) {
   const [creditToView, setCreditToView] = useState(null);
   const { handleSubmit, register, watch, errors } = useForm();
   const [errorMessage, setErrorMessage] = useState("");
-
+  useEffect(() => {
+    
+}, [sort]);
     //keep this to send to the update method. This object is being updated. DO NOT ERASE!
   var creditToSave = {
     name: "",
@@ -33,62 +34,57 @@ export default function Courses({ sort, licensurePeriod }) {
     certificateImage: "",
   };
   var sortedCredits = [];
-  useEffect(() => {
-
-//component updates if sort is updated
-}, [sort, licensurePeriod]);
-
-if (sort !== null && sort !== "" && sort !== undefined) {
-    if(licensurePeriod && licensurePeriod.credits != [])
-      {
-        switch (sort) {
+  
+  
+    if (sort !== null && sort !== "" && sort !== undefined) {
+      switch (sort) {
         case "DateDesc":
-            sortedCredits = 
-            licensurePeriod.credits.sort(function (a, b) {
-                return new Date(a.date) - new Date(b.date);
+    
+          sortedCredits = 
+          licensurePeriod?.credits?.sort(function (a, b) {
+              return new Date(a.date) - new Date(b.date);
             }).reverse();
-
-            break;
+    
+          break;
         case "DateAsc":
-
-            sortedCredits = 
-            licensurePeriod.credits
-                .sort(function (a, b) {
+    
+          sortedCredits = 
+          licensurePeriod?.credits?.sort(function (a, b) {
                 return new Date(a.date) - new Date(b.date);
-                });
-            break;
+              });
+          break;
         case "AZ":
-
-            sortedCredits = 
-            licensurePeriod.credits.sort(function (a, b) {
-                return a.name - b.name;
+    
+          sortedCredits = 
+          licensurePeriod?.credits?.sort(function (a, b) {
+              return a.name - b.name;
             });
-
-            break;
+    
+          break;
         case "ZA":
-
-            sortedCredits =
-            licensurePeriod.credits
-                .sort(function (a, b) {
+    
+          sortedCredits =
+          licensurePeriod?.credits?.sort(function (a, b) {
                 return a.name - b.name;
-                })
-                .reverse();
-            break;
+              })
+              .reverse();
+          break;
         case "CreditHours":
-            sortedCredits =
-            licensurePeriod.credits
-                .sort(function (a, b) {
+          sortedCredits =
+          licensurePeriod?.credits?.sort(function (a, b) {
                 return a.hours - b.hours;
-                })
-                .reverse();
-
-            break;
+              })
+              .reverse();
+    
+          break;
         default:
-            console.log("default");
-        }
+          console.log("default");
+      }
+    
     }
   
-}
+
+
 function removeImage(credit){
     creditToSave = {
         name: credit.name,
@@ -113,8 +109,12 @@ const onSubmit = handleSubmit(async (formData) => {
         if(!formData.certificateImage){
             console.log("empty");
         }
-
         console.log(formData);
+
+        //DO NOT REMOVE - if form validates and we update the credit successfully then we do this
+        setShowModal(false);
+        setShowSuccessModal(true);
+        
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
@@ -131,12 +131,6 @@ const onSubmit = handleSubmit(async (formData) => {
     setShowModal(false);
     setShowSuccessModal(false);
     setCreditToView(credit);
-  }
-
-  function saveCourse(credit) {
-    console.log("save");
-    setShowModal(false);
-    setShowSuccessModal(true);
   }
 
   return (
@@ -166,8 +160,7 @@ const onSubmit = handleSubmit(async (formData) => {
 
       <div
         className={showModal === true ? "overlay active" : "overlay"}
-        onClick={() => hideModal()}
-      ></div>
+        onClick={() => hideModal()}></div>
       <div
         className={
           showModal === true
@@ -181,74 +174,79 @@ const onSubmit = handleSubmit(async (formData) => {
           </a>
         </div>
         <form onSubmit={onSubmit}>
-        <div className="text-box">
-          <h3>Claim Credit Hours</h3>
-          <p>{creditToView ? creditToView.name : ""}</p>
-          <a href={creditToView ? creditToView.provider.url : ""}>
-            {creditToView ? creditToView.provider.name : ""}&nbsp;
-            <ExpendIcon />
-          </a>
-        </div>
-        <div className="panel-text">
-          <h4>DESCRIPTION</h4>
-          <p>{creditToView ? creditToView.description : ""}</p>
-          <span>CREDITS</span>
-          <strong>
-            {creditToView ? creditToView.hours : ""} continuing
-            education credit hours
-          </strong>
-        </div>
-        <div className="calendar-text">
-          <p>COMPLETED DATE</p>
-          <div className="media">
-<div>
-              <input
-                type="text"
-                className="form-control"
-                name="date"
-                placeholder="mm/dd/yyy"
-                defaultValue={creditToView ? creditToView.date : "" }
-                ref={register({
-                    required: "Completed date is required.",
-                  })}
-              />
-              <span>
-                <CalendarIcon />
-              </span>
-              </div>
-            <span>Select the date indicated on your certificate.</span>
+          <div className="text-box">
+            <h3>Claim Credit Hours</h3>
+            <p>{creditToView ? creditToView.name : ""}</p>
+            <a href={creditToView ? creditToView.provider.url : ""}>
+              {creditToView ? creditToView.provider.name : ""}&nbsp;
+              <ExpendIcon />
+            </a>
           </div>
-          {errors.date && (
-                        <span role="alert" class="form-error">
-                          {errors.date.message}
-                        </span>
-                      )}
-        </div>
-        <div className="upload">
-          <h4>UPLOAD CERTIFICATE</h4>
-          <div className={creditToView && creditToView.certificateImage !== "" ? "upload-inner" : "hidden"}>
-                    <a href="#"  onClick={() => removeImage(creditToView)}><p>
-                        <ImageIcon />&nbsp;&nbsp;{creditToView ? creditToView.certificateImage : ""}</p>
-                        <TrashIcon/>
-                    </a>
-                    <div className="image-holder">
-                        <img src={creditToView ? creditToView.certificateImage : ""} alt="" className="img-fluid"></img>
-                    </div>
+          <div className="panel-text">
+            <span>CREDITS</span>
+            <strong>
+              {creditToView ? creditToView.hours : ""} continuing
+              education credit hours
+            </strong>
+          </div>
+          <div className="calendar-text">
+            <p>COMPLETED DATE</p>
+            <div className="media">
+  <div>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="date"
+                  placeholder="mm/dd/yyy"
+                  defaultValue={creditToView ? creditToView.date : "" }
+                  ref={register({
+                      required: "Completed date is required.",
+                    })}
+                />
+                <span>
+                  <CalendarIcon />
+                </span>
                 </div>
-
-          <div className={creditToView && creditToView.certificateImage === "" ? "upload-file" : "hidden"}>
-            <label>
-              {" "}
-              <FileIcon /> <span>Select a file</span> from your computer
-              {creditToView && !creditToView.certificateImage ? <input type="file" size="60" name="certificateImage" ref={register({required: "Certificate Image is required.",})}/> : <input type="file" size="60" name="certificateImage" defaultValue={creditToView ? creditToView.certificateImage : "" }/> }
-            </label>
+              <span>Select the date indicated on your certificate.</span>
+            </div>
+            {errors.date && (
+                          <span role="alert" className="form-error">
+                            {errors.date.message}
+                          </span>
+                        )}
           </div>
-        </div>
-        <input
-          className="save-btn"
-          type="submit"
-          defaultValue="Save Changes"
-        />
+          <div className="upload">
+            <h4>UPLOAD CERTIFICATE</h4>
+            <div className={creditToView && creditToView.certificateImage !== "" ? "upload-inner" : "hidden"}>
+                      <a href="#"  onClick={() => removeImage(creditToView)}><p>
+                          <ImageIcon />&nbsp;&nbsp;{creditToView ? creditToView.certificateImage : ""}</p>
+                          <TrashIcon/>
+                      </a>
+                      <div className="image-holder">
+                          <img src={creditToView ? creditToView.certificateImage : ""} alt="" className="img-fluid"></img>
+                      </div>
+                  </div>
+                  
+            <div className={creditToView && creditToView.certificateImage === "" ? "upload-file" : "hidden"}>
+              <label>
+                {" "}
+                <FileIcon /> <span>Select a file</span> from your computer
+                <input type="file" size="60" name="certificateImage" defaultValue={creditToView ? creditToView.certificateImage : "" } ref={creditToView && creditToView.certificateImage === "" ? register({
+                      required: "Certificate image is required.",
+                    }) : null}/>
+              </label>
+            </div>
+            {errors.certificateImage && (
+                          <span role="alert" className="form-error">
+                            {errors.certificateImage.message}
+                          </span>
+                        )}
+          </div>
+          <input
+            className="save-btn"
+            type="submit"
+            defaultValue="Save Changes"
+          />
         </form>
 
       </div>

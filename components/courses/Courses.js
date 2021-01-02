@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { useState, useEffect } from "react";
-
+import {useForm} from "react-hook-form";
 import Course from "./Course";
 import CrossIcon from "../svgs/crossIcon";
 import ExpendIcon from "../svgs/expendIcon";
@@ -111,12 +111,33 @@ export default function Courses({ sort }) {
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [courseToView, setCourseToView] = useState(null);
+  const { handleSubmit, register, watch, errors } = useForm();
+  const [errorMessage, setErrorMessage] = useState("");
+
 var isShowingUpcomingCourses = false;
   var sortedCourses = [];
   useEffect(() => {
 
 //component updates if sort is updated
 }, [sort]);
+
+const onSubmit = handleSubmit(async (formData) => {
+
+  try {
+      if(!formData.certificateImage){
+          console.log("empty");
+      }
+      console.log(formData);
+      
+      //DO NOT REMOVE - if form validates and we update the credit successfully then we do this
+      setShowModal(false);
+      setShowSuccessModal(true);
+      
+  } catch (error) {
+    console.error(error);
+    setErrorMessage(error.message);
+  }
+});
 
 if (sort !== null && sort !== "" && sort !== undefined) {
     switch (sort) {
@@ -206,12 +227,7 @@ else{
   function unsaveCourse(course) {
     console.log("unsave course - " + course.name);
   }
-  function saveCourse(course) {
-    console.log("save");
-    setShowModal(false);
-    setShowSuccessModal(true);
-  }
-
+ 
   return (
     <div>
       <div className="table-responsive">
@@ -254,9 +270,7 @@ else{
                   </td>
                 </tr>
               ))}
-
 {isShowingUpcomingCourses ? <tr><td colSpan="5"><a className="view-btn" href="/courses">View all courses&nbsp;<RightArrow /></a></td></tr> : ""}
-
           </tbody>
         </table>
       </div>
@@ -277,57 +291,73 @@ else{
             <CrossIcon />
           </a>
         </div>
-        <div className="text-box">
-          <h3>Claim Credit Hours</h3>
-          <p>{courseToView !== null ? courseToView.name : ""}</p>
-          <a href={courseToView !== null ? courseToView.provider.url : ""}>
-            {courseToView !== null ? courseToView.provider.name : ""}&nbsp;
-            <ExpendIcon />
-          </a>
-        </div>
-        <div className="panel-text">
-          <h4>DESCRIPTION</h4>
-          <p>{courseToView !== null ? courseToView.description : ""}</p>
-          <span>CREDITS</span>
-          <strong>
-            {courseToView !== null ? courseToView.hours : ""} continuing
-            education credit hours
-          </strong>
-        </div>
-        <div className="calendar-text">
-          <p>COURSE DATE</p>
-          <div className="media">
-            <form>
+        <form onSubmit={onSubmit}>
+          <div className="text-box">
+            <h3>Claim Credit Hours</h3>
+            <p>{courseToView !== null ? courseToView.name : ""}</p>
+            <a href={courseToView !== null ? courseToView.provider.url : ""}>
+              {courseToView !== null ? courseToView.provider.name : ""}&nbsp;
+              <ExpendIcon />
+            </a>
+          </div>
+          <div className="panel-text">
+          
+            <span>CREDITS</span>
+            <strong>
+              {courseToView !== null ? courseToView.hours : ""} continuing
+              education credit hours
+            </strong>
+          </div>
+          <div className="calendar-text">
+            <p>COURSE DATE</p>
+            <div className="media">
+              <div>
               <input
-                type="text"
-                className="form-control"
-                id="startDate"
-                placeholder="mm/dd/yyy"
-              />
-              <span>
-                <CalendarIcon />
-              </span>
-            </form>
-            <span>Select the date indicated on your certificate.</span>
+                  type="text"
+                  className="form-control"
+                  name="date"
+                  placeholder="mm/dd/yyy"
+                  defaultValue={courseToView ? courseToView.date : "" }
+                  ref={register({
+                      required: "Course date is required.",
+                    })}
+                />
+                <span>
+                  <CalendarIcon />
+                </span>
+              </div>
+              <span>Select the date indicated on your certificate.</span>
+            </div>
+            {errors.date && (
+                          <span role="alert" className="form-error">
+                            {errors.date.message}
+                          </span>
+                        )}
           </div>
-        </div>
-        <div className="upload">
-          <h4>UPLOAD CERTIFICATE</h4>
-          <div className="upload-file">
-            <label>
-              {" "}
-              <FileIcon /> <span>Select a file</span> from your computer
-              <input type="file" size="60"></input>
-            </label>
+          <div className="upload">
+            <h4>UPLOAD CERTIFICATE</h4>
+           
+            <div className="upload-file">
+              <label>
+                {" "}
+                <FileIcon /> <span>Select a file</span> from your computer
+                <input type="file" size="60" name="certificateImage" ref={register({
+                      required: "Certificate image is required.",
+                    })}/>
+              </label>
+            </div>
+            {errors.certificateImage && (
+                          <span role="alert" className="form-error">
+                            {errors.certificateImage.message}
+                          </span>
+                        )}
           </div>
-        </div>
-        <a
-          className="save-btn"
-          href="#"
-          onClick={() => saveCourse(courseToView)}
-        >
-          Save & Claim Credits
-        </a>
+          <input
+            className="save-btn"
+            type="submit"
+            value="Save &amp; Claim Credits"
+         />
+        </form>
       </div>
       <div
         className={

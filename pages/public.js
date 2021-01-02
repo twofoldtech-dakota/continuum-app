@@ -361,7 +361,7 @@ const [creditToView, setCreditToView] = useState(null);
     </a>
   </div>
   <div className="calendar-text creadit-date">
-    <p>COURSE DATE: {creditToView !== null ? creditToView.date : ""}</p>
+    <p>COMPLETED DATE: {creditToView !== null ? creditToView.date : ""}</p>
     
   </div>
   <div className="upload">
