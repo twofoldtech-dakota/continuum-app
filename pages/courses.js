@@ -6,9 +6,15 @@ import ToggleCourses from "../components/courses/ToggleCourses";
 import LeftArrow from "../components/svgs/leftArrow";
 import RightArrow2 from "../components/svgs/rightArrow2";
 import SearchIcon from "../components/svgs/searchIcon";
+import Pagination from "../components/shared/pagination";''
 export default function Courses1() {
     const [activeComponent, setActiveComponent] = useState("courses");
     const [sortOption, setSortOption] = useState("DateDesc");
+
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(3);
 
     const userData = {
         username: "dillonosmith",
@@ -128,13 +134,133 @@ export default function Courses1() {
           "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
         isRealtor: true,
       };
-     
+
+      const coursesData = [
+        {
+          name: "Test course 1",
+          provider: {
+            name: "Provider 1 Testing",
+            url: "http://www.google.com",
+          },
+          date: "12/30/2020",
+          hours: 4,
+          governingAgency: "Test Governing Agency",
+          saved: false,
+          description: "Test description 1",
+        },
+        {
+          name: "Test course 2",
+          provider: {
+            name: "Provider 2 Testing",
+            url: "http://www.google.com",
+          },
+          date: "2/31/2021",
+          hours: 5,
+          governingAgency: "Test Governing Agency 2",
+          saved: false,
+          description: "Test description 2",
+        },
+        {
+          name: "Test course 3",
+          provider: {
+            name: "Provider 3 Testing",
+            url: "http://www.google.com",
+          },
+          date: "1/29/2022",
+          hours: 6,
+          governingAgency: "Test Governing Agency 3",
+          saved: true,
+          description: "Test description 3",
+        },
+        {
+          name: "Test course 4",
+          provider: {
+            name: "Provider 4 Testing",
+            url: "http://www.google.com",
+          },
+          date: "1/30/2021",
+          hours: 4,
+          governingAgency: "Test Governing Agency 4",
+          saved: false,
+          description: "Test description 4",
+        },
+        {
+          name: "Test course 5",
+          provider: {
+            name: "Provider 4 Testing",
+            url: "http://www.google.com",
+          },
+          date: "1/12/2021",
+          hours: 4,
+          governingAgency: "Test Governing Agency 4",
+          saved: false,
+          description: "Test description 4",
+        },
+        {
+          name: "Test course 6",
+          provider: {
+            name: "Provider 4 Testing",
+            url: "http://www.google.com",
+          },
+          date: "3/12/2021",
+          hours: 4,
+          governingAgency: "Test Governing Agency 4",
+          saved: false,
+          description: "Test description 4",
+        },
+        {
+          name: "Test course 8",
+          provider: {
+            name: "Provider 4 Testing",
+            url: "http://www.google.com",
+          },
+          date: "6/30/2021",
+          hours: 4,
+          governingAgency: "Test Governing Agency 4",
+          saved: false,
+          description: "Test description 4",
+        },
+        {
+          name: "Test course 7",
+          provider: {
+            name: "Provider 4 Testing",
+            url: "http://www.google.com",
+          },
+          date: "1/15/2021",
+          hours: 4,
+          governingAgency: "Test Governing Agency 4",
+          saved: false,
+          description: "Test description 4",
+        },
+      ];
+
+     useEffect(() => {
+        const fetchPosts = async () => {
+          setLoading(true);
+          setPosts(coursesData);
+          setLoading(false);
+        }
+
+        fetchPosts();
+    //component updates if sort is updated
+    }, []);
+
+    // Get current posts
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+    console.log(posts);
       function toggleList(name) {
         if (name === "courses") {
             setActiveComponent("courses");
         } else {
             setActiveComponent("savedCourses");
         }
+    }
+    function handlePageChange(pageNumber) {
+      console.log(`active page is ${pageNumber}`);
+      setActivePage(pageNumber);
     }
     function handleChange(sortOption) {
       
@@ -220,24 +346,13 @@ export default function Courses1() {
                             </div>
                             {/* <Courses name="courses" /> */}
                             <ToggleCourses active={activeComponent}>
-                                <Courses name="courses" sort={sortOption}/>
+                                <Courses name="courses" sort={sortOption} posts={currentPosts} loading={loading}/>
                                 <SavedCourses name="savedCourses" sort={sortOption}/>
                             </ToggleCourses>
-                            <div className="show-result">
-                                <p>Showing 20 of 248 results</p>
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <LeftArrow />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <RightArrow2 />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            
+                            <Pagination postsPerPage={postsPerPage} totalPosts={posts}/>
+                               
+                              
                         </div>
                     </div>
                 </div>

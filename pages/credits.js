@@ -8,6 +8,8 @@ export default function Credits1() {
     const [sortOption, setSortOption] = useState("DateDesc");
     const [selectedLicensurePeriod, setLicensurePeriod] = useState();
     const [selectedLicensurePeriodDropdown, setLicensurePeriodDropdown] = useState();
+    const [activePage, setActivePage] = useState();
+
     const licensurePeriods = [
       {
         startDate: "12/01/2020",
@@ -90,7 +92,10 @@ export default function Credits1() {
 
       }
   }, []);
-      
+  function handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    setActivePage(pageNumber);
+  }
   function setActiveCredits(licensurePeriod) {
     var startLicensureDate = "";
     var endLicensureDate = "";
@@ -167,7 +172,10 @@ export default function Credits1() {
                                 <Credits sort={sortOption} licensurePeriod={selectedLicensurePeriod}/>
 
                                 <div className="show-result">
-                                <p>Showing 20 of 248 results</p>
+
+                              
+
+                                {/* <p>Showing 20 of 248 results</p>
                                 <ul>
                                     <li>
                                         <a href="#">
@@ -179,7 +187,7 @@ export default function Credits1() {
                                             <RightArrow2 />
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </div>
                             </div>
                         </div>

@@ -9,105 +9,8 @@ import FilledStar from "../svgs/filledStar";
 import FileIcon from "../svgs/fileIcon";
 import CalendarIcon from "../svgs/calendarIcon";
 import RightArrow from "../svgs/rightArrow";
-export default function Courses({ sort }) {
-  const coursesData = [
-    {
-      name: "Test course 1",
-      provider: {
-        name: "Provider 1 Testing",
-        url: "http://www.google.com",
-      },
-      date: "12/30/2020",
-      hours: 4,
-      governingAgency: "Test Governing Agency",
-      saved: false,
-      description: "Test description 1",
-    },
-    {
-      name: "Test course 2",
-      provider: {
-        name: "Provider 2 Testing",
-        url: "http://www.google.com",
-      },
-      date: "2/31/2021",
-      hours: 5,
-      governingAgency: "Test Governing Agency 2",
-      saved: false,
-      description: "Test description 2",
-    },
-    {
-      name: "Test course 3",
-      provider: {
-        name: "Provider 3 Testing",
-        url: "http://www.google.com",
-      },
-      date: "1/29/2022",
-      hours: 6,
-      governingAgency: "Test Governing Agency 3",
-      saved: true,
-      description: "Test description 3",
-    },
-    {
-      name: "Test course 4",
-      provider: {
-        name: "Provider 4 Testing",
-        url: "http://www.google.com",
-      },
-      date: "1/30/2021",
-      hours: 4,
-      governingAgency: "Test Governing Agency 4",
-      saved: false,
-      description: "Test description 4",
-    },
-    {
-      name: "Test course 5",
-      provider: {
-        name: "Provider 4 Testing",
-        url: "http://www.google.com",
-      },
-      date: "1/12/2021",
-      hours: 4,
-      governingAgency: "Test Governing Agency 4",
-      saved: false,
-      description: "Test description 4",
-    },
-    {
-      name: "Test course 6",
-      provider: {
-        name: "Provider 4 Testing",
-        url: "http://www.google.com",
-      },
-      date: "3/12/2021",
-      hours: 4,
-      governingAgency: "Test Governing Agency 4",
-      saved: false,
-      description: "Test description 4",
-    },
-    {
-      name: "Test course 8",
-      provider: {
-        name: "Provider 4 Testing",
-        url: "http://www.google.com",
-      },
-      date: "6/30/2021",
-      hours: 4,
-      governingAgency: "Test Governing Agency 4",
-      saved: false,
-      description: "Test description 4",
-    },
-    {
-      name: "Test course 7",
-      provider: {
-        name: "Provider 4 Testing",
-        url: "http://www.google.com",
-      },
-      date: "1/15/2021",
-      hours: 4,
-      governingAgency: "Test Governing Agency 4",
-      saved: false,
-      description: "Test description 4",
-    },
-  ];
+export default function Courses({ sort, posts, loading }) {
+  
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [courseToView, setCourseToView] = useState(null);
@@ -117,9 +20,16 @@ export default function Courses({ sort }) {
 var isShowingUpcomingCourses = false;
   var sortedCourses = [];
   useEffect(() => {
-
+    
 //component updates if sort is updated
-}, [sort]);
+}, [sort, loading, posts]);
+
+
+if(loading){
+  return <h4>Loading...</h4>
+}
+
+
 
 const onSubmit = handleSubmit(async (formData) => {
 
@@ -144,7 +54,7 @@ if (sort !== null && sort !== "" && sort !== undefined) {
       case "DateDesc":
 
       sortedCourses = 
-          coursesData.sort(function (a, b) {
+      posts.sort(function (a, b) {
             return new Date(a.date) - new Date(b.date);
           }).reverse();
 
@@ -152,7 +62,7 @@ if (sort !== null && sort !== "" && sort !== undefined) {
       case "DateAsc":
 
       sortedCourses = 
-          coursesData
+      posts
             .sort(function (a, b) {
               return new Date(a.date) - new Date(b.date);
             });
@@ -160,7 +70,7 @@ if (sort !== null && sort !== "" && sort !== undefined) {
       case "AZ":
 
       sortedCourses = 
-          coursesData.sort(function (a, b) {
+      posts.sort(function (a, b) {
             return a.name - b.name;
           });
 
@@ -168,7 +78,7 @@ if (sort !== null && sort !== "" && sort !== undefined) {
       case "ZA":
 
       sortedCourses =
-          coursesData
+      posts
             .sort(function (a, b) {
               return a.name - b.name;
             })
@@ -176,7 +86,7 @@ if (sort !== null && sort !== "" && sort !== undefined) {
         break;
       case "CreditHours":
         sortedCourses =
-          coursesData
+        posts
             .sort(function (a, b) {
               return a.hours - b.hours;
             })
@@ -194,12 +104,12 @@ else{
 
     var diffdate = new Date();
 
-    sortedCourses = coursesData.sort(function(a, b) {
+    sortedCourses = posts.sort(function(a, b) {
         var distancea = Math.abs(diffdate - new Date(a.date));
         var distanceb = Math.abs(diffdate - new Date(b.date));
         return distancea - distanceb; // sort a before b when the distance is smaller
     });
-    sortedCourses = sortedCourses.slice(0, 6);
+    sortedCourses = posts.slice(0, 6);
     for (let index = 0; index < sortedCourses.length; index++) {
         const course = sortedCourses[index];
 
@@ -270,7 +180,7 @@ else{
                   </td>
                 </tr>
               ))}
-{isShowingUpcomingCourses ? <tr><td colSpan="5"><a className="view-btn" href="/courses">View all courses&nbsp;<RightArrow /></a></td></tr> : ""}
+{isShowingUpcomingCourses ? <tr><td colSpan="5"><a className="view-btn" href="/courses">View all courses&nbsp;<RightArrow /></a></td></tr> : null}
           </tbody>
         </table>
       </div>
