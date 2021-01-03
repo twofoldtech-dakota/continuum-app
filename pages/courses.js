@@ -248,9 +248,13 @@ export default function Courses1() {
     // Get current posts
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
 
-    console.log(posts);
+    console.log(currentPosts);
+
+    //Change Page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
       function toggleList(name) {
         if (name === "courses") {
             setActiveComponent("courses");
@@ -346,11 +350,11 @@ export default function Courses1() {
                             </div>
                             {/* <Courses name="courses" /> */}
                             <ToggleCourses active={activeComponent}>
-                                <Courses name="courses" sort={sortOption} posts={currentPosts} loading={loading}/>
+                                <Courses name="courses" sort={sortOption} posts={currentPosts ? currentPosts : posts} loading={loading}/>
                                 <SavedCourses name="savedCourses" sort={sortOption}/>
                             </ToggleCourses>
                             
-                            <Pagination postsPerPage={postsPerPage} totalPosts={posts}/>
+                            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
                                
                               
                         </div>
