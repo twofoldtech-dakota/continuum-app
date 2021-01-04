@@ -4,11 +4,18 @@ import Credits from "../components/credits/Credits";
 import LeftArrow from "../components/svgs/leftArrow";
 import RightArrow2 from "../components/svgs/rightArrow2";
 import SearchIcon from "../components/svgs/searchIcon";
+import Pagination from "../components/shared/pagination";
+
 export default function Credits1() {
     const [sortOption, setSortOption] = useState("DateDesc");
     const [selectedLicensurePeriod, setLicensurePeriod] = useState();
     const [selectedLicensurePeriodDropdown, setLicensurePeriodDropdown] = useState();
     const [activePage, setActivePage] = useState();
+
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(2);
 
     const licensurePeriods = [
       {
@@ -91,11 +98,72 @@ export default function Credits1() {
         setLicensurePeriodDropdown(licensurePeriods[0].startDate + "-" + licensurePeriods[0].endDate)
 
       }
+
+      const fetchPosts = async () => {
+        setLoading(true);
+        setPosts(sortCourses(licensurePeriods[0]?.credits));
+        setLoading(false);
+      }
+      fetchPosts();
+      
+      console.log(posts);
+
   }, []);
-  function handlePageChange(pageNumber) {
-    console.log(`active page is ${pageNumber}`);
-    setActivePage(pageNumber);
+  
+  function sortCourses(credits){
+    if (sortOption !== null && sortOption !== "" && sortOption !== undefined) {
+      switch (sortOption) {
+        case "DateDesc":
+    
+          return credits.sort(function (a, b) {
+              return new Date(a.date) - new Date(b.date);
+            }).reverse();
+    
+          break;
+        case "DateAsc":
+    
+          return credits.sort(function (a, b) {
+                return new Date(a.date) - new Date(b.date);
+              });
+          break;
+        case "AZ":
+    
+          return credits.sort(function (a, b) {
+              return a.name - b.name;
+            });
+    
+          break;
+        case "ZA":
+    
+          return credits.sort(function (a, b) {
+                return a.name - b.name;
+              })
+              .reverse();
+          break;
+        case "CreditHours":
+          return credits.sort(function (a, b) {
+                return a.hours - b.hours;
+              })
+              .reverse();
+    
+          break;
+        default:
+          console.log("default");
+      }
+    
+    }
   }
+
+// Get current posts
+const indexOfLastPost = currentPage * postsPerPage;
+const indexOfFirstPost = indexOfLastPost - postsPerPage;
+const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+//Change Page
+const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  
+
   function setActiveCredits(licensurePeriod) {
     var startLicensureDate = "";
     var endLicensureDate = "";
@@ -169,11 +237,12 @@ export default function Credits1() {
                                     </div>
                                 </div>
                                 
-                                <Credits sort={sortOption} licensurePeriod={selectedLicensurePeriod}/>
+                                <Credits loading={loading} posts={currentPosts}/>
 
                                 <div className="show-result">
 
-                              
+                                <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} currentPage={currentPage}/>
+
 
                                 {/* <p>Showing 20 of 248 results</p>
                                 <ul>

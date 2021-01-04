@@ -8,7 +8,7 @@ import FileIcon from "../svgs/fileIcon";
 import CalendarIcon from "../svgs/calendarIcon";
 import { useState, useEffect } from "react";
 
-export default function SavedCourses({ sort }) {
+export default function SavedCourses() {
     const { data: courses, mutate } = useSWR("/api/userCourses");
     const coursesData = [
         {
@@ -67,7 +67,7 @@ export default function SavedCourses({ sort }) {
       useEffect(() => {
 
         //component updates if sort is updated
-        }, [sort]);
+        }, []);
 
 
        
@@ -105,52 +105,6 @@ export default function SavedCourses({ sort }) {
         
     }
 
-    if (sort !== null && sort !== "") {
-        switch (sort) {
-          case "DateDesc":
-            console.log("date desc");
-            savedCourses.sort(function (a, b) {
-                return new Date(a.date) - new Date(b.date);
-              }).reverse();
-    
-            break;
-          case "DateAsc":
-            console.log("date asc");
-            savedCourses
-                .sort(function (a, b) {
-                  return new Date(a.date) - new Date(b.date);
-                });
-            break;
-          case "AZ":
-            console.log("az");
-            savedCourses.sort(function (a, b) {
-                return a.name - b.name;
-              });
-    
-            break;
-          case "ZA":
-            console.log("za");
-            savedCourses
-                .sort(function (a, b) {
-                  return a.name - b.name;
-                })
-                .reverse();
-            break;
-          case "CreditHours":
-            console.log("credit hours");
-    
-            savedCourses
-                .sort(function (a, b) {
-                  return a.hours - b.hours;
-                })
-                .reverse();
-    
-            break;
-          default:
-            console.log("default");
-        }
-      
-    }
 
     return (
         <div>

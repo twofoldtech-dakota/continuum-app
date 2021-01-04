@@ -9,7 +9,8 @@ import ImageIcon from "../svgs/ImageIcon";
 import TrashIcon from "../svgs/TrashIcon";
 import TickIcon from "../svgs/TickIcon";
 import FileIcon from "../svgs/fileIcon";
-export default function Courses({ sort, licensurePeriod }) {
+
+export default function Credits({ posts, loading}) {
   
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -18,7 +19,7 @@ export default function Courses({ sort, licensurePeriod }) {
   const [errorMessage, setErrorMessage] = useState("");
   useEffect(() => {
     
-}, [sort]);
+}, []);
     //keep this to send to the update method. This object is being updated. DO NOT ERASE!
   var creditToSave = {
     name: "",
@@ -33,57 +34,6 @@ export default function Courses({ sort, licensurePeriod }) {
     credits: 0,
     certificateImage: "",
   };
-  var sortedCredits = [];
-  
-  
-    if (sort !== null && sort !== "" && sort !== undefined) {
-      switch (sort) {
-        case "DateDesc":
-    
-          sortedCredits = 
-          licensurePeriod?.credits?.sort(function (a, b) {
-              return new Date(a.date) - new Date(b.date);
-            }).reverse();
-    
-          break;
-        case "DateAsc":
-    
-          sortedCredits = 
-          licensurePeriod?.credits?.sort(function (a, b) {
-                return new Date(a.date) - new Date(b.date);
-              });
-          break;
-        case "AZ":
-    
-          sortedCredits = 
-          licensurePeriod?.credits?.sort(function (a, b) {
-              return a.name - b.name;
-            });
-    
-          break;
-        case "ZA":
-    
-          sortedCredits =
-          licensurePeriod?.credits?.sort(function (a, b) {
-                return a.name - b.name;
-              })
-              .reverse();
-          break;
-        case "CreditHours":
-          sortedCredits =
-          licensurePeriod?.credits?.sort(function (a, b) {
-                return a.hours - b.hours;
-              })
-              .reverse();
-    
-          break;
-        default:
-          console.log("default");
-      }
-    
-    }
-  
-
 
 function removeImage(credit){
     creditToSave = {
@@ -138,8 +88,8 @@ const onSubmit = handleSubmit(async (formData) => {
       <div className="table-responsive">
         <table>
           <tbody>
-            {sortedCredits &&
-              sortedCredits.map((credit) => (
+            {posts &&
+              posts.map((credit) => (
                 <tr key={credit.name}>
                     <td width="60%">
                         <div className="upcomingp-courses-select">

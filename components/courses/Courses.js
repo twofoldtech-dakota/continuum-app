@@ -9,7 +9,7 @@ import FilledStar from "../svgs/filledStar";
 import FileIcon from "../svgs/fileIcon";
 import CalendarIcon from "../svgs/calendarIcon";
 import RightArrow from "../svgs/rightArrow";
-export default function Courses({ sort, posts, loading }) {
+export default function Courses({ posts, loading }) {
   
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -18,17 +18,15 @@ export default function Courses({ sort, posts, loading }) {
   const [errorMessage, setErrorMessage] = useState("");
 
 var isShowingUpcomingCourses = false;
-  var sortedCourses = [];
   useEffect(() => {
     
 //component updates if sort is updated
-}, [sort, loading, posts]);
+}, [loading, posts]);
 
 
 if(loading){
   return <h4>Loading...</h4>
 }
-
 
 
 const onSubmit = handleSubmit(async (formData) => {
@@ -49,77 +47,6 @@ const onSubmit = handleSubmit(async (formData) => {
   }
 });
 
-if (sort !== null && sort !== "" && sort !== undefined) {
-    switch (sort) {
-      case "DateDesc":
-
-      sortedCourses = 
-      posts.sort(function (a, b) {
-            return new Date(a.date) - new Date(b.date);
-          }).reverse();
-
-        break;
-      case "DateAsc":
-
-      sortedCourses = 
-      posts
-            .sort(function (a, b) {
-              return new Date(a.date) - new Date(b.date);
-            });
-        break;
-      case "AZ":
-
-      sortedCourses = 
-      posts.sort(function (a, b) {
-            return a.name - b.name;
-          });
-
-        break;
-      case "ZA":
-
-      sortedCourses =
-      posts
-            .sort(function (a, b) {
-              return a.name - b.name;
-            })
-            .reverse();
-        break;
-      case "CreditHours":
-        sortedCourses =
-        posts
-            .sort(function (a, b) {
-              return a.hours - b.hours;
-            })
-            .reverse();
-
-        break;
-      default:
-        console.log("default");
-    }
-  
-}
-else{
-    // This is for the upcoming courses on the homepage. This shows the 5 latest courses
-    isShowingUpcomingCourses = true;
-
-    var diffdate = new Date();
-
-    sortedCourses = posts.sort(function(a, b) {
-        var distancea = Math.abs(diffdate - new Date(a.date));
-        var distanceb = Math.abs(diffdate - new Date(b.date));
-        return distancea - distanceb; // sort a before b when the distance is smaller
-    });
-    sortedCourses = posts.slice(0, 6);
-    for (let index = 0; index < sortedCourses.length; index++) {
-        const course = sortedCourses[index];
-
-        if(Date.parse(course.date) < Date.now()){
-            delete sortedCourses[index];
-        }
-        
-    }
-
-}
 
   function showSlideOut(course) {
     setShowModal(true);
@@ -143,8 +70,8 @@ else{
       <div className="table-responsive">
         <table>
           <tbody>
-            {sortedCourses &&
-              sortedCourses.map((course) => (
+            {posts &&
+              posts.map((course) => (
                 <tr key={course.name}>
                   <td width="60%">
                     <div className="upcomingp-courses-select">

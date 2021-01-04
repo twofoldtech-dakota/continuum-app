@@ -3,10 +3,8 @@ import Layout from "../components/shared/layout";
 import Courses from "../components/courses/Courses";
 import SavedCourses from "../components/courses/SavedCourses";
 import ToggleCourses from "../components/courses/ToggleCourses";
-import LeftArrow from "../components/svgs/leftArrow";
-import RightArrow2 from "../components/svgs/rightArrow2";
 import SearchIcon from "../components/svgs/searchIcon";
-import Pagination from "../components/shared/pagination";''
+import Pagination from "../components/shared/pagination";
 export default function Courses1() {
     const [activeComponent, setActiveComponent] = useState("courses");
     const [sortOption, setSortOption] = useState("DateDesc");
@@ -14,8 +12,7 @@ export default function Courses1() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(3);
-
+    const [postsPerPage] = useState(10);
     const userData = {
         username: "dillonosmith",
         email: "dillon@twofold.tech",
@@ -234,38 +231,105 @@ export default function Courses1() {
         },
       ];
 
-     useEffect(() => {
+      useEffect(() => {
         const fetchPosts = async () => {
           setLoading(true);
-          setPosts(coursesData);
+          setPosts(sortCourses(coursesData));
           setLoading(false);
         }
-
         fetchPosts();
+        
     //component updates if sort is updated
-    }, []);
+    }, [sortOption]);
 
-    // Get current posts
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
 
-    console.log(currentPosts);
+    function sortCourses(courses){
+      
+    //sort results
+    if (sortOption !== null && sortOption !== "" && sortOption !== undefined) {
+      switch (sortOption) {
+        case "DateDesc":
+  
+          return courses.sort(function (a, b) {
+              return new Date(a.date) - new Date(b.date);
+            }).reverse();
+  
+          break;
+        case "DateAsc":
+  
+          return courses
+              .sort(function (a, b) {
+                return new Date(a.date) - new Date(b.date);
+              });
+          break;
+        case "AZ":
+  
+          return courses.sort(function (a, b) {
+              return a.name - b.name;
+            });
+  
+          break;
+        case "ZA":
+  
+          return courses
+              .sort(function (a, b) {
+                return a.name - b.name;
+              })
+              .reverse();
+          break;
+        case "CreditHours":
+          return courses
+              .sort(function (a, b) {
+                return a.hours - b.hours;
+              })
+              .reverse();
+  
+          break;
+        default:
+          console.log("default");
+      }
+    
+  }
+  else{
+      // This is for the upcoming courses on the homepage. This shows the 5 latest courses
+      isShowingUpcomingCourses = true;
+  
+      var diffdate = new Date();
+  
+      var upcomingCourses =  courses.sort(function(a, b) {
+          var distancea = Math.abs(diffdate - new Date(a.date));
+          var distanceb = Math.abs(diffdate - new Date(b.date));
+          return distancea - distanceb; // sort a before b when the distance is smaller
+      });
+      upcomingCourses = upcomingCourses.slice(0, 6);
+      for (let index = 0; index < upcomingCourses.length; index++) {
+          const course = posts[index];
+  
+          if(Date.parse(course.date) < Date.now()){
+              delete posts[index];
+          }
+          
+      }
+  
+  }
+    }
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-    //Change Page
-    const paginate = pageNumber => setCurrentPage(pageNumber);
+  //Change Page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
-      function toggleList(name) {
+    
+    function toggleList(name) {
         if (name === "courses") {
             setActiveComponent("courses");
         } else {
             setActiveComponent("savedCourses");
         }
     }
-    function handlePageChange(pageNumber) {
-      console.log(`active page is ${pageNumber}`);
-      setActivePage(pageNumber);
-    }
+    
     function handleChange(sortOption) {
       
       setSortOption(sortOption);
@@ -350,11 +414,11 @@ export default function Courses1() {
                             </div>
                             {/* <Courses name="courses" /> */}
                             <ToggleCourses active={activeComponent}>
-                                <Courses name="courses" sort={sortOption} posts={currentPosts ? currentPosts : posts} loading={loading}/>
+                                <Courses name="courses" posts={currentPosts} loading={loading}/>
                                 <SavedCourses name="savedCourses" sort={sortOption}/>
                             </ToggleCourses>
                             
-                            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+                            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} currentPage={currentPage}/>
                                
                               
                         </div>

@@ -5,10 +5,6 @@ export const Pagination = ({ postsPerPage, totalPosts, paginate}) => {
     for (let index = 1; index <= Math.ceil(totalPosts / postsPerPage); index++) {
         pageNumbers.push(index);
     }
-    console.log(Math.ceil(totalPosts / postsPerPage));
-    console.log(pageNumbers);
-    console.log(postsPerPage);
-    console.log(totalPosts);
     return (
         <div className="show-result">
             {/* <p>Showing {postsPerPage ? postsPerPage : 0} of {totalPosts ? totalPosts : 0} results</p> */}
