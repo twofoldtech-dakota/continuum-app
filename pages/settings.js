@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Layout from "../components/shared/layout";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import LicensurePeriods from "../components/settings/licensurePeriods";
+import LicensurePeriod from "../components/settings/licensurePeriods";
 const Settings = () => {
   const router = useRouter();
 
@@ -129,7 +129,18 @@ const Settings = () => {
       );
     };
   }
-
+  function comparer2(otherArray) {
+    return function (current) {
+      return (
+        otherArray.filter(function (other) {
+          return (
+            other.startDate == current.startDate &&
+            other.endDate == current.endDate
+          );
+        }).length == 1
+      );
+    };
+  }
   const onSubmit = handleSubmit(async (formData) => {
     // check and loop through all licensure periods and make sure there are no blank fields and make sure the start date is less than the end date.
     // if we find a blank field or an end date that is before the start date then show general error message at top of box
@@ -179,18 +190,22 @@ const Settings = () => {
         }
       }
       var onlyInLicensurePeriods = licensurePeriods.filter(
-        comparer(finalPeriods)
+        comparer2(finalPeriods)
       );
       var onlyInNewPeriods = finalPeriods.filter(
         comparer(licensurePeriods)
       );
+      console.log(finalPeriods);
+console.log(onlyInLicensurePeriods);
+console.log(onlyInNewPeriods);
 
       var results = onlyInLicensurePeriods.concat(onlyInNewPeriods);
 
       if (results.length) {
-        setLicensurePeriods(licensurePeriods.concat(results));
-        //We will save licensurePeriods to the db
-        console.log(licensurePeriods);
+        //setLicensurePeriods(results);
+        //We will save results to the db for the user.licensurePeriods
+        console.log("final");
+        console.log(results);
       }
       if (errorMessage) setErrorMessage("");
 
@@ -204,27 +219,27 @@ const Settings = () => {
 
   function addPeriod() {
     //var test = <LicensurePeriod/>;
-    // let newPeriod =
-    //   //'<div class="calendar licensure-row"> <input type="text" placeholder="mm/dd/yyyy" name="licensureStartDate" class="form-control start" ><span><img src="images/calendar-icon.svg" alt=""></span><input type="text" placeholder="mm/dd/yyyy" name="licensureEndDate" class="form-control end" ><span class="delete"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="delete" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"></path></g></svg></span><span class="save"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="save" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM272 80v80H144V80h128zm122 352H54a6 6 0 0 1-6-6V86a6 6 0 0 1 6-6h42v104c0 13.255 10.745 24 24 24h176c13.255 0 24-10.745 24-24V83.882l78.243 78.243a6 6 0 0 1 1.757 4.243V426a6 6 0 0 1-6 6zM224 232c-48.523 0-88 39.477-88 88s39.477 88 88 88 88-39.477 88-88-39.477-88-88-88zm0 128c-22.056 0-40-17.944-40-40s17.944-40 40-40 40 17.944 40 40-17.944 40-40 40z"></path></svg></span><hr class="divider"></div>';
-    //   '<div class="calendar licensure-row"> <input type="text" placeholder="mm/dd/yyyy" name="licensureStartDate" class="form-control start" ><span><img src="images/calendar-icon.svg" alt=""></span><input type="text" placeholder="mm/dd/yyyy" name="licensureEndDate" class="form-control end" ><span class="delete" onclick="removePeriod"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="delete" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"></path></g></svg></span><hr class="divider"></div>';
+    let newPeriod =
+      // '<div class="calendar licensure-row"> <input type="text" placeholder="mm/dd/yyyy" name="licensureStartDate" class="form-control start" ><span><img src="images/calendar-icon.svg" alt=""></span><input type="text" placeholder="mm/dd/yyyy" name="licensureEndDate" class="form-control end" ><span class="delete"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="delete" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"></path></g></svg></span><span class="save"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="save" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM272 80v80H144V80h128zm122 352H54a6 6 0 0 1-6-6V86a6 6 0 0 1 6-6h42v104c0 13.255 10.745 24 24 24h176c13.255 0 24-10.745 24-24V83.882l78.243 78.243a6 6 0 0 1 1.757 4.243V426a6 6 0 0 1-6 6zM224 232c-48.523 0-88 39.477-88 88s39.477 88 88 88 88-39.477 88-88-39.477-88-88-88zm0 128c-22.056 0-40-17.944-40-40s17.944-40 40-40 40 17.944 40 40-17.944 40-40 40z"></path></svg></span><hr class="divider"></div>';
+      '<div class="calendar licensure-row"> <input type="text" placeholder="mm/dd/yyyy" name="licensureStartDate" class="form-control start" ><span><img src="images/calendar-icon.svg" alt=""></span><input type="text" placeholder="mm/dd/yyyy" name="licensureEndDate" class="form-control end" ><span class="delete" onclick="removePeriod"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="delete" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z"></path></g></svg></span><hr class="divider"></div>';
 
     
     // Test to see if the browser supports the HTML template element by checking
 // for the presence of the template element's content attribute.
-// if ('content' in document.createElement('template')) {
+//if ('content' in document.createElement('template')) {
 
 //   // Instantiate the table with the existing HTML tbody
 //   // and the row with the template
-//   var periodsContianer = document.querySelector("#periods");
+var periodsContianer = document.querySelector("#periods");
 //   var template = document.querySelector('#periodTemplate');
 
 //   // Clone the new row and insert it into the table
 //   var clone = template.content.cloneNode(true);
 //   console.log(template);
+console.log(<LicensurePeriod />);
+periodsContianer.insertAdjacentHTML('beforeend', newPeriod);
 
-//   periodsContianer.appendChild(<LicensurePeriod/>);
-
-//   }
+   //}
 }
 
   function removePeriod(startDate, endDate) {

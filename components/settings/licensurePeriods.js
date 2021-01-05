@@ -1,6 +1,6 @@
 import React from "react";
 
-const LicensurePeriods = ({licensurePeriods}) => (
+export default function LicensurePeriod ({licensurePeriods}) {
 
     <div className="calendar licensure-row"> 
         <input type="text" placeholder="mm/dd/yyyy" name="licensureStartDate" className="form-control start"></input>
@@ -12,6 +12,4 @@ const LicensurePeriods = ({licensurePeriods}) => (
         <hr className="divider"></hr>
 
     </div>
-    )
-
-export default LicensurePeriods;
+}
