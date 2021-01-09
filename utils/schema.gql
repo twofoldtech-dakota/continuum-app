@@ -2,7 +2,7 @@ type User {
     username: String @unique
     email: String! @unique
     governingAgency: String
-    savedCourses: [SavedCourses!] @relation
+    savedCourses: [SavedCourses] @relation
     name: String
     title: String
     company: String
@@ -34,42 +34,43 @@ type User {
 
 type Course {
     name: String!
-    provider: Provider! @relation
+    provider: String!
     date: String!
-    hours: Int
+    hours: Int!
     governingAgency: String!
-    saved: String!
+    saved: Boolean
     description: String
+    required: Boolean
+    contactName: String
+    contactPhone: String
 }
+# Annual Commission Update Course
 
 type SavedCourses {
     name: String!
-    provider: Provider! @relation
+    provider: String!
     date: String!
     hours: Int
     governingAgency: String!
-    saved: String!
+    saved: Boolean
     owner: String!
     username: String!
     description: String
     user: User! @relation
+    contactName: String
+    contactPhone: String
 }
 
 type Credit {
     name: String!
     user: User! @relation
-    provider: Provider! @relation
+    provider: String!
     date: String!
     hours: Int!
     governingAgency: String
     description: String
     certificateImage: String!
     licensurePeriod: LicensurePeriod! @relation
-}
-
-type Provider {
-    name: String!
-    url: String!
 }
 
 type Query {
@@ -85,3 +86,30 @@ type LicensurePeriod {
     credits: [Credit!] @relation
     user: User! @relation
 }
+
+
+#---- GET_COURSES,
+# GET_COURSES_BY_PROVIDER,
+#---- CREATE_COURSE
+
+# GET_SAVEDCOURSES_BY_USER,
+# CREATE_SAVEDCOURSE,
+# DELETE_SAVEDCOURSE,
+
+# CREATE_PROVIDER,
+# GET_PROVIDERS,
+
+# GET_USER,
+# UPDATE_USER,
+# CREATE_USER,
+
+# GET_LICENSUREPERIODS_BY_USER,
+# CREATE_LICENSUREPERIORD_FOR_USER,
+# UPDATE_LICENSUREPERIORD_FOR_USER,
+# DELETE_LICENSUREPERIORD_FOR_USER,
+
+# GET_CREDIT_BY_ID,
+# CREATE_CREDIT,
+# UPDATE_CREDIT,
+# DELETE_CREDIT,
+# GET_USER_CREDITS,
