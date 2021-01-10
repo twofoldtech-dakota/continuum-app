@@ -1,24 +1,44 @@
-const faunadb = require("faunadb");
-const faunaClient = new faunadb.Client({ secret: process.env.FAUNA_SECRET });
+const faunadb = require('faunadb'),
+  q = faunadb.query;
+const faunaClient = new faunadb.Client({ secret: process.env.NEXT_PUBLIC_FAUNADB_SECRET });
 const authClient = (secret) => new faunadb.Client({ secret });
-const q = faunadb.query;
 
 //#region Courses
 const getCourses = async () => {
-    const { data } = await faunaClient.query(
-        q.Map(
-            q.Paginate(q.Documents(q.Collection("Course"))),
-            q.Lambda("ref", q.Get(q.Var("ref")))
-        )
-    );
-    const courses = data.map((course) => {
-        course.id = course.ref.id;
-        delete course.ref;
+    // const { data } = await faunaClient.query(
+    //     q.Map(
+    //         q.Paginate(q.Documents(q.Collection("Course"))),
+    //         q.Lambda("ref", q.Get(q.Var("ref")))
+    //     )
+    // );only returns 64 so I belive we need to return an index
+    // const data = faunaClient.query(
+    //     q.Match(q.Index('allCourses'))
+    //   ).then(function(response) {
+    //       console.log("response below");
+    //     console.log(response) // Would log the ref to console.
+    //   });
 
-        return course;
-    });
+      var data = await faunaClient.paginate(q.Match(q.Index('allCourses'))).map(function(ref) {
+        return q.Get(ref)
+      });
+      //console.log(data.each(function(course){console.log(course);}));
+    //   data
+    //        .map(function(ref) {
+    //          return q.Get(ref)
+    //        })
+    //        .each(function(course) {
+    //          console.log(course) // Will now log the retrieved documents.
+    //        })
+    
+    // const courses = await data.map((course) => {
+    //     course.id = course.ref.id;
+    //     delete course.ref;
+    //     return course;
+    // });
+    //console.log("awaiting data");
+//console.log(data ? data : "data is null or slow ");
 
-    return courses;
+    return data;
 };
 
 const getUserCourses = async () => {
