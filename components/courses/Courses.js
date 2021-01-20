@@ -72,26 +72,26 @@ const onSubmit = handleSubmit(async (formData) => {
           <tbody>
             {posts &&
               posts.map((course) => (
-                <tr key={course.name}>
+                <tr key={course.data.name}>
                   <td width="60%">
                     <div className="upcomingp-courses-select">
                       <div className="text-box">
-                        <h4>{course.name}</h4>
-                        <p>{course.provider.name}</p>
+                        <h4>{course.data.name}</h4>
+                        <p>{course.data.provider}</p>
                       </div>
                     </div>
                   </td>
-                  <td>{course.date}</td>
+                  <td>{course.data.date}</td>
                   <td>
-                    <span>{course.hours}</span>
+                    <span>{course.data.hours}</span>
                   </td>
                   <td>
                     {course.saved ? (
-                      <a href="#" onClick={() => unsaveCourse(course)}>
+                      <a href="#" onClick={() => unsaveCourse(course.data)}>
                         <FilledStar></FilledStar>
                       </a>
                     ) : (
-                      <a href="#" onClick={() => addToSavedCourses(course)}>
+                      <a href="#" onClick={() => addToSavedCourses(course.data)}>
                         <BlankStar></BlankStar>
                       </a>
                     )}
@@ -100,7 +100,7 @@ const onSubmit = handleSubmit(async (formData) => {
                     <a
                       className="claim-btn"
                       href="#"
-                      onClick={() => showSlideOut(course)}
+                      onClick={() => showSlideOut(course.data)}
                     >
                       Claim
                     </a>
@@ -132,8 +132,8 @@ const onSubmit = handleSubmit(async (formData) => {
           <div className="text-box">
             <h3>Claim Credit Hours</h3>
             <p>{courseToView !== null ? courseToView.name : ""}</p>
-            <a href={courseToView !== null ? courseToView.provider.url : ""}>
-              {courseToView !== null ? courseToView.provider.name : ""}&nbsp;
+            <a href="#">
+              {courseToView !== null ? courseToView.provider : ""}&nbsp;
               <ExpendIcon />
             </a>
           </div>

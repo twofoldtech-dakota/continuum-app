@@ -14,7 +14,7 @@ export default async function handler(req, res) {
             q.Match(
               // query index
               q.Index('api-getCoursesByGoverningAgency'),
-              q.ToString("Colorado Association of Realtors")//eventually change this to the user.governingAgency
+              q.ToString(req.query?.governingagency)
                // specify source
             ),{size: 10000}
           ),
@@ -22,6 +22,8 @@ export default async function handler(req, res) {
         )
       );
       // ok
+      // console.log("root data");
+      // console.log(courses.data);
       res.status(200).json(courses.data);
     } catch (e) {
       // something went wrong

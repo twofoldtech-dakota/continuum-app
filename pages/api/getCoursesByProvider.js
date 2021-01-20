@@ -5,7 +5,6 @@ var authClient = (secret) => new faunadb.Client({ secret });
 
 export default async function handler(req, res) {
     try {
-        
       const courses = await faunaClient.query(
         q.Map(
           // iterate each item in result
@@ -14,14 +13,14 @@ export default async function handler(req, res) {
             q.Match(
               // query index
               q.Index('api-getCoursesByProvider'), 
-              q.ToString("360training.com Inc")//eventually change this to the user.governingAgency
+              q.ToString(req.query?.providername)
                // specify source
             ),{size: 10000}
           ),
           (ref) => q.Get(ref) // lookup each result by its reference
         )
       );
-      console.log(courses.data);
+      //console.log(courses.data);
       // ok
       res.status(200).json(courses.data);
     } catch (e) {

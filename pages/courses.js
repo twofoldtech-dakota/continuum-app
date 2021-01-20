@@ -5,14 +5,18 @@ import SavedCourses from "../components/courses/SavedCourses";
 import ToggleCourses from "../components/courses/ToggleCourses";
 import SearchIcon from "../components/svgs/searchIcon";
 import Pagination from "../components/shared/pagination";
+import useSWR from "swr";
+
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
 export default function Courses1() {
     const [activeComponent, setActiveComponent] = useState("courses");
     const [sortOption, setSortOption] = useState("DateDesc");
 
-    const [posts, setPosts] = useState([]);
+    const [coursesList, setCourses] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(10);
+    const [coursesPerPage] = useState(10);
     const userData = {
         username: "dillonosmith",
         email: "dillon@twofold.tech",
@@ -132,126 +136,134 @@ export default function Courses1() {
         isRealtor: true,
       };
 
-      const coursesData = [
-        {
-          name: "Test course 1",
-          provider: {
-            name: "Provider 1 Testing",
-            url: "http://www.google.com",
-          },
-          date: "12/30/2020",
-          hours: 4,
-          governingAgency: "Test Governing Agency",
-          saved: false,
-          description: "Test description 1",
-        },
-        {
-          name: "Test course 2",
-          provider: {
-            name: "Provider 2 Testing",
-            url: "http://www.google.com",
-          },
-          date: "2/31/2021",
-          hours: 5,
-          governingAgency: "Test Governing Agency 2",
-          saved: false,
-          description: "Test description 2",
-        },
-        {
-          name: "Test course 3",
-          provider: {
-            name: "Provider 3 Testing",
-            url: "http://www.google.com",
-          },
-          date: "1/29/2022",
-          hours: 6,
-          governingAgency: "Test Governing Agency 3",
-          saved: true,
-          description: "Test description 3",
-        },
-        {
-          name: "Test course 4",
-          provider: {
-            name: "Provider 4 Testing",
-            url: "http://www.google.com",
-          },
-          date: "1/30/2021",
-          hours: 4,
-          governingAgency: "Test Governing Agency 4",
-          saved: false,
-          description: "Test description 4",
-        },
-        {
-          name: "Test course 5",
-          provider: {
-            name: "Provider 4 Testing",
-            url: "http://www.google.com",
-          },
-          date: "1/12/2021",
-          hours: 4,
-          governingAgency: "Test Governing Agency 4",
-          saved: false,
-          description: "Test description 4",
-        },
-        {
-          name: "Test course 6",
-          provider: {
-            name: "Provider 4 Testing",
-            url: "http://www.google.com",
-          },
-          date: "3/12/2021",
-          hours: 4,
-          governingAgency: "Test Governing Agency 4",
-          saved: false,
-          description: "Test description 4",
-        },
-        {
-          name: "Test course 8",
-          provider: {
-            name: "Provider 4 Testing",
-            url: "http://www.google.com",
-          },
-          date: "6/30/2021",
-          hours: 4,
-          governingAgency: "Test Governing Agency 4",
-          saved: false,
-          description: "Test description 4",
-        },
-        {
-          name: "Test course 7",
-          provider: {
-            name: "Provider 4 Testing",
-            url: "http://www.google.com",
-          },
-          date: "1/15/2021",
-          hours: 4,
-          governingAgency: "Test Governing Agency 4",
-          saved: false,
-          description: "Test description 4",
-        },
-      ];
+//       const coursesData = [
+//         {
+//           name: "Test course 1",
+//           provider: {
+//             name: "Provider 1 Testing",
+//             url: "http://www.google.com",
+//           },
+//           date: "12/30/2020",
+//           hours: 4,
+//           governingAgency: "Test Governing Agency",
+//           saved: false,
+//           description: "Test description 1",
+//         },
+//         {
+//           name: "Test course 2",
+//           provider: {
+//             name: "Provider 2 Testing",
+//             url: "http://www.google.com",
+//           },
+//           date: "2/31/2021",
+//           hours: 5,
+//           governingAgency: "Test Governing Agency 2",
+//           saved: false,
+//           description: "Test description 2",
+//         },
+//         {
+//           name: "Test course 3",
+//           provider: {
+//             name: "Provider 3 Testing",
+//             url: "http://www.google.com",
+//           },
+//           date: "1/29/2022",
+//           hours: 6,
+//           governingAgency: "Test Governing Agency 3",
+//           saved: true,
+//           description: "Test description 3",
+//         },
+//         {
+//           name: "Test course 4",
+//           provider: {
+//             name: "Provider 4 Testing",
+//             url: "http://www.google.com",
+//           },
+//           date: "1/30/2021",
+//           hours: 4,
+//           governingAgency: "Test Governing Agency 4",
+//           saved: false,
+//           description: "Test description 4",
+//         },
+//         {
+//           name: "Test course 5",
+//           provider: {
+//             name: "Provider 4 Testing",
+//             url: "http://www.google.com",
+//           },
+//           date: "1/12/2021",
+//           hours: 4,
+//           governingAgency: "Test Governing Agency 4",
+//           saved: false,
+//           description: "Test description 4",
+//         },
+//         {
+//           name: "Test course 6",
+//           provider: {
+//             name: "Provider 4 Testing",
+//             url: "http://www.google.com",
+//           },
+//           date: "3/12/2021",
+//           hours: 4,
+//           governingAgency: "Test Governing Agency 4",
+//           saved: false,
+//           description: "Test description 4",
+//         },
+//         {
+//           name: "Test course 8",
+//           provider: {
+//             name: "Provider 4 Testing",
+//             url: "http://www.google.com",
+//           },
+//           date: "6/30/2021",
+//           hours: 4,
+//           governingAgency: "Test Governing Agency 4",
+//           saved: false,
+//           description: "Test description 4",
+//         },
+//         {
+//           name: "Test course 7",
+//           provider: {
+//             name: "Provider 4 Testing",
+//             url: "http://www.google.com",
+//           },
+//           date: "1/15/2021",
+//           hours: 4,
+//           governingAgency: "Test Governing Agency 4",
+//           saved: false,
+//           description: "Test description 4",
+//         },
+//       ];
+//       console.log("coursesData");
+// console.log(coursesData);
+      const { data: courses, mutate, errors } = useSWR("/api/getCoursesByGoverningAgency?governingagency=Colorado Association of Realtors", fetcher);
 
       useEffect(() => {
-        const fetchPosts = async () => {
-          setLoading(true);
-          setPosts(sortCourses(coursesData));
-          setLoading(false);
-        }
-        fetchPosts();
         
     //component updates if sort is updated
-    }, [sortOption]);
+    }, [sortOption, courses]);
 
+    //paging stuff
+    const indexOfLastCourse = currentPage * coursesPerPage;
+    const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+    var currentCourses = courses;
 
+    if(courses){
+      var sortedCourses = sortCourses(courses);
+
+      currentCourses = sortedCourses.slice(indexOfFirstCourse, indexOfLastCourse);
+      }
+   
     function sortCourses(courses){
-      
     //sort results
-    if (sortOption !== null && sortOption !== "" && sortOption !== undefined) {
+    if (sortOption !== null && sortOption !== "" && sortOption !== undefined && courses) {
+console.log("sort option - " + sortOption);
+
       switch (sortOption) {
         case "DateDesc":
   
           return courses.sort(function (a, b) {
-              return new Date(a.date) - new Date(b.date);
+              return new Date(a.data.date) - new Date(b.data.date);
             }).reverse();
   
           break;
@@ -259,13 +271,13 @@ export default function Courses1() {
   
           return courses
               .sort(function (a, b) {
-                return new Date(a.date) - new Date(b.date);
+                return new Date(a.data.date) - new Date(b.data.date);
               });
           break;
         case "AZ":
   
           return courses.sort(function (a, b) {
-              return a.name - b.name;
+              return a.data.name - b.data.name;
             });
   
           break;
@@ -273,14 +285,14 @@ export default function Courses1() {
   
           return courses
               .sort(function (a, b) {
-                return a.name - b.name;
+                return a.data.name - b.data.name;
               })
               .reverse();
           break;
         case "CreditHours":
           return courses
               .sort(function (a, b) {
-                return a.hours - b.hours;
+                return a.data.hours - b.data.hours;
               })
               .reverse();
   
@@ -292,20 +304,20 @@ export default function Courses1() {
   }
   else{
       // This is for the upcoming courses on the homepage. This shows the 5 latest courses
-      isShowingUpcomingCourses = true;
+      //isShowingUpcomingCourses = true;
   
       var diffdate = new Date();
   
       var upcomingCourses =  courses.sort(function(a, b) {
-          var distancea = Math.abs(diffdate - new Date(a.date));
-          var distanceb = Math.abs(diffdate - new Date(b.date));
+          var distancea = Math.abs(diffdate - new Date(a.data.date));
+          var distanceb = Math.abs(diffdate - new Date(b.data.date));
           return distancea - distanceb; // sort a before b when the distance is smaller
       });
       upcomingCourses = upcomingCourses.slice(0, 6);
       for (let index = 0; index < upcomingCourses.length; index++) {
           const course = posts[index];
   
-          if(Date.parse(course.date) < Date.now()){
+          if(Date.parse(course.data.date) < Date.now()){
               delete posts[index];
           }
           
@@ -314,9 +326,9 @@ export default function Courses1() {
   }
     }
   // Get current posts
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  // const indexOfLastPost = currentPage * postsPerPage;
+  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   //Change Page
   const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -333,6 +345,22 @@ export default function Courses1() {
     function handleChange(sortOption) {
       
       setSortOption(sortOption);
+    }
+
+    if(errors){
+      return (
+        <div>
+        <h3>Your errors are </h3>
+        <ul>
+          {errors?.map((error) =>
+            <li key={error}>{error}</li>
+          )}
+        </ul>
+        </div>
+      )
+    }
+    if(!courses){
+      return <h1>data is loading</h1>
     }
     return (
         <Layout title="Continuum - Courses">
@@ -414,11 +442,11 @@ export default function Courses1() {
                             </div>
                             {/* <Courses name="courses" /> */}
                             <ToggleCourses active={activeComponent}>
-                                <Courses name="courses" posts={currentPosts} loading={loading}/>
+                                <Courses name="courses" posts={currentCourses} loading={loading}/>
                                 <SavedCourses name="savedCourses" sort={sortOption}/>
                             </ToggleCourses>
                             
-                            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} currentPage={currentPage}/>
+                            <Pagination postsPerPage={coursesPerPage} totalPosts={sortedCourses.length} paginate={paginate} currentPage={currentPage}/>
                                
                               
                         </div>
