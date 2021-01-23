@@ -1,13 +1,14 @@
 import React from 'react'
 import LeftArrow from '../../components/svgs/leftArrow'
 import RightArrow2 from '../../components/svgs/rightArrow2'
-export const Pagination = ({ postsPerPage, totalPosts, paginate}) => {
-    const pageNumbers = [];
-    for (let index = 1; index <= Math.ceil(totalPosts / postsPerPage); index++) {
-        pageNumbers.push(index);
-    }
-    var nextPageNumber = paginate + 1;
-    var previousPageNumber = paginate <= 1 ? 0 : 0;
+export const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, previousPageNumber, nextPageNumber}) => {
+    // const pageNumbers = [];
+    // for (let index = 1; index <= Math.ceil(totalPosts / postsPerPage); index++) {
+    //     pageNumbers.push(index);
+    // }
+    console.log(previousPageNumber);
+    console.log(currentPage);
+    console.log(nextPageNumber);
     return (
         <div className="show-result">
             {/* <p>Showing {postsPerPage ? postsPerPage : 0} of {totalPosts ? totalPosts : 0} results</p> */}
@@ -19,13 +20,13 @@ export const Pagination = ({ postsPerPage, totalPosts, paginate}) => {
                                             </a>
                                         </li>
                                     )) : null} */}
-                                    <li className="">
-                                        <a onClick={() => paginate(previousPageNumber)} href="#">
-                                            <LeftArrow />
+                                    <li className={previousPageNumber == 0 ? "hidden" : ""}>
+                                    <a onClick={() => paginate(previousPageNumber)} href="#">
+                                    <LeftArrow />
                                         </a>
                                     </li>
                                     <li>
-                                        <a onClick={() => paginate(nextPageNumber)} href="#">
+                                        <a href="#" onClick={() => paginate(nextPageNumber)}>
                                             <RightArrow2 />
                                         </a>
                                     </li>

@@ -237,16 +237,18 @@ export default function Courses1() {
 //       console.log("coursesData");
 // console.log(coursesData);
       const { data: courses, mutate, errors } = useSWR("/api/getCoursesByGoverningAgency?governingagency=Colorado Association of Realtors", fetcher);
-
+var currentCourses;
       useEffect(() => {
         
     //component updates if sort is updated
-    }, [sortOption, courses]);
+    }, [sortOption, courses, currentPage]);
 
     //paging stuff
     const indexOfLastCourse = currentPage * coursesPerPage;
     const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
-    var currentCourses = courses;
+    currentCourses = courses;
+    var nextPageNumber = currentPage + 1;
+    var previousPageNumber = currentPage <= 1 ? 1 : currentPage - 1;
 
     if(courses){
       var sortedCourses = sortCourses(courses);
@@ -446,7 +448,7 @@ console.log("sort option - " + sortOption);
                                 <SavedCourses name="savedCourses" sort={sortOption}/>
                             </ToggleCourses>
                             
-                            <Pagination postsPerPage={coursesPerPage} totalPosts={sortedCourses.length} paginate={paginate} currentPage={currentPage}/>
+                            <Pagination postsPerPage={coursesPerPage} totalPosts={sortedCourses.length} paginate={paginate} currentPage={currentPage} previousPageNumber={previousPageNumber} nextPageNumber={nextPageNumber}/>
                                
                               
                         </div>
