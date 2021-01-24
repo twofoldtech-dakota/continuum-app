@@ -36,7 +36,6 @@ const Sidebar = () => {
 
     function setActive(event){
         setActiveUrl(event);
-        console.log(event);
     }
 
     return (

@@ -94,7 +94,7 @@ export default function Login() {
                                 <a href="#">Forgot my password</a>
                                 <br />
                                 Don’t have an account?{" "}
-                                <a href="/signup">Sign up</a>
+                                <a href="/register">Sign up</a>
                             </p>
                         </div>
                     </form>
