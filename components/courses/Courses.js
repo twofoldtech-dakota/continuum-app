@@ -9,6 +9,7 @@ import FilledStar from "../svgs/filledStar";
 import FileIcon from "../svgs/fileIcon";
 import CalendarIcon from "../svgs/calendarIcon";
 import RightArrow from "../svgs/rightArrow";
+import {FaTruckLoading} from "react-icons/fa";
 export default function Courses({ posts, loading }) {
   
   const [showModal, setShowModal] = useState(false);
@@ -70,9 +71,19 @@ const onSubmit = handleSubmit(async (formData) => {
       <div className="table-responsive">
         <table>
           <tbody>
+          <tr className={!posts  ? "show" : "hidden"}>
+                  <td width="60%">
+                    <div className="upcomingp-courses-select">
+                      <div className="text-box">
+                        <h4><FaTruckLoading />&nbsp;&nbsp;Loading Courses</h4>
+                      </div>
+                    </div>
+                  </td>
+                  
+                </tr>
             {posts &&
               posts.map((course) => (
-                <tr key={course.data.name}>
+                <tr key={course.ts}>
                   <td width="60%">
                     <div className="upcomingp-courses-select">
                       <div className="text-box">

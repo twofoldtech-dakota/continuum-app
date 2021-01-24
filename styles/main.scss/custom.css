@@ -2537,4 +2537,13 @@ border-radius: 3px;
 .progress-bar{
   background-color: #405ADD;
 }
+
+
+.red{
+  color:red;
+}
+
+.credir-look-left{
+  width: 100%;
+}
 /*# sourceMappingURL=custom.css.map */

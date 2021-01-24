@@ -5,18 +5,23 @@ import SavedCourses from "../components/courses/SavedCourses";
 import ToggleCourses from "../components/courses/ToggleCourses";
 import SearchIcon from "../components/svgs/searchIcon";
 import Pagination from "../components/shared/pagination";
+import {ImCancelCircle} from "react-icons/im";
 import useSWR from "swr";
+import { useForm } from "react-hook-form";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function Courses1() {
+    const { handleSubmit, register, formErrors } = useForm();
+
     const [activeComponent, setActiveComponent] = useState("courses");
     const [sortOption, setSortOption] = useState("DateDesc");
 
-    const [coursesList, setCourses] = useState([]);
+    const [searchedCourses, setSearchedCourses] = useState();
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [coursesPerPage] = useState(10);
+    const [keyword, setKeyword] = useState();
     const userData = {
         username: "dillonosmith",
         email: "dillon@twofold.tech",
@@ -136,123 +141,24 @@ export default function Courses1() {
         isRealtor: true,
       };
 
-//       const coursesData = [
-//         {
-//           name: "Test course 1",
-//           provider: {
-//             name: "Provider 1 Testing",
-//             url: "http://www.google.com",
-//           },
-//           date: "12/30/2020",
-//           hours: 4,
-//           governingAgency: "Test Governing Agency",
-//           saved: false,
-//           description: "Test description 1",
-//         },
-//         {
-//           name: "Test course 2",
-//           provider: {
-//             name: "Provider 2 Testing",
-//             url: "http://www.google.com",
-//           },
-//           date: "2/31/2021",
-//           hours: 5,
-//           governingAgency: "Test Governing Agency 2",
-//           saved: false,
-//           description: "Test description 2",
-//         },
-//         {
-//           name: "Test course 3",
-//           provider: {
-//             name: "Provider 3 Testing",
-//             url: "http://www.google.com",
-//           },
-//           date: "1/29/2022",
-//           hours: 6,
-//           governingAgency: "Test Governing Agency 3",
-//           saved: true,
-//           description: "Test description 3",
-//         },
-//         {
-//           name: "Test course 4",
-//           provider: {
-//             name: "Provider 4 Testing",
-//             url: "http://www.google.com",
-//           },
-//           date: "1/30/2021",
-//           hours: 4,
-//           governingAgency: "Test Governing Agency 4",
-//           saved: false,
-//           description: "Test description 4",
-//         },
-//         {
-//           name: "Test course 5",
-//           provider: {
-//             name: "Provider 4 Testing",
-//             url: "http://www.google.com",
-//           },
-//           date: "1/12/2021",
-//           hours: 4,
-//           governingAgency: "Test Governing Agency 4",
-//           saved: false,
-//           description: "Test description 4",
-//         },
-//         {
-//           name: "Test course 6",
-//           provider: {
-//             name: "Provider 4 Testing",
-//             url: "http://www.google.com",
-//           },
-//           date: "3/12/2021",
-//           hours: 4,
-//           governingAgency: "Test Governing Agency 4",
-//           saved: false,
-//           description: "Test description 4",
-//         },
-//         {
-//           name: "Test course 8",
-//           provider: {
-//             name: "Provider 4 Testing",
-//             url: "http://www.google.com",
-//           },
-//           date: "6/30/2021",
-//           hours: 4,
-//           governingAgency: "Test Governing Agency 4",
-//           saved: false,
-//           description: "Test description 4",
-//         },
-//         {
-//           name: "Test course 7",
-//           provider: {
-//             name: "Provider 4 Testing",
-//             url: "http://www.google.com",
-//           },
-//           date: "1/15/2021",
-//           hours: 4,
-//           governingAgency: "Test Governing Agency 4",
-//           saved: false,
-//           description: "Test description 4",
-//         },
-//       ];
-//       console.log("coursesData");
-// console.log(coursesData);
       const { data: courses, mutate, errors } = useSWR("/api/getCoursesByGoverningAgency?governingagency=Colorado Association of Realtors", fetcher);
 var currentCourses;
       useEffect(() => {
         
     //component updates if sort is updated
-    }, [sortOption, courses, currentPage]);
+    }, [sortOption, courses, currentPage, searchedCourses]);
 
     //paging stuff
     const indexOfLastCourse = currentPage * coursesPerPage;
     const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
-    currentCourses = courses;
+    currentCourses = searchedCourses ? searchedCourses : courses;
+    //currentCourses = courses;
     var nextPageNumber = currentPage + 1;
     var previousPageNumber = currentPage <= 1 ? 1 : currentPage - 1;
 
-    if(courses){
-      var sortedCourses = sortCourses(courses);
 
+    if(courses){
+      var sortedCourses = sortCourses(currentCourses);
       currentCourses = sortedCourses.slice(indexOfFirstCourse, indexOfLastCourse);
       }
    
@@ -327,12 +233,8 @@ console.log("sort option - " + sortOption);
   
   }
     }
-  // Get current posts
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  //Change Page
+    //Change Page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
     
@@ -348,6 +250,48 @@ console.log("sort option - " + sortOption);
       
       setSortOption(sortOption);
     }
+    function clearKeyword(){
+      console.log("clear keyword");
+      
+      setSearchedCourses(sortCourses(courses));
+      setKeyword("");
+      //currentCourses = courses.slice(indexOfFirstCourse, indexOfLastCourse);
+    }
+    const onSubmit = handleSubmit(async (formData) => {
+      //if (errorMessage) setErrorMessage("");
+      try {
+        console.log(formData);
+        if(formData?.keyword)
+        {
+          var keyword = formData.keyword.toLowerCase();
+          setKeyword(keyword);
+          var filteredCourses = [];
+          for (let index = 0; index < courses.length; index++) {
+            const course = courses[index];
+            
+            if(course.data.name.toLowerCase().includes(keyword) || course.data.provider.toLowerCase().includes(keyword) || course.data.contactName.toLowerCase().includes(keyword)){
+              filteredCourses.push(course);
+            }
+          }
+  
+          if(filteredCourses.length > 0){
+            var sortedCourses = sortCourses(filteredCourses);
+            setSearchedCourses(sortedCourses.slice(indexOfFirstCourse, indexOfLastCourse));
+          }
+          console.log(filteredCourses);
+          //setSearchedCourses();
+        }
+        if(formData.keyword = "")
+        {
+
+        }
+
+      }
+      catch(error){
+        console.error(error);
+        //setErrorMessage(error.message);
+      }
+    });
 
     if(errors){
       return (
@@ -361,9 +305,9 @@ console.log("sort option - " + sortOption);
         </div>
       )
     }
-    if(!courses){
-      return <h1>data is loading</h1>
-    }
+    // if(!courses){
+    //   return 
+    // }
     return (
         <Layout title="Continuum - Courses">
             <div className="title">
@@ -418,15 +362,19 @@ console.log("sort option - " + sortOption);
                         <div className="upcoming-courses-inner">
                             <div className="credir-look">
                                 <div className="credir-look-left">
-                                    <form>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Look up a credit"
-                                        />
-                                        <a href="#">
-                                            <SearchIcon />
-                                        </a>
+                                    <form onSubmit={onSubmit}>
+                                   
+
+                    <input
+                        type="text"
+                        name="keyword"
+                        className="form-control"
+                        placeholder="Look up a course"
+                        defaultValue={keyword}
+                        ref={register}
+                      />
+                                 {keyword ? <a href="#" className="red" onClick={(e) => clearKeyword()}><ImCancelCircle /></a> : <a href="#" ><SearchIcon /></a>}   
+                                    
                                     </form>
                                 </div>
                                 <div className="credir-look-sort">
@@ -443,12 +391,12 @@ console.log("sort option - " + sortOption);
                                 </div>
                             </div>
                             {/* <Courses name="courses" /> */}
-                            <ToggleCourses active={activeComponent}>
+                            <ToggleCourses active={activeComponent} className={!courses ? "hidden" : "show"}>
                                 <Courses name="courses" posts={currentCourses} loading={loading}/>
                                 <SavedCourses name="savedCourses" sort={sortOption}/>
                             </ToggleCourses>
                             
-                            <Pagination postsPerPage={coursesPerPage} totalPosts={sortedCourses.length} paginate={paginate} currentPage={currentPage} previousPageNumber={previousPageNumber} nextPageNumber={nextPageNumber}/>
+                            <Pagination className={!courses ? "hidden" : "show"} postsPerPage={coursesPerPage} totalPosts={sortedCourses?.length} paginate={paginate} currentPage={currentPage} previousPageNumber={previousPageNumber} nextPageNumber={nextPageNumber}/>
                                
                               
                         </div>
