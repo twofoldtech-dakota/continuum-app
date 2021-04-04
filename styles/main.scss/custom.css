@@ -2546,4 +2546,10 @@ border-radius: 3px;
 .credir-look-left{
   width: 100%;
 }
+
+.toggleStar{
+  border:none;
+  background:none;
+  cursor:pointer;
+}
 /*# sourceMappingURL=custom.css.map */

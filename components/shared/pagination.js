@@ -8,13 +8,12 @@ export const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, pr
     //     pageNumbers.push(index);
     // }
     var lastPage = totalPosts / postsPerPage;
-    console.log(lastPage);
     useEffect(() => {
         
         //component updates if sort is updated
-        }, [previousPageNumber]);
+        }, [previousPageNumber, nextPageNumber, currentPage]);
     return (
-        <div className={previousPageNumber == 1 && nextPageNumber >= lastPage ? "hidden": "show-result"}>
+        <div className={previousPageNumber <= 1 && nextPageNumber >= lastPage ? "hidden": "show-result"}>
             {/* <p>Showing {postsPerPage ? postsPerPage : 0} of {totalPosts ? totalPosts : 0} results</p> */}
                                 <ul>
                                     {/* {pageNumbers ? pageNumbers.map(number => (
@@ -24,9 +23,9 @@ export const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, pr
                                             </a>
                                         </li>
                                     )) : null} */}
-                                    <li className={previousPageNumber == 1 ? "hidden" : "show"}>
-                                    <a onClick={() => paginate(previousPageNumber)} href="#">
-                                    <LeftArrow />
+                                    <li className={previousPageNumber < 1 ? "hidden" : "show"}>
+                                        <a onClick={() => paginate(previousPageNumber)} href="#">
+                                            <LeftArrow />
                                         </a>
                                     </li>
                                     <li className={nextPageNumber >= lastPage ? "hidden" : "show"}>

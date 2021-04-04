@@ -14,10 +14,16 @@ import { MdEmail } from "react-icons/md";
 import PublicProfileLogoTop from "../components/svgs/publicprofilelogotop";
 import PublicProfileLogoBottom from "../components/svgs/publicprofilelogobottom";
 import CrossIcon from "../components/svgs/crossIcon";
-import ExpendIcon from "../components/svgs/expendIcon"
-export default function Home() {
-  const router = useRouter();
+import ExpendIcon from "../components/svgs/expendIcon";
 
+import useSWR from "swr";
+
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
+export default function Home() {
+  const router = useRouter()
+
+  //const { data: userData, mutate, errors } = useSWR("/api/getUserByUsername?username=test usernaame", fetcher);
   const userData = {
     username: "dillonosmith",
     email: "dillon@twofold.tech",
@@ -136,7 +142,10 @@ export default function Home() {
       "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
     isRealtor: true,
   };
+  //use this to pass username in url and pull thhat user
 
+
+  // const { data, error } = useSWR(`/api/getUserByUsername/${username}`, fetcher);
   const [selectedLicensurePeriod, setLicensurePeriod] = useState();
   const [activeLicensureCredits, setActiveLicensureCredits] = useState([]);
   const [
@@ -159,7 +168,7 @@ const [creditToView, setCreditToView] = useState(null);
   }, []);
   const mailTo = "mailto:";
   var email = "";
-  if (userData.email !== "" && userData.email !== null) {
+  if (userData.email && userData.email !== "" && userData.email !== null) {
     email = mailTo + userData.email;
   }
 

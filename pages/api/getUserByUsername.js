@@ -6,15 +6,15 @@ var authClient = (secret) => new faunadb.Client({ secret });
 export default async function handler(req, res) {
     try {
 
-      const courses = await faunaClient.query(
+      const userData = await faunaClient.query(
         q.Map(
           // iterate each item in result
           q.Paginate(
             // make paginatable
             q.Match(
               // query index
-              q.Index('api-getCoursesByGoverningAgency'),
-              q.ToString(req.query?.governingagency)
+              q.Index('api-getUserByUsername'),
+              q.ToString(req.query?.username)
                // specify source
             ),{size: 10000}
           ),
@@ -23,8 +23,8 @@ export default async function handler(req, res) {
       );
       // ok
       // console.log("root data");
-      //console.log(courses);
-      res.status(200).json(courses.data);
+      //console.log(userData.data);
+      res.status(200).json(userData.data);
     } catch (e) {
       // something went wrong
       res.status(500).json({ error: e.message });

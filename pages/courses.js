@@ -22,124 +22,124 @@ export default function Courses1() {
     const [currentPage, setCurrentPage] = useState(1);
     const [coursesPerPage] = useState(10);
     const [keyword, setKeyword] = useState();
-    const userData = {
-        username: "dillonosmith",
-        email: "dillon@twofold.tech",
-        governingAgency: "The Governing Agency Test",
-        savedCourses: [
-          {
-            name: "Saved Course 1",
-            provider: {
-              name: "American Home Shield",
-              url: "http://www.google.com"
-            },
-            date: "05/29/2020",
-            hours: 6,
-            governingAgency: "Governing Agency Test",
-            saved: true,
-            /*owner: String!*/
-            username: "dillonosmith",
-          },
-        ],
-        name: "Dillon Smith",
-        title: "Associate Broker",
-        company: "compass Colorado",
-        website: "https://www.twofold.tech/",
-        bio:
-          "Kate is an experienced realtor servicing both buyers and sellers throughout the Denver metro area. Skilled in negotiation, market trends/insights, and pricing strategy, she recognizes what a privilege it is to help her clients transition through such a monumental chapter of their lives. Kate aims to be your most valuable and reliable resource for any current and future real estate needs.",
-        linkedin: "https://www.linkedin.com/in/dillonosmith/",
-        zillow: "https://www.linkedin.com/in/dillonosmith/",
-        twitter: "https://www.linkedin.com/in/dillonosmith/",
-        instagram: "https://www.linkedin.com/in/dillonosmith/",
-        facebook: "https://www.linkedin.com/in/dillonosmith/",
-        theme: "purple",
-        personalEmail: "dillon@twofold.tech",
-        phone: "123-234-4432",
-        officePhone: "939-999-9098",
-        addressLine1: "123 Washington St",
-        addressLine2: "apt b",
-        city: "Kansas City",
-        state: "MO",
-        zip: "98767",
-        licenseType: "Real Estate",
-        licenseNumber: "FA.100069906",
-        licensurePeriods: [
-          {
-            startDate: "12/01/2020",
-            endDate: "11/30/2023",
-            creditsEarned: 18,
-            creditsRequired: 24,
-            credits: [
-              {
-                name: "Testing Period",
-                /*user: User! @relation*/
-                provider: {
-                  name: "All Service Real Estate Academy",
-                  url: "http://www.google.com"
-                },
-                date: "01/20/2022",
-                hours: 12,
-                governingAgency: "Governing Agency Test",
-                description: "Credit description testing testing testing",
-                credits: 12,
-              },
-              {
-                name: "Testing Period 2",
-                /*user: User! @relation*/
-                provider: {
-                  name: "All Service Real Estate Academy",
-                  url: "http://www.google.com"
-                },
-                date: "01/20/2022",
-                hours: 6,
-                governingAgency: "Governing Agency Test",
-                description: "Credit description testing testing testing",
-                credits: 6,
-              },
-            ],
-          },
-          {
-            startDate: "12/01/2017",
-            endDate: "11/30/2020",
-            creditsEarned: 15,
-            creditsRequired: 24,
-            credits: [
-              {
-                name: "Fundamental Skills for Real Estate Agents",
-                /*user: User! @relation*/
-                provider: {
-                  name: "All Service Real Estate Academy",
-                  url: "http://www.google.com"
-                },
-                date: "01/20/2020",
-                hours: 12,
-                governingAgency: "Governing Agency Test",
-                description: "Credit description testing testing testing",
-                credits: 12,
-              },
-              {
-                name: "Credit testing",
-                /*user: User! @relation*/
-                provider: {
-                  name: "Armburst Real Estate",
-                  url: "http://www.google.com"
-                },
-                date: "03/03/2020",
-                hours: 3,
-                governingAgency: "Governing Agency Test",
-                description: "Credit 2 description testing testing testing",
-                credits: 3,
-              },
-            ],
-          },
-        ],
-        alerts: true,
-        news: true,
-        hideContactInfo: true,
-        profileImage:
-          "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
-        isRealtor: true,
-      };
+    // const userData = {
+    //     username: "dillonosmith",
+    //     email: "dillon@twofold.tech",
+    //     governingAgency: "The Governing Agency Test",
+    //     savedCourses: [
+    //       {
+    //         name: "Saved Course 1",
+    //         provider: {
+    //           name: "American Home Shield",
+    //           url: "http://www.google.com"
+    //         },
+    //         date: "05/29/2020",
+    //         hours: 6,
+    //         governingAgency: "Governing Agency Test",
+    //         saved: true,
+    //         /*owner: String!*/
+    //         username: "dillonosmith",
+    //       },
+    //     ],
+    //     name: "Dillon Smith",
+    //     title: "Associate Broker",
+    //     company: "compass Colorado",
+    //     website: "https://www.twofold.tech/",
+    //     bio:
+    //       "Kate is an experienced realtor servicing both buyers and sellers throughout the Denver metro area. Skilled in negotiation, market trends/insights, and pricing strategy, she recognizes what a privilege it is to help her clients transition through such a monumental chapter of their lives. Kate aims to be your most valuable and reliable resource for any current and future real estate needs.",
+    //     linkedin: "https://www.linkedin.com/in/dillonosmith/",
+    //     zillow: "https://www.linkedin.com/in/dillonosmith/",
+    //     twitter: "https://www.linkedin.com/in/dillonosmith/",
+    //     instagram: "https://www.linkedin.com/in/dillonosmith/",
+    //     facebook: "https://www.linkedin.com/in/dillonosmith/",
+    //     theme: "purple",
+    //     personalEmail: "dillon@twofold.tech",
+    //     phone: "123-234-4432",
+    //     officePhone: "939-999-9098",
+    //     addressLine1: "123 Washington St",
+    //     addressLine2: "apt b",
+    //     city: "Kansas City",
+    //     state: "MO",
+    //     zip: "98767",
+    //     licenseType: "Real Estate",
+    //     licenseNumber: "FA.100069906",
+    //     licensurePeriods: [
+    //       {
+    //         startDate: "12/01/2020",
+    //         endDate: "11/30/2023",
+    //         creditsEarned: 18,
+    //         creditsRequired: 24,
+    //         credits: [
+    //           {
+    //             name: "Testing Period",
+    //             /*user: User! @relation*/
+    //             provider: {
+    //               name: "All Service Real Estate Academy",
+    //               url: "http://www.google.com"
+    //             },
+    //             date: "01/20/2022",
+    //             hours: 12,
+    //             governingAgency: "Governing Agency Test",
+    //             description: "Credit description testing testing testing",
+    //             credits: 12,
+    //           },
+    //           {
+    //             name: "Testing Period 2",
+    //             /*user: User! @relation*/
+    //             provider: {
+    //               name: "All Service Real Estate Academy",
+    //               url: "http://www.google.com"
+    //             },
+    //             date: "01/20/2022",
+    //             hours: 6,
+    //             governingAgency: "Governing Agency Test",
+    //             description: "Credit description testing testing testing",
+    //             credits: 6,
+    //           },
+    //         ],
+    //       },
+    //       {
+    //         startDate: "12/01/2017",
+    //         endDate: "11/30/2020",
+    //         creditsEarned: 15,
+    //         creditsRequired: 24,
+    //         credits: [
+    //           {
+    //             name: "Fundamental Skills for Real Estate Agents",
+    //             /*user: User! @relation*/
+    //             provider: {
+    //               name: "All Service Real Estate Academy",
+    //               url: "http://www.google.com"
+    //             },
+    //             date: "01/20/2020",
+    //             hours: 12,
+    //             governingAgency: "Governing Agency Test",
+    //             description: "Credit description testing testing testing",
+    //             credits: 12,
+    //           },
+    //           {
+    //             name: "Credit testing",
+    //             /*user: User! @relation*/
+    //             provider: {
+    //               name: "Armburst Real Estate",
+    //               url: "http://www.google.com"
+    //             },
+    //             date: "03/03/2020",
+    //             hours: 3,
+    //             governingAgency: "Governing Agency Test",
+    //             description: "Credit 2 description testing testing testing",
+    //             credits: 3,
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //     alerts: true,
+    //     news: true,
+    //     hideContactInfo: true,
+    //     profileImage:
+    //       "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
+    //     isRealtor: true,
+    //   };
 
       const { data: courses, mutate, errors } = useSWR("/api/getCoursesByGoverningAgency?governingagency=Colorado Association of Realtors", fetcher);
 var currentCourses;
@@ -147,14 +147,17 @@ var currentCourses;
         
     //component updates if sort is updated
     }, [sortOption, courses, currentPage, searchedCourses]);
-
     //paging stuff
     const indexOfLastCourse = currentPage * coursesPerPage;
     const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
     currentCourses = searchedCourses ? searchedCourses : courses;
     //currentCourses = courses;
     var nextPageNumber = currentPage + 1;
-    var previousPageNumber = currentPage <= 1 ? 1 : currentPage - 1;
+    var previousPageNumber = currentPage - 1;
+    if(currentPage <= 1 && previousPageNumber <=1)
+    {
+      previousPageNumber = 0;
+    }
 
 
     if(courses){
@@ -393,7 +396,8 @@ console.log("sort option - " + sortOption);
                             {/* <Courses name="courses" /> */}
                             <ToggleCourses active={activeComponent} className={!courses ? "hidden" : "show"}>
                                 <Courses name="courses" posts={currentCourses} loading={loading}/>
-                                <SavedCourses name="savedCourses" sort={sortOption}/>
+                                <SavedCourses name="savedCourses" sort={sortOption}/>{/* need to pass in a user or their saved courses  */}
+                                
                             </ToggleCourses>
                             
                             <Pagination className={!courses ? "hidden" : "show"} postsPerPage={coursesPerPage} totalPosts={sortedCourses?.length} paginate={paginate} currentPage={currentPage} previousPageNumber={previousPageNumber} nextPageNumber={nextPageNumber}/>
