@@ -39,7 +39,7 @@ const Post = () => {
     "/api/getUserByUsername?username=" + username,
     fetcher
   );
-
+ 
   useEffect(() => {
       if(userData){
         setUserDataParsed(userData[0].data);
