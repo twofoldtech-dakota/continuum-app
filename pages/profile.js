@@ -1,129 +1,54 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Layout from "../components/shared/layout";
+import useSWR from "swr";
+import { RiCreativeCommonsZeroLine } from "react-icons/ri";
 export default function Profile() {
-  const router = useRouter();
-
+  const fetcher = (url) => fetch(url).then((r) => r.json());
+  
   const [errorMessage, setErrorMessage] = useState("");
 
   const { handleSubmit, register, errors } = useForm();
+  const { data: userData, userError } = useSWR( "/api/user", fetcher );
+  const [updatedFormData, setUpdatedFormData] = useState(null);
 
+  useEffect(() => {
+    if(userData){
+      setUpdatedFormData(userData);
+    }
+  
+}, [userData]);
 
-  /*Do not delete until you confirm every prop is accounted for in the api call and matches the same type*/
-  const userData = {
-    username: "dillonosmith",
-    email: "dillon@twofold.tech",
-    governingAgency: "The Governing Agency Test",
-    savedCourses: [
-      {
-        name: "Saved Course 1",
-        provider: "American Home Shield",
-        date: "05/29/2020",
-        hours: 6,
-        governingAgency: "Governing Agency Test",
-        saved: true,
-        /*owner: String!*/
-        username: "dillonosmith",
+  const updateUser = () => {
+    fetch("api/profilesettings/" + userData.id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    ],
-    name: "Dillon Smith",
-    title: "Associate Broker / Realtor",
-    company: "compass Colorado",
-    website: "https://www.twofold.tech/",
-    bio:
-      "Kate is an experienced realtor servicing both buyers and sellers throughout the Denver metro area. Skilled in negotiation, market trends/insights, and pricing strategy, she recognizes what a privilege it is to help her clients transition through such a monumental chapter of their lives. Kate aims to be your most valuable and reliable resource for any current and future real estate needs.",
-    linkedin: "https://www.linkedin.com/in/dillonosmith/",
-    zillow: "https://www.linkedin.com/in/dillonosmith/",
-    twitter: "https://www.linkedin.com/in/dillonosmith/",
-    instagram: "https://www.linkedin.com/in/dillonosmith/",
-    facebook: "https://www.linkedin.com/in/dillonosmith/",
-    theme: "purple",
-    personalEmail: "dillon@twofold.tech",
-    phone: "123-234-4432",
-    officePhone: "939-999-9098",
-    addressLine1: "123 Washington St",
-    addressLine2: "apt b",
-    city: "Kansas City",
-    state: "MO",
-    zip: "98767",
-    licenseType: "Real Estate",
-    licenseNumber: "FA.100069906",
-    licensurePeriods: [
-      {
-        startDate: "12/01/2020",
-        endDate: "11/30/2023",
-        creditsEarned: 18,
-        creditsRequired: 24,
-        credits: [
-          {
-            name: "Testing Period",
-            /*user: User! @relation*/
-            provider: "All Service Real Estate Academy",
-            date: "01/20/2022",
-            hours: 12,
-            governingAgency: "Governing Agency Test",
-            description: "Credit description testing testing testing",
-            credits: 12,
-          },
-          {
-            name: "Testing Period 2",
-            /*user: User! @relation*/
-            provider: "All Service Real Estate Academy",
-            date: "01/20/2022",
-            hours: 6,
-            governingAgency: "Governing Agency Test",
-            description: "Credit description testing testing testing",
-            credits: 6,
-          }
-          
-        ],
-      },
-      {
-        startDate: "12/01/2017",
-        endDate: "11/30/2020",
-        creditsEarned: 15,
-        creditsRequired: 24,
-        credits: [
-          {
-            name: "Fundamental Skills for Real Estate Agents",
-            /*user: User! @relation*/
-            provider: "All Service Real Estate Academy",
-            date: "01/20/2020",
-            hours: 12,
-            governingAgency: "Governing Agency Test",
-            description: "Credit description testing testing testing",
-            credits: 12,
-          },
-          {
-            name: "Credit testing",
-            /*user: User! @relation*/
-            provider: "Armburst Real Estate",
-            date: "03/03/2020",
-            hours: 3,
-            governingAgency: "Governing Agency Test",
-            description: "Credit 2 description testing testing testing",
-            credits: 3,
-          },
-        ],
-
-      }
-    ],
-    alerts: true,
-    news: true,
-    hideContactInfo: true,
-    profileImage:
-      "https://media-exp1.licdn.com/dms/image/C5603AQE1h32pUQ7UoQ/profile-displayphoto-shrink_200_200/0/1591127333018?e=1613001600&v=beta&t=-Pwl5i5ptqyxuy391LNHAWpCF4h38JJJAmckZKGdtjc",
-  };
-
-console.log(userData);
+      body: JSON.stringify({
+        username: updatedFormData ? updatedFormData.username : userData.username, // Use your own property name / key
+        email: updatedFormData ? updatedFormData.email : updatedFormData.email
+      }),
+    })
+      .then((res) => res.json())
+      .then(console.log("form updated"))
+      .catch((err) => console.log(err.message))
+  }
   const onSubmit = handleSubmit(async (formData) => {
     if (errorMessage) setErrorMessage("");
-    console.log("submitted form");
+    
     try {
+      if(formData != null){
+
+      
+      console.log("form Data - ");
       console.log(formData);
+      setUpdatedFormData(formData);
+      updateUser();
+    }
     }
     catch(error){
+      console.log("error on submit");
       console.error(error);
       setErrorMessage(error.message);
     }
@@ -133,9 +58,9 @@ console.log(userData);
     this.setState({ selectValue: e.target.value });
   };
   
-
   return (
     <Layout title="Continuum - Profile">
+      
       <div className="profile-edit">
         <form onSubmit={onSubmit}>
           <div className="title">
@@ -168,7 +93,7 @@ console.log(userData);
                         name="username"
                         className="form-control"
                         placeholder="http://getcontinuum.app/"
-                        defaultValue={userData.username}
+                        defaultValue={userData?.username}
                         ref={register({
                           required: "Username is required",
                         })}
@@ -189,7 +114,7 @@ console.log(userData);
                         type="text"
                         name="name"
                         className="form-control"
-                        defaultValue={userData.name}
+                        defaultValue={userData?.name}
                         ref={register({
                           required: "Name is required",
                         })}
@@ -211,7 +136,7 @@ console.log(userData);
                         type="text"
                         name="title"
                         className="form-control"
-                        defaultValue={userData.title}
+                        defaultValue={userData?.title}
                         ref={register({
                           required: "Title is required",
                         })}
@@ -228,7 +153,7 @@ console.log(userData);
                         name="company"
                         className="form-control"
 
-                        defaultValue={userData.company}
+                        defaultValue={userData?.company}
                         ref={register({
                           required: "Company is required",
                         })}
@@ -245,7 +170,7 @@ console.log(userData);
                         name="website"
                         className="form-control"
 
-                        defaultValue={userData.website}
+                        defaultValue={userData?.website}
                         ref={register({
                           required: "Website is required",
                         })}
@@ -263,7 +188,7 @@ console.log(userData);
                         name="bio"
                         className="form-control bio"
                         maxLength="400"
-                        defaultValue={userData.bio}
+                        defaultValue={userData?.bio}
                       ></textarea>
                     </div>
                   </div>
@@ -276,7 +201,7 @@ console.log(userData);
                         type="text"
                         name="email"
                         className="form-control"
-                        defaultValue={userData.email}
+                        defaultValue={userData?.email}
                         ref={register({
                           required: "Email is required",
                         })}
@@ -292,7 +217,7 @@ console.log(userData);
                         type="text"
                         name="phone"
                         className="form-control"
-                        defaultValue={userData.phone}
+                        defaultValue={userData?.phone}
                         ref={register({
                           required: "Phone number is required",
                         })}
@@ -308,7 +233,7 @@ console.log(userData);
                         type="text"
                         name="officePhone"
                         className="form-control"
-                        defaultValue={userData.officePhone}
+                        defaultValue={userData?.officePhone}
                         ref={register({
                           required: "Title is required",
                         })}
@@ -325,7 +250,7 @@ console.log(userData);
                         name="addressLine1"
                         className="form-control"
 
-                        defaultValue={userData.addressLine1}
+                        defaultValue={userData?.addressLine1}
                         ref={register({
                           required: "Address is required",
                         })}
@@ -340,7 +265,7 @@ console.log(userData);
                         type="text"
                         name="addressLine2"
                         className="form-control"
-                        defaultValue={userData.addressLine2}
+                        defaultValue={userData?.addressLine2}
                       ></input>
 
                       <div className="form-row">
@@ -350,7 +275,7 @@ console.log(userData);
                             type="text"
                             name="city"
                             className="form-control"
-                            defaultValue={userData.city}
+                            defaultValue={userData?.city}
                             ref={register({
                               required: "City is required",
                             })}
@@ -366,7 +291,7 @@ console.log(userData);
                           <select
                             className="form-control"
                             name="state"
-                            defaultValue={userData.state}
+                            defaultValue={userData?.state}
                             ref={register({
                               required: "State is required zip",
                             })}
@@ -435,7 +360,7 @@ console.log(userData);
                             type="text"
                             name="zip"
                             className="form-control"
-                            defaultValue={userData.zip}
+                            defaultValue={userData?.zip}
                             ref={register({
                               required: "Zip is required zip",
                             })}
@@ -452,8 +377,8 @@ console.log(userData);
                         type="checkbox"
                         name="hideContactInfo"
                         className="form-control checkbox"
-                        defaultValue={userData.hideContactInfo}
-                        defaultChecked={userData.hideContactInfo}
+                        defaultValue={userData?.hideContactInfo}
+                        defaultChecked={userData?.hideContactInfo}
                       ></input>
                       <label className="form-label-checkbox">
                         Hide contact information on my profile
@@ -489,35 +414,35 @@ console.log(userData);
                         type="text"
                         name="linkedin"
                         className="form-control"
-                        defaultValue={userData.linkedin}
+                        defaultValue={userData?.linkedin}
                       ></input>
                       <div className="form-label">ZILLOW</div>
                       <input
                         type="text"
                         name="zillow"
                         className="form-control"
-                        defaultValue={userData.zillow}
+                        defaultValue={userData?.zillow}
                       ></input>
                       <div className="form-label">TWITTER</div>
                       <input
                         type="text"
                         name="twitter"
                         className="form-control"
-                        defaultValue={userData.twitter}
+                        defaultValue={userData?.twitter}
                       ></input>
                       <div className="form-label">INSTAGRAM</div>
                       <input
                         type="text"
                         name="instagram"
                         className="form-control"
-                        defaultValue={userData.instagram}
+                        defaultValue={userData?.instagram}
                       ></input>
                       <div className="form-label">FACEBOOK</div>
                       <input
                         type="text"
                         name="facebook"
                         className="form-control"
-                        defaultValue={userData.facebook}
+                        defaultValue={userData?.facebook}
                       ></input>
                     </div>
                   </div>
@@ -534,6 +459,9 @@ console.log(userData);
           </div>
         </form>
       </div>
+    
+   
     </Layout>
-  );
+    );
+    
 }
